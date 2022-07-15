@@ -40,14 +40,14 @@ public class BulletManager : MonoBehaviour
     #endregion
     private void Awake()
     {
-        SelectWeapon();
-
         for (int i = 0; i < numberOfBulletsToSpawn; i++)
         {
             GameObject _spawned = Instantiate(templateBullet, transform.position, Quaternion.identity);
             availableBullets.Add(_spawned);
             _spawned.SetActive(false);
         }
+
+        SelectWeapon();
     }
 
     public void InitialiseWeapon()
@@ -73,6 +73,8 @@ public class BulletManager : MonoBehaviour
         foreach (GameObject _bullet in availableBullets)
         {
             bulletSpeed = _selectedBullet.bulletSpeed;
+
+            _bullet.GetComponent<SpriteRenderer>().sprite = _selectedBullet.bulletSprite;
         }
     }
 
