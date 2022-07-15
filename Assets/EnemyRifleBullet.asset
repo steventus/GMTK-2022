@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adde879eaba89bd4c824fc6447d0b964, type: 3}
   m_Name: EnemyRifleBullet
   m_EditorClassIdentifier: 
-  bulletSpeed: 0
-  bulletSprite: {fileID: 0}
+  bulletSpeed: 1
+  bulletSprite: {fileID: 21300000, guid: 26926e4cd1c3eac4890c55238762dd15, type: 3}
