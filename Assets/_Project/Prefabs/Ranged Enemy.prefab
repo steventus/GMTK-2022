@@ -55,6 +55,8 @@ MonoBehaviour:
   desiredBullet:
   - {fileID: 11400000, guid: 2fc928600a7c7ea4e8c44a89a5ee2da3, type: 2}
   templateBullet: {fileID: 3525454690951914276, guid: f86a7464927f53a4790d2ae23783f439, type: 3}
+  maxAmmo: 100
+  curAmmo: 0
   fireRate: 1
   radius: 1
   bulletSpeed: 5
