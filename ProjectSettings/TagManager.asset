@@ -6,6 +6,7 @@ TagManager:
   tags:
   - F_Enemy
   - Fake
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX

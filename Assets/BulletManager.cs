@@ -12,14 +12,19 @@ public class BulletManager : MonoBehaviour
 
     //Bullet
     public List<BulletData> desiredBullet;
-
     [SerializeField] private GameObject templateBullet;
+
+    //Ammo
+    public int maxAmmo;
+    public int curAmmo;
+
 
     #region 
     //Firing a cycle
     [HideInInspector] public float fireRate = 1, radius = 1, bulletSpeed = 5, delayBetweenCycleInSec = 0.1f;
     [HideInInspector] public int numberOfTimesToFirePerCycle, numberOfCycles = 1;
     [HideInInspector] public bool ifFireFromBack = false;
+    [HideInInspector] private int curFireCost;
 
     //Properties within each firing cycle
     [HideInInspector] public float angleBetweenEachBulletInCycle, delayBetweenEachRapidFireInSec;
@@ -48,10 +53,19 @@ public class BulletManager : MonoBehaviour
         }
 
         SelectWeapon();
+
+
+        curAmmo = maxAmmo;
     }
 
     public void InitialiseWeapon()
     {
+        if (desiredWeapon.Count == 0)
+        {
+            ifCanFire = false;
+            return;     
+        }
+
         WeaponData _selectedWep = desiredWeapon[Random.Range(0, desiredWeapon.Count)];
         Debug.Log("Weapon: " + _selectedWep.name);
 
@@ -63,6 +77,9 @@ public class BulletManager : MonoBehaviour
         numberOfCycles = 1;
         angleBetweenEachBulletInCycle = _selectedWep.angleBetweenBullet;
         delayBetweenEachRapidFireInSec = 0;
+
+
+        curFireCost = _selectedWep.costPerShot;
     }
 
     public void InitialiseBullet()
@@ -76,6 +93,7 @@ public class BulletManager : MonoBehaviour
 
             _bullet.GetComponent<SpriteRenderer>().sprite = _selectedBullet.bulletSprite;
         }
+
     }
 
     public void SelectWeapon()
@@ -98,10 +116,11 @@ public class BulletManager : MonoBehaviour
     public void CallFire()
     {
         //FIRE
-        if (Time.time >= timeLastFired + (1 / fireRate) && !firing && ifCanFire)
+        if (Time.time >= timeLastFired + (1 / fireRate) && !firing && ifCanFire && CheckAmmo(curFireCost))
         {
             timeLastFired = Time.time;
             firing = true;
+            UpdateAmmo(curFireCost);
             StartCoroutine(FireCycle(numberOfTimesToFirePerCycle));
         }
     }
@@ -189,5 +208,17 @@ public class BulletManager : MonoBehaviour
             }
             yield return new WaitForSeconds(delayBetweenCycleInSec);
         }
+    }
+
+    private bool CheckAmmo(int _cost)
+    {
+        if (curAmmo >= _cost) return true;
+        else return false;
+    }
+
+    private void UpdateAmmo(int _cost)
+    {
+        curAmmo -= _cost;
+        FindObjectOfType<UiPlayerAmmo>().SetPlayerAmmo(curAmmo);
     }
 }
