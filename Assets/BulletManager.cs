@@ -89,7 +89,7 @@ public class BulletManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
             SelectWeapon();
 
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKey(KeyCode.Mouse0))
             CallFire();
     }
 

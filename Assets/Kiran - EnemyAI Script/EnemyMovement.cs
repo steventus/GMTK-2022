@@ -12,7 +12,7 @@ public class EnemyMovement : MonoBehaviour
     enum GunTypes { Shotgun, AutoFire, BurstFire, Sniper };
 
     [SerializeField] private bool isMovingRight = true;
-
+    [SerializeField] EnemyTypes currentEnemyType;
     void Start()
     {
        
@@ -21,7 +21,7 @@ public class EnemyMovement : MonoBehaviour
     void FixedUpdate()
     {
       
-        var enemyTypes = EnemyTypes.RangedAI;
+        var enemyTypes = currentEnemyType;
 
         switch (enemyTypes)
         {
@@ -36,9 +36,9 @@ public class EnemyMovement : MonoBehaviour
                 break;
         }
 
-        Debug.Log("=============");
-        Debug.Log("Enemy Types: " + enemyTypes);
-        Debug.Log("=============");
+        //Debug.Log("=============");
+        //Debug.Log("Enemy Types: " + enemyTypes);
+        //Debug.Log("=============");
 
     }
 
