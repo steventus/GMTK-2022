@@ -36,9 +36,9 @@ public class EnemyMovement : MonoBehaviour
                 break;
         }
 
-        Debug.Log("=============");
+     /*   Debug.Log("=============");
         Debug.Log("Enemy Types: " + enemyTypes);
-        Debug.Log("=============");
+        Debug.Log("=============");*/
 
     }
 
@@ -51,6 +51,7 @@ public class EnemyMovement : MonoBehaviour
         {
             float speed = 10f * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position, speed);
+
         }
     }
 
