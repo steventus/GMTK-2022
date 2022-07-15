@@ -4,9 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - trap
+  - bullet
   - F_Enemy
   - Fake
   - PlayerBullet
+
   layers:
   - Default
   - TransparentFX
