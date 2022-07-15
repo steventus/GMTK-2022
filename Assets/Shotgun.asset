@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   fireRate: 1
-  costPerShot: 0
+  costPerShot: 10
   numOfBulletsInBurst: 5
   angleBetweenBullet: 10
