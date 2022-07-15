@@ -12,7 +12,9 @@ public class EnemyMovement : MonoBehaviour
     enum GunTypes { Shotgun, AutoFire, BurstFire, Sniper };
 
     [SerializeField] private bool isMovingRight = true;
-    [SerializeField] EnemyTypes currentEnemyType;
+    
+     [SerializeField] EnemyTypes currentEnemyType;
+
     void Start()
     {
        
@@ -20,8 +22,8 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-      
-        var enemyTypes = currentEnemyType;
+
+       var enemyTypes = currentEnemyType;
 
         switch (enemyTypes)
         {
@@ -36,9 +38,7 @@ public class EnemyMovement : MonoBehaviour
                 break;
         }
 
-        //Debug.Log("=============");
-        //Debug.Log("Enemy Types: " + enemyTypes);
-        //Debug.Log("=============");
+
 
     }
 
@@ -51,6 +51,7 @@ public class EnemyMovement : MonoBehaviour
         {
             float speed = 10f * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position, speed);
+
         }
     }
 
