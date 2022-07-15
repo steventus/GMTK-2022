@@ -13,6 +13,8 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] private bool isMovingRight = true;
 
+    [SerializeField] EnemyTypes currentEnemyType;
+
     void Start()
     {
        
@@ -20,8 +22,8 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-      
-        var enemyTypes = EnemyTypes.RangedAI;
+
+        var enemyTypes = currentEnemyType;
 
         switch (enemyTypes)
         {
