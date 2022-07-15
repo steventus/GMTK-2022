@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 1
   costPerShot: 0
-  numOfBulletsInBurst: 4
+  numOfBulletsInBurst: 5
   angleBetweenBullet: 10
