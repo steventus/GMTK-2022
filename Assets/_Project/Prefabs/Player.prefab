@@ -617,7 +617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c658c2f78a987974e814ad569b7ae89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedUpgrade: 5
+  moveSpeedUpgrade: 1.1
   maxAmmoUpgrade: 20
   regenAmmoPerSecUpgrade: 10
 --- !u!1 &6466752713386010851

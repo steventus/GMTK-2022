@@ -59,9 +59,9 @@ public class EnemyBulletManager : BulletManager
         //ALTER ROTATION 
         _bullet.transform.Rotate(0, 0, _rotation);
 
-        _bullet.GetComponent<Rigidbody2D>().velocity = _bullet.transform.up * bulletSpeed;
-
-        //INITIALISE BULLET    
+        //INITIALISE BULLET
+        _bullet.GetComponentInChildren<SpriteRenderer>().sprite = curWeapon.bulletData.bulletSprite;
+        _bullet.GetComponent<BaseBulletBehaviour>().Initialise(curWeapon.bulletData.bulletLifeTime, curWeapon.bulletData.velocityOverLifetime, curWeapon.bulletData.sizeOverLifetime, _bullet.transform.up * bulletSpeed);
 
     }
 }
