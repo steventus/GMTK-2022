@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     
     public float runSpeed = 20.0f;
 
+    [HideInInspector] public Vector2 desiredAimDir;
     void Start ()
     {
         rb = GetComponent<Rigidbody2D>(); 
@@ -47,9 +48,11 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(moveX * runSpeed, moveY * runSpeed);
 
-        Vector2 aimDirection = mousePos - rb.position;
-        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = aimAngle;
+        desiredAimDir = mousePos - rb.position;
+        float aimAngle = Mathf.Atan2(desiredAimDir.y, desiredAimDir.x) * Mathf.Rad2Deg - 90f;
+
+        Debug.DrawRay(transform.position, desiredAimDir);
+        //rb.rotation = aimAngle;
     }
     
 }
