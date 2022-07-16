@@ -63,26 +63,27 @@ public class WaveManager : MonoBehaviour
             }
             return;
         }
-
-
-      
-        ValueHandler.currentRoundNum++;
-        
         Debug.Log("Completed waves");
 
+        //Slotmachine anim
+        FindObjectOfType<SlotMachine>().GetComponent<Animator>().Play("slotMachine_flyIn");
+
         onRoundEnd.Invoke();
-        BulletManager = FindObjectOfType<BulletManager>();
-        
+    }
+    public void RandomizeSlotMachine()
+    {
+        //Select new Weapon
+        BulletManager.SelectWeapon();
+
+        //Select new perk
         ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
         ArenaPerk.Randomize();
     }
-
-    public void RandomizeSlotMachine()
+    public void StartNextRound()
     {
-        BulletManager.SelectWeapon();
-        ArenaPerk.Randomize();
+        ValueHandler.currentRoundNum++;
+        onRoundStart.Invoke();
     }
-
     private bool isUsed;
     private bool GetValidate()
     {
@@ -94,14 +95,11 @@ public class WaveManager : MonoBehaviour
 
         return currentWaveNumber + 1 != waves.Count;
     }
-
     void SpawnNextWave()
     {
         currentWaveNumber++;
         canSpawn = true;
     }
-
-
     void SpawnWave()
     {
         SpawnEnemyAtRandomPos();
@@ -112,13 +110,11 @@ public class WaveManager : MonoBehaviour
         TrySpawn = true;
 
     }
-
     private void GetNextWave()
     {
         currentWave.enemiesNum--;
         nextSpawnTime = Time.time + currentWave.timeBetweenEnemeySpawn;
     }
-
     private void SpawnEnemyAtRandomPos()
     {
         GameObject randomEnemy = currentWave.Enemytype[Random.Range(0, currentWave.Enemytype.Length)];
