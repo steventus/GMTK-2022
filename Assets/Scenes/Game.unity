@@ -495,14 +495,14 @@ MonoBehaviour:
   RoundNum: 1
   ValueHandler: {fileID: 1789986702}
   waves:
-  - enemiesNum: 1
+  - enemiesNum: 2
     Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
-    timeBetweenEnemeySpawn: 0.1
-  - enemiesNum: 1
+    timeBetweenEnemeySpawn: 0.5
+  - enemiesNum: 2
     Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
-    timeBetweenEnemeySpawn: 0.1
+    timeBetweenEnemeySpawn: 0.5
   spawnPoints:
   - {fileID: 49975290}
   - {fileID: 280499864}
@@ -2599,8 +2599,8 @@ MonoBehaviour:
   - enemiesNum: 3
     Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
-    timeBetweenEnemeySpawn: 0.1
-  - enemiesNum: 2
+    timeBetweenEnemeySpawn: 1
+  - enemiesNum: 3
     Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
@@ -5181,6 +5181,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9188689436653734582, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: sceneCamera
+      value: 
+      objectReference: {fileID: 1626174415}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
 --- !u!1001 &4472511684429942171

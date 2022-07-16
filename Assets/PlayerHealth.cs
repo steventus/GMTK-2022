@@ -18,8 +18,33 @@ public class PlayerHealth : MonoBehaviour
     {
         curHealth -= _delta;
 
+<<<<<<< Updated upstream
         if (curHealth <= 0) Death();
         else onTakeDamage.Invoke();
+=======
+        Debug.Log("Take Damage");
+        if (curHealth <= 0)
+        {
+            //Messenger.Broadcast(GameEvent.PlayerDeathEvent);
+            Death();
+        }
+        else
+        {
+            onTakeDamage.Invoke();
+        }
+        
+      
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "enemyBullet")
+        {
+            collision.gameObject.SetActive(false);
+            TakeDamage(10);
+
+        }
+>>>>>>> Stashed changes
     }
 
     private void Death()
