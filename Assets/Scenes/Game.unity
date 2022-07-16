@@ -490,6 +490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArenaPerk: {fileID: 542094115}
   BulletManager: {fileID: 1970575107}
+  enemyAIManager: {fileID: 0}
   RoundNum: 1
   ValueHandler: {fileID: 1789986702}
   waves:
@@ -509,6 +510,11 @@ MonoBehaviour:
   - {fileID: 2022529971}
   - {fileID: 1095700205}
   currentWaveNumber: 0
+  CriticalRole: 0
+  enemyHealthUpgrade: 0
+  enemyFireRateUpgrade: 0
+  numOfBulletsUpgrade: 0
+  rng_upgrade: 0
   onRoundStart:
     m_PersistentCalls:
       m_Calls: []
@@ -1429,6 +1435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArenaPerk: {fileID: 542094115}
   BulletManager: {fileID: 1970575107}
+  enemyAIManager: {fileID: 0}
   RoundNum: 2
   ValueHandler: {fileID: 1789986702}
   waves:
@@ -1452,6 +1459,11 @@ MonoBehaviour:
   - {fileID: 1468759307}
   - {fileID: 1415961458}
   currentWaveNumber: 0
+  CriticalRole: 0
+  enemyHealthUpgrade: 0
+  enemyFireRateUpgrade: 0
+  numOfBulletsUpgrade: 0
+  rng_upgrade: 0
   onRoundStart:
     m_PersistentCalls:
       m_Calls: []
@@ -4002,18 +4014,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
-      propertyPath: numberOfBulletsToSpawn
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
-      propertyPath: desiredWeapon.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
-      propertyPath: desiredWeapon.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
     - target: {fileID: 4430640474824362387, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: m_Name
       value: Player
