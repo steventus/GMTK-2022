@@ -9,6 +9,7 @@ public class BulletManager : MonoBehaviour
 
     //Fire Properties
     public List<WeaponData> desiredWeapon;
+    private WeaponData curWeapon;
 
     //Bullet
     public List<BulletData> desiredBullet;
@@ -16,8 +17,13 @@ public class BulletManager : MonoBehaviour
 
     //Ammo
     public int maxAmmo;
-    public int curAmmo;
+    private int curAmmo;
     public int ammoRegenPerSec;
+    private bool isReloading;
+
+    [Space]
+    //Events
+    public UnityEvent<AudioClip> onOutOfAmmo, onFire, onRegenAmmo, onFinishRegenAmmo;
 
     #region 
     //Firing a cycle
@@ -68,20 +74,21 @@ public class BulletManager : MonoBehaviour
             return;     
         }
 
-        WeaponData _selectedWep = desiredWeapon[Random.Range(0, desiredWeapon.Count)];
-        Debug.Log("Weapon: " + _selectedWep.name);
+        curWeapon = desiredWeapon[Random.Range(0, desiredWeapon.Count)];
+        Debug.Log("Weapon: " + curWeapon.name);
 
-        fireRate = _selectedWep.fireRate;
+        fireRate = curWeapon.fireRate;
         radius = 1;
         delayBetweenCycleInSec = 0;
 
-        numberOfTimesToFirePerCycle = _selectedWep.numOfBulletsInBurst;
+        numberOfTimesToFirePerCycle = curWeapon.numOfBulletsInBurst;
         numberOfCycles = 1;
-        angleBetweenEachBulletInCycle = _selectedWep.angleBetweenBullet;
+        angleBetweenEachBulletInCycle = curWeapon.angleBetweenBullet;
         delayBetweenEachRapidFireInSec = 0;
 
 
-        curFireCost = _selectedWep.costPerShot;
+        curFireCost = curWeapon.costPerShot;
+
     }
 
     public void InitialiseBullet()
@@ -103,7 +110,6 @@ public class BulletManager : MonoBehaviour
         InitialiseWeapon();
         InitialiseBullet();
     }
-
     protected virtual void Update()
     {
         //UPDATE MOUSE POSITION
@@ -112,24 +118,25 @@ public class BulletManager : MonoBehaviour
             SelectWeapon();
 
         if (Input.GetKey(KeyCode.Mouse0))
-            CallFire();
-
-        if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            if (coro_bulletRegen != null)
-            {
-                Debug.Log("interuppted");
-                StopCoroutine(coro_bulletRegen);
-            }
+            if (!CheckAmmo(curFireCost))
+                return;
+
+            InterruptRegen();
+            CallFire();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse0) && !isReloading)
+        {
+            InterruptRegen();
 
             coro_bulletRegen = StartCoroutine(BeginRegen());
         }
     }
-
     public virtual void CallFire()
     {
         //FIRE
-        if (Time.time >= timeLastFired + (1 / fireRate) && !firing && ifCanFire && CheckAmmo(curFireCost))
+        if (Time.time >= timeLastFired + (1 / fireRate) && !firing && ifCanFire)
         {
             timeLastFired = Time.time;
             firing = true;
@@ -148,6 +155,7 @@ public class BulletManager : MonoBehaviour
     }
     protected virtual void Fire(float _rotation)
     {
+        #region Instantiate Bullet
         GameObject _bullet = null;
         if (availableBullets[0] != null)
         {
@@ -179,8 +187,9 @@ public class BulletManager : MonoBehaviour
         _bullet.transform.Rotate(0, 0, _rotation);
 
         _bullet.GetComponent<Rigidbody2D>().velocity = _bullet.transform.up * bulletSpeed;
+        #endregion
 
-        //INITIALISE BULLET
+        
     }
     protected IEnumerator FireCycle(int _numberOfRapidFire)
     {
@@ -221,24 +230,39 @@ public class BulletManager : MonoBehaviour
             }
             yield return new WaitForSeconds(delayBetweenCycleInSec);
         }
+
+        //EVENTS
+        //Choose sound clip based on gun - choose from resource
+
+        //Invoke fire based on gun
+        onFire.Invoke(curWeapon.soundOnFire);
+
     }
 
     protected bool CheckAmmo(int _cost)
     {
         if (curAmmo >= _cost) return true;
-        else return false;
+        else 
+        {
+            onOutOfAmmo.Invoke(curWeapon.soundOnOutOfAmmo);
+            return false;
+        }
+        
     }
-
     protected void UpdateAmmo(int _cost)
     {
         curAmmo -= _cost;
         FindObjectOfType<UiPlayerAmmo>().SetPlayerAmmo(curAmmo);
     }
-
     IEnumerator BeginRegen()
     {
+        if (isReloading) yield break;
+
+        isReloading = true;
         yield return new WaitForSeconds(1);
-        Debug.Log("begin regen");
+            
+        onRegenAmmo.Invoke(curWeapon.soundOnReload);
+
         while (curAmmo < maxAmmo)
         {
             yield return new WaitForSeconds(1);
@@ -247,12 +271,42 @@ public class BulletManager : MonoBehaviour
             
             if (curAmmo >= maxAmmo)
             {
+                isReloading = false;
                 curAmmo = maxAmmo;
                 FindObjectOfType<UiPlayerAmmo>().SetPlayerAmmo(curAmmo);
+
+                onFinishRegenAmmo.Invoke(curWeapon.soundOnFinishReload);
                 break;
             }
-
             yield return new WaitForFixedUpdate();
+        }
+    }
+    private void InterruptRegen()
+    {
+        if (coro_bulletRegen != null)
+        {
+            Debug.Log("interuppted");
+            StopCoroutine(coro_bulletRegen);
+            onFinishRegenAmmo.Invoke(curWeapon.soundOnFinishReload);
+            coro_bulletRegen = null;
+            isReloading = false;
+        }
+    }
+    public void PlayOnlyOnce(AudioClip _clip)
+    {
+        AudioSource _source = GetComponentInChildren<AudioSource>();
+
+        if (_source.isPlaying)
+        {
+            _source.Stop();
+            return;
+        }
+
+        else
+        {
+            _source.clip = _clip;
+            _source.loop = false;
+            _source.Play();
         }
     }
 }

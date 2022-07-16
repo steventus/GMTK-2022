@@ -316,7 +316,7 @@ MonoBehaviour:
     Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
-  - enemiesNum: 2
+  - enemiesNum: 1
     Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
