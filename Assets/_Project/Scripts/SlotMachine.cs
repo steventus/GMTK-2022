@@ -30,15 +30,18 @@ public class SlotMachine : MonoBehaviour
   private IEnumerator Spin()
   {
 
-    while (!ShouldStop)
-    {
-      Weapons = (Weapons)values.GetValue(Random.Range(0,values.Length));
-      slotNum.text = Weapons.ToString();
-      yield return new WaitForSeconds(0.1f);
-    }
+        while (!ShouldStop)
+        {
+            Weapons = (Weapons)values.GetValue(Random.Range(0,values.Length));
 
-    // Stopped Spinning
-    Debug.Log($"Selected Gun is {Weapons}");
+            if (slotNum != null)
+              slotNum.text = Weapons.ToString();
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        // Stopped Spinning
+        FindObjectOfType<WaveManager>().StartNextRound();
+        GetComponentInChildren<Animator>().Play("slotMachine_flyOut");
   }
 
   private void OnTriggerEnter2D(Collider2D col)
