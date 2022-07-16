@@ -13,8 +13,5 @@ public class WeaponData : ScriptableObject
     public int numOfBulletsInBurst;
     public float angleBetweenBullet;
 
-    [Space]
-    //Audio
-    public AudioClip soundOnFire;
-    public AudioClip soundOnReload, soundOnFinishReload, soundOnOutOfAmmo;
+    
 }

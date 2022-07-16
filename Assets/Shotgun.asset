@@ -16,7 +16,3 @@ MonoBehaviour:
   costPerShot: 5
   numOfBulletsInBurst: 3
   angleBetweenBullet: 10
-  soundOnFire: {fileID: 8300000, guid: 72e93e563ac286342a81448bb6cab48f, type: 3}
-  soundOnReload: {fileID: 8300000, guid: 86ba7d8a5c6b2e047917bda566ed9f26, type: 3}
-  soundOnFinishReload: {fileID: 8300000, guid: 3389eeab1cfecc24faaee5f896912068, type: 3}
-  soundOnOutOfAmmo: {fileID: 8300000, guid: 7da3435fd22a32e4aa6ed264a63834ab, type: 3}

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
 [System.Serializable]
 public class Wave
@@ -33,7 +32,6 @@ public class WaveManager : MonoBehaviour
     private bool ShouldStop;
     private int myRoundNumber;
 
-    public UnityEvent onRoundStart, onRoundEnd;
 
     private void Update()
     {
@@ -70,6 +68,7 @@ public class WaveManager : MonoBehaviour
         
         Debug.Log("Completed waves");
 
+
         onRoundEnd.Invoke();
         BulletManager = FindObjectOfType<BulletManager>();
         
@@ -81,6 +80,10 @@ public class WaveManager : MonoBehaviour
     {
         BulletManager.SelectWeapon();
         ArenaPerk.Randomize();
+
+        BulletManager.SelectWeapon();
+        
+
     }
 
     private bool isUsed;
