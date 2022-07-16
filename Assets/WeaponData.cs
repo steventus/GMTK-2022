@@ -7,7 +7,7 @@ public class WeaponData : ScriptableObject
 {
     //Weapon Stats
     public float fireRate;
-    public float costPerShot;
+    public int costPerShot;
 
     //Weapon Properties
     public int numOfBulletsInBurst;

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62076d9a91baa9841857f662d79a4ab8, type: 3}
-  m_Name: Shotgun
+  m_Name: EnemyRifle
   m_EditorClassIdentifier: 
-  fireRate: 1.5
-  costPerShot: 5
+  fireRate: 1.2
+  costPerShot: 0
   numOfBulletsInBurst: 3
   angleBetweenBullet: 10
