@@ -49,6 +49,8 @@ public class EnemyBulletManager : BulletManager
         //Update original object pooling list
         MoveBulletToBackOfList(_bullet);
 
+        player = FindObjectOfType<PlayerController>().gameObject;
+
         //ROTATE TO PLAYER
         Vector3 targetdirection = player.transform.position - transform.position;
         targetdirection.z = -20;
