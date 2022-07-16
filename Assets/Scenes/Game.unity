@@ -161,7 +161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -22.95, y: 129.85}
+  m_AnchoredPosition: {x: -22.950195, y: 129.8501}
   m_SizeDelta: {x: 45.9, y: 259.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &18703329
@@ -4003,9 +4003,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
-      propertyPath: ammoRegenPerSec
-      value: 30
+      propertyPath: numberOfBulletsToSpawn
+      value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: desiredWeapon.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: desiredWeapon.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
     - target: {fileID: 4430640474824362387, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: m_Name
       value: Player
