@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 8701104280922528475}
   - component: {fileID: 8701104280922528474}
   - component: {fileID: 8701104280922528469}
-  - component: {fileID: 8701104280922528468}
   - component: {fileID: 8701104280922528471}
   - component: {fileID: 8701104280922528470}
   - component: {fileID: 8701104280922528473}
+  - component: {fileID: 1685984587404415776}
   m_Layer: 0
   m_Name: Melee Enemy
   m_TagString: Fake
@@ -54,6 +54,20 @@ MonoBehaviour:
   desiredBullet:
   - {fileID: 11400000, guid: 3a8ea7f170496e24b9e592c9eecbf8f1, type: 2}
   templateBullet: {fileID: 3525454690951914276, guid: f86a7464927f53a4790d2ae23783f439, type: 3}
+  maxAmmo: 0
+  ammoRegenPerSec: 0
+  onOutOfAmmo:
+    m_PersistentCalls:
+      m_Calls: []
+  onFire:
+    m_PersistentCalls:
+      m_Calls: []
+  onRegenAmmo:
+    m_PersistentCalls:
+      m_Calls: []
+  onFinishRegenAmmo:
+    m_PersistentCalls:
+      m_Calls: []
   fireRate: 1
   radius: 1
   bulletSpeed: 5
@@ -133,19 +147,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMovingRight: 1
+  playerTransform: {fileID: 0}
   currentEnemyType: 0
---- !u!114 &8701104280922528468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8701104280922528465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66feef4e362ed5a449fd4851ed39dc36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  currentUpgradeEnemy: 3
+  canCharge: 0
+  IsAvailable: 1
+  CooldownDuration: 1
+  speed: 0
 --- !u!50 &8701104280922528471
 Rigidbody2D:
   serializedVersion: 4
@@ -219,3 +227,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.2}
   m_EdgeRadius: 0
+--- !u!114 &1685984587404415776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701104280922528465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2013b9fc14c2400468097cfebff2e4c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealth: 100
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
