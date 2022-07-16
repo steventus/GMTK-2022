@@ -495,11 +495,11 @@ MonoBehaviour:
   waves:
   - enemiesNum: 1
     Enemytype:
-    - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
+    - {fileID: 8701104280922528465, guid: 1f9481725bd1dff42b245f8b99b71332, type: 3}
     timeBetweenEnemeySpawn: 0.1
   - enemiesNum: 1
     Enemytype:
-    - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
+    - {fileID: 8701104280922528465, guid: 1f9481725bd1dff42b245f8b99b71332, type: 3}
     timeBetweenEnemeySpawn: 0.1
   spawnPoints:
   - {fileID: 49975290}
