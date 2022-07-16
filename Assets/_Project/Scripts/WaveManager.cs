@@ -63,7 +63,6 @@ public class WaveManager : MonoBehaviour
             }
             return;
         }
-        Debug.Log("Completed waves");
 
         //Slotmachine anim
         FindObjectOfType<SlotMachine>().GetComponent<Animator>().Play("slotMachine_flyIn");
@@ -72,15 +71,21 @@ public class WaveManager : MonoBehaviour
     }
     public void RandomizeSlotMachine()
     {
-        //Select new Weapon
+        //Select new Weapon or just upgrade player properties
+        //Check for Critical roll
         BulletManager.SelectWeapon();
 
-        //Select new perk
+        //Select enemy AI upgrade or just upgrade enemy properties
+        //Check for Critical roll
+
+
+        //Select new perk - Karim
         ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
         ArenaPerk.Randomize();
     }
     public void StartNextRound()
     {
+        RandomizeSlotMachine();
         ValueHandler.currentRoundNum++;
         onRoundStart.Invoke();
     }
@@ -119,6 +124,14 @@ public class WaveManager : MonoBehaviour
     {
         GameObject randomEnemy = currentWave.Enemytype[Random.Range(0, currentWave.Enemytype.Length)];
         Transform randomPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        
+        //Apply upgrades
+        //Enemy Property upgrades
+
+        //AI upgrades
+        //if is critical roll
+        //else (Random.Range(0,101) >= 90) run code to apply upgrade
+
         Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
     }
 }
