@@ -25,10 +25,14 @@ public class EnemyAIManager : MonoBehaviour
 
         if (enemyHealth <= 0)
         {
+            Messenger.Broadcast(GameEvent.EnemyDeathEvent);
+            Messenger.Broadcast(GameEvent.PlayerReGainHealth);
+            
             onDeath.Invoke();
             gameObject.SetActive(false);
         }
 
         else onTakeDamage.Invoke();
     }
+    
 }
