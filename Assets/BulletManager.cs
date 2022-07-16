@@ -171,7 +171,7 @@ public class BulletManager : MonoBehaviour
         MoveBulletToBackOfList(_bullet);
 
         //ROTATE TO PLAYER
-        Vector3 targetdirection = transform.up;
+        Vector3 targetdirection = GetComponent<PlayerController>().desiredAimDir;
         targetdirection.z = -20;
         _bullet.transform.rotation = Quaternion.LookRotation(targetdirection, ifFireFromBack ? -Vector3.forward : Vector3.forward);
 

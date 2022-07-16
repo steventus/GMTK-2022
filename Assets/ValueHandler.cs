@@ -20,12 +20,14 @@ public class ValueHandler : MonoBehaviour
     {
         if (currentRoundNum == _waveManager.Length + 1)
         {
-            round_Label.text = "Finished";
+            if (round_Label != null)
+                round_Label.text = "Finished";
             return;
         }
         else
         {
-            round_Label.text = currentRoundNum.ToString();
+            if (round_Label != null)
+                round_Label.text = currentRoundNum.ToString();
         }
        
     }
