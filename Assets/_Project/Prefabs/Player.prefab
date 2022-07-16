@@ -139,11 +139,13 @@ GameObject:
   - component: {fileID: 4430640474824362384}
   - component: {fileID: 4430640474824362383}
   - component: {fileID: 4430640474824362385}
+  - component: {fileID: 1094909561962837675}
   - component: {fileID: 4430640474824362382}
   - component: {fileID: 4430640474824362381}
   - component: {fileID: 1325310620638773487}
   - component: {fileID: 4430640474824362380}
   - component: {fileID: 7803340829422482760}
+  - component: {fileID: 1843499621836002513}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -194,15 +196,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb316e9958857d47b119ef0a4de6bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTemporary: 0
+  isTemporaryReady: 0
   desiredWeapon:
-  - {fileID: 11400000, guid: b33cfb3fdbf0bc340a8f6044f129f1e1, type: 2}
-  - {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
-  desiredBullet:
-  - {fileID: 11400000, guid: 3a8ea7f170496e24b9e592c9eecbf8f1, type: 2}
-  - {fileID: 11400000, guid: 5b52c14c30487a742bfd5789d67bd94d, type: 2}
+  - {fileID: 11400000, guid: 4b101f4d843c77241b8e2b685805a96b, type: 2}
   templateBullet: {fileID: 3525454690951914276, guid: f86a7464927f53a4790d2ae23783f439, type: 3}
   maxAmmo: 50
-  ammoRegenPerSec: 10
+  ammoRegenPerSec: 30
   onOutOfAmmo:
     m_PersistentCalls:
       m_Calls:
@@ -320,7 +320,147 @@ MonoBehaviour:
   ifFireFromBack: 0
   angleBetweenEachBulletInCycle: 0
   delayBetweenEachRapidFireInSec: 0
-  numberOfBulletsToSpawn: 10
+  numberOfBulletsToSpawn: 40
+  bulletFire: {fileID: 0}
+  bulletDie: {fileID: 0}
+  ifCanFire: 1
+--- !u!114 &1094909561962837675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4430640474824362387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb316e9958857d47b119ef0a4de6bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTemporary: 1
+  isTemporaryReady: 0
+  desiredWeapon:
+  - {fileID: 11400000, guid: 4b101f4d843c77241b8e2b685805a96b, type: 2}
+  templateBullet: {fileID: 3525454690951914276, guid: f86a7464927f53a4790d2ae23783f439, type: 3}
+  maxAmmo: 50
+  ammoRegenPerSec: 30
+  onOutOfAmmo:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1094909561962837675}
+        m_TargetAssemblyTypeName: BulletManager, Assembly-CSharp
+        m_MethodName: PlayOnlyOnce
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onFire:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5763624804621651058}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onRegenAmmo:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5763624804621651058}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: set_loop
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5763624804621651058}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: set_clip
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5763624804621651058}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onFinishRegenAmmo:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5763624804621651058}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: set_loop
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5763624804621651058}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5763624804621651058}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  fireRate: 1
+  radius: 1
+  bulletSpeed: 5
+  delayBetweenCycleInSec: 0.1
+  numberOfTimesToFirePerCycle: 0
+  numberOfCycles: 1
+  ifFireFromBack: 0
+  angleBetweenEachBulletInCycle: 0
+  delayBetweenEachRapidFireInSec: 0
+  numberOfBulletsToSpawn: 40
   bulletFire: {fileID: 0}
   bulletDie: {fileID: 0}
   ifCanFire: 1
@@ -463,6 +603,21 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1843499621836002513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4430640474824362387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c658c2f78a987974e814ad569b7ae89e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeedUpgrade: 5
+  maxAmmoUpgrade: 20
+  regenAmmoPerSecUpgrade: 10
 --- !u!1 &6466752713386010851
 GameObject:
   m_ObjectHideFlags: 0

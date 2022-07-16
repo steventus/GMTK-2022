@@ -92,7 +92,7 @@ public class WaveManager : MonoBehaviour
     {
         //Select new Weapon or just upgrade player properties
         //Check for Critical roll
-        BulletManager.SelectWeapon();
+        BulletManager.SlotMachine();
 
         if (CriticalRole)
         {
@@ -108,7 +108,6 @@ public class WaveManager : MonoBehaviour
 
         }
       
-
         //Select new perk - Karim
         ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
         ArenaPerk.Randomize();
@@ -202,7 +201,6 @@ public class WaveManager : MonoBehaviour
                 rng_upgrade = RNG_Upgrade.Uncommon;
             }
         }
-
 
         Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
     }
