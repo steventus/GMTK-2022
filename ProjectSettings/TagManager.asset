@@ -9,7 +9,7 @@ TagManager:
   - F_Enemy
   - Fake
   - PlayerBullet
-
+  - enemyBullet
   layers:
   - Default
   - TransparentFX
