@@ -12,11 +12,17 @@ public class Wave
 
 public class WaveManager : MonoBehaviour
 {
+
+    public BulletManager BulletManager;
+    public int RoundNum;
+
+    public ValueHandler ValueHandler;
+    
     public List<Wave> waves;
     public Transform[] spawnPoints;
 
     private Wave currentWave;
-    private int currentWaveNumber;
+    public int currentWaveNumber;
     private float nextSpawnTime;
 
     private bool canSpawn = true;
@@ -24,32 +30,56 @@ public class WaveManager : MonoBehaviour
 
     private bool ShouldStop;
     private int myRoundNumber;
+
+
     private void Update()
     {
-        if (!ShouldStop)
+        if (ShouldStop) return;
+        if (ValueHandler.currentRoundNum != RoundNum) return;
+        
+        currentWave = waves[currentWaveNumber];
+        if (canSpawn && nextSpawnTime < Time.time)
         {
-            ShouldStop = true;
-            
-            currentWave = waves[currentWaveNumber];
-            if (canSpawn && nextSpawnTime < Time.time)
-            {
-                SpawnWave();
-            }
-
-            GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Fake");
-
-            if (totalEnemies.Length != 0) return;
-            if (currentWaveNumber + 1 != waves.Count)
-            {
-                if (!TrySpawn) return;
-                SpawnNextWave();
-                return;
-            }
-
-            RoundManager.currentRoundNumber++;
-            Debug.Log("Completed waves");
-           
+            SpawnWave();
         }
+
+        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Fake");
+
+        if (totalEnemies.Length != 0) return;
+        if (currentWaveNumber + 1 != waves.Count)
+        {
+            if (!TrySpawn) return;
+            
+            
+            SpawnNextWave();
+
+            if (ValueHandler.currentRoundNum > ValueHandler._waveManager.Length + 1)
+            {
+                Debug.Log("Stop heeeeeeeeeeeeeeeeeeeeeeeeee");
+                ShouldStop = true;
+            }
+            return;
+        }
+
+
+      
+        ValueHandler.currentRoundNum++;
+        
+        Debug.Log("Completed waves");
+        BulletManager.SelectWeapon();
+        
+    }
+
+    private bool isUsed;
+    private bool GetValidate()
+    {
+        if (waves.Count == 1 && isUsed == false)
+        {
+            isUsed = true;
+            return currentWaveNumber != waves.Count;
+        }
+
+        return currentWaveNumber + 1 != waves.Count;
     }
 
     void SpawnNextWave()

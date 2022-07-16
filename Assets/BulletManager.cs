@@ -243,7 +243,8 @@ public class BulletManager : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             curAmmo += ammoRegenPerSec;
-
+            FindObjectOfType<UiPlayerAmmo>().SetPlayerAmmo(curAmmo);
+            
             if (curAmmo >= maxAmmo)
             {
                 curAmmo = maxAmmo;

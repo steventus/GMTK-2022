@@ -59,6 +59,7 @@ MonoBehaviour:
   templateBullet: {fileID: 3525454690951914276, guid: c1cb9ac2dcf6062438d6979b2ef5fd19, type: 3}
   maxAmmo: 100
   curAmmo: 0
+  ammoRegenPerSec: 0
   fireRate: 1
   radius: 1
   bulletSpeed: 5
@@ -132,7 +133,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 787023095450456522}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7570b07d82fd535488bcb3eab0054328, type: 3}
   m_Name: 

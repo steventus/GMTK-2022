@@ -12,12 +12,5 @@ public struct Round
 }
 public class RoundManager : MonoBehaviour
 {
-   public List<Round> Rounds = new List<Round>();
-   public static int currentRoundNumber = 0;
-   private void Update()
-   {
-      var currentRound = Rounds[currentRoundNumber];
-      
-      Debug.Log(currentRound.RoundName);
-   }
+   public static int currentRoundNum = 0;
 }
