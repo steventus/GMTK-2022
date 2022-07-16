@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 724b8e46b7b3a4b5c9e19449f8f29b24
+guid: 94d9552d5e62646e0bb539a555f5dca9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -69,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: abandoned_anim 3_0
+      name: casino_tiles_0
       rect:
         serializedVersion: 2
         x: 32
-        y: 0
+        y: 224
         width: 32
-        height: 31
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e26085f8268ed094a8d9c696739f2f03
-      internalID: -674000287
+      spriteID: 99bfc97ac9d44354c8db03e7965ea801
+      internalID: -1977882468
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: abandoned_anim 3_1
+      name: casino_tiles_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 0
+        y: 224
         width: 32
-        height: 31
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a68fe4460a282ac458417465fc473bc3
-      internalID: -2057972324
+      spriteID: e1b43621d4d76d445a86fe99970662e4
+      internalID: -1866027493
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: abandoned_anim 3_2
+      name: casino_tiles_2
       rect:
         serializedVersion: 2
         x: 96
-        y: 0
+        y: 224
         width: 32
-        height: 31
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa5ec3ad6dc1f9f448b63375fc41b2a9
-      internalID: -2077617666
+      spriteID: a4680b3c2b1e72340a5077bd3aeb52b2
+      internalID: -725035661
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: abandoned_anim 3_3
+      name: casino_tiles_3
       rect:
         serializedVersion: 2
         x: 128
-        y: 0
+        y: 224
         width: 32
-        height: 31
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 164f6acc5dcec794ab25a981dbe12c6a
-      internalID: -503370297
+      spriteID: 5538ff74862559c4d8c03e20e85058e7
+      internalID: 1046288070
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: abandoned_anim 3_4
+      name: casino_tiles_4
       rect:
         serializedVersion: 2
         x: 160
-        y: 0
+        y: 224
         width: 32
-        height: 31
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,20 +214,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6188f79b9a5d446438a44d35202f1137
-      internalID: 814690730
+      spriteID: 26865e7b5939ca94ba5c66847cd2f10b
+      internalID: 1254430255
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: abandoned_anim 3_5
+      name: casino_tiles_5
       rect:
         serializedVersion: 2
         x: 192
-        y: 0
+        y: 224
         width: 32
-        height: 31
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,20 +235,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e7338bf14cf4594587df8c774af2f30
-      internalID: -371055988
+      spriteID: a48f3bf82e37ec04eb61c8613cbc97df
+      internalID: 1958946117
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: abandoned_anim 3_6
+      name: casino_tiles_6
       rect:
         serializedVersion: 2
         x: 224
-        y: 0
+        y: 224
         width: 32
-        height: 31
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,8 +256,134 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f678370cb74ab344bf5804405046000
-      internalID: -1477005661
+      spriteID: 3a2880bf2e0cdf5479dae93af5b61e8b
+      internalID: -1952971743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casino_tiles_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99679f173c6354c4c8561eea6497d220
+      internalID: -1335519716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casino_tiles_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d931bbff854fc544873b68e6fc36dcd
+      internalID: -1203085347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casino_tiles_9
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 239fcae2802456544b60de2bdda2226f
+      internalID: -1247883125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casino_tiles_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca03f1a0c0a42c5458b7eef70b598998
+      internalID: 1704092097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casino_tiles_11
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5091d405d74468245a58ad995875aa56
+      internalID: 1509499408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casino_tiles_12
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1001be7fc895bd4dbac564cc8abb6f1
+      internalID: -428619420
       vertices: []
       indices: 
       edges: []
@@ -273,13 +399,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      abandoned_anim 3_2: -2077617666
-      abandoned_anim 3_0: -674000287
-      abandoned_anim 3_1: -2057972324
-      abandoned_anim 3_5: -371055988
-      abandoned_anim 3_6: -1477005661
-      abandoned_anim 3_3: -503370297
-      abandoned_anim 3_4: 814690730
+      casino_tiles_0: -1977882468
+      casino_tiles_4: 1254430255
+      casino_tiles_8: -1203085347
+      casino_tiles_1: -1866027493
+      casino_tiles_10: 1704092097
+      casino_tiles_2: -725035661
+      casino_tiles_5: 1958946117
+      casino_tiles_12: -428619420
+      casino_tiles_9: -1247883125
+      casino_tiles_6: -1952971743
+      casino_tiles_7: -1335519716
+      casino_tiles_11: 1509499408
+      casino_tiles_3: 1046288070
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
