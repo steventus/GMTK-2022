@@ -64,18 +64,6 @@ public class PlayerHealth : MonoBehaviour
 
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "enemyBullet")
-        {
-            collision.gameObject.SetActive(false);
-            TakeDamage(10);
-
-        }
-    }
-
-    
     private void Death()
     {
         onDeath.Invoke();
