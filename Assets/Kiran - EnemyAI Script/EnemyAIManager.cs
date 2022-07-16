@@ -28,12 +28,8 @@ public class EnemyAIManager : MonoBehaviour
 
         if (curEnemyHealth <= 0)
         {
-<<<<<<< Updated upstream
-=======
             //Messenger.Broadcast(GameEvent.EnemyDeathEvent);
             //Messenger.Broadcast(GameEvent.PlayerReGainHealth);
-            
->>>>>>> Stashed changes
             onDeath.Invoke();
             gameObject.SetActive(false);
         }

@@ -18,10 +18,6 @@ public class PlayerHealth : MonoBehaviour
     {
         curHealth -= _delta;
 
-<<<<<<< Updated upstream
-        if (curHealth <= 0) Death();
-        else onTakeDamage.Invoke();
-=======
         Debug.Log("Take Damage");
         if (curHealth <= 0)
         {
@@ -44,7 +40,6 @@ public class PlayerHealth : MonoBehaviour
             TakeDamage(10);
 
         }
->>>>>>> Stashed changes
     }
 
     private void Death()
