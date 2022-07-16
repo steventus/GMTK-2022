@@ -23,6 +23,11 @@ public class EnemyAIManager : MonoBehaviour
         {
             enemyHealth -= 10f;
             Debug.Log(enemyHealth);
+            if (enemyHealth <= 0)
+            {
+
+                gameObject.SetActive(false);
+            }
         }
     }
 
