@@ -17,11 +17,13 @@ public class PlayerController : MonoBehaviour
     private Vector2 mousePos;
     
     public float runSpeed = 20.0f;
+    private float curRunSpeed;
 
     [HideInInspector] public Vector2 desiredAimDir;
     void Start ()
     {
-        rb = GetComponent<Rigidbody2D>(); 
+        rb = GetComponent<Rigidbody2D>();
+        curRunSpeed = runSpeed;
     }
 
     void Update ()
@@ -54,5 +56,15 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(transform.position, desiredAimDir);
         //rb.rotation = aimAngle;
     }
-    
+
+    public void Reset()
+    {
+        curRunSpeed = runSpeed;
+    }
+
+    public void Upgrade()
+    {
+        curRunSpeed = runSpeed + PlayerUpgrades.numMoveSpeedUp * GetComponent<PlayerUpgrades>().moveSpeedUpgrade;
+    }
+
 }

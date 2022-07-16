@@ -13,6 +13,8 @@ public class WeaponData : ScriptableObject
     public int numOfBulletsInBurst;
     public float angleBetweenBullet;
 
+    public BulletData bulletData;
+
     [Space]
     //Audio
     public AudioClip soundOnFire;

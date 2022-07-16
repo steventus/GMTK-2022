@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62076d9a91baa9841857f662d79a4ab8, type: 3}
-  m_Name: Rifle
+  m_Name: SuperShotgun
   m_EditorClassIdentifier: 
-  fireRate: 4
-  costPerShot: 3
-  numOfBulletsInBurst: 1
-  angleBetweenBullet: 0
-  bulletData: {fileID: 11400000, guid: 3a8ea7f170496e24b9e592c9eecbf8f1, type: 2}
+  fireRate: 8
+  costPerShot: 2
+  numOfBulletsInBurst: 5
+  angleBetweenBullet: 10
+  bulletData: {fileID: 11400000, guid: 5b52c14c30487a742bfd5789d67bd94d, type: 2}
   soundOnFire: {fileID: 8300000, guid: 72e93e563ac286342a81448bb6cab48f, type: 3}
   soundOnReload: {fileID: 8300000, guid: 86ba7d8a5c6b2e047917bda566ed9f26, type: 3}
   soundOnFinishReload: {fileID: 8300000, guid: 3389eeab1cfecc24faaee5f896912068, type: 3}
