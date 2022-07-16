@@ -13,11 +13,11 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] private bool isMovingRight = true;
     
-     [SerializeField] EnemyTypes currentEnemyType;
+    [SerializeField] EnemyTypes currentEnemyType;
 
     void Start()
     {
-       
+
     }
 
     void FixedUpdate()
@@ -37,9 +37,6 @@ public class EnemyMovement : MonoBehaviour
                 Debug.Log("Error");
                 break;
         }
-
-
-
     }
 
    
@@ -49,22 +46,23 @@ public class EnemyMovement : MonoBehaviour
 
         if (distance < 6f)
         {
-            float speed = 10f * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position, speed);
-
+            float speed = 3f * Time.deltaTime;
+            transform.position = Vector2.Lerp(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position, speed);
         }
     }
 
     public void RunFromPlayerEnemyMovement()
     {
         float distance = Vector2.Distance(this.gameObject.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
-
-        if (distance < 6f)
+        
+        if (distance < 3f)
         {
             float speed = 10f * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position, -1 * speed);
+            var myPos = transform.position;
+            var otherPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+            var dist = (myPos - otherPos).magnitude;
+            var mapped = Mathf.InverseLerp(10, 5, dist);
+            transform.position = Vector2.MoveTowards(myPos, otherPos, -mapped * speed);
         }
     }
-
-
 }
