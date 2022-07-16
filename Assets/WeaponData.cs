@@ -7,11 +7,14 @@ public class WeaponData : ScriptableObject
 {
     //Weapon Stats
     public float fireRate;
-    public float costPerShot;
+    public int costPerShot;
 
     //Weapon Properties
     public int numOfBulletsInBurst;
     public float angleBetweenBullet;
 
-    
+    [Space]
+    //Audio
+    public AudioClip soundOnFire;
+    public AudioClip soundOnReload, soundOnFinishReload, soundOnOutOfAmmo;
 }
