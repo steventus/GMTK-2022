@@ -546,7 +546,7 @@ MonoBehaviour:
   - {fileID: 501527628}
   - {fileID: 1408626160}
   - {fileID: 1322243002}
-  SelecetedPerk: {fileID: 0}
+  SelecetedPerk: {fileID: 1322243002}
 --- !u!4 &229435606
 Transform:
   m_ObjectHideFlags: 0
@@ -1147,7 +1147,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentRoundNum: 1
   round_Label: {fileID: 1421589830}
-  _waveManager: []
+  _waveManager:
+  - {fileID: 1900368445}
+  - {fileID: 1560260800}
 --- !u!1 &1306228594
 GameObject:
   m_ObjectHideFlags: 0
