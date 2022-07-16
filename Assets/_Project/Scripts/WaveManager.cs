@@ -23,31 +23,33 @@ public class WaveManager : MonoBehaviour
     private bool TrySpawn = false;
 
     private bool ShouldStop;
-
+    private int myRoundNumber;
     private void Update()
     {
-        if(ShouldStop) return;
-        
-        currentWave = waves[currentWaveNumber];
-        if (canSpawn && nextSpawnTime < Time.time)
+        if (!ShouldStop)
         {
-            SpawnWave();
-        }
-        
-        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Fake");
-        
-        if (totalEnemies.Length != 0) return;
-        if ( currentWaveNumber + 1 != waves.Count )
-        {
-            if (!TrySpawn) return;
-            SpawnNextWave();
-            return;
-        }
+            ShouldStop = true;
+            
+            currentWave = waves[currentWaveNumber];
+            if (canSpawn && nextSpawnTime < Time.time)
+            {
+                SpawnWave();
+            }
 
-       
-        Debug.Log("Completed waves");
-        ShouldStop = true;
+            GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Fake");
 
+            if (totalEnemies.Length != 0) return;
+            if (currentWaveNumber + 1 != waves.Count)
+            {
+                if (!TrySpawn) return;
+                SpawnNextWave();
+                return;
+            }
+
+            RoundManager.currentRoundNumber++;
+            Debug.Log("Completed waves");
+           
+        }
     }
 
     void SpawnNextWave()
