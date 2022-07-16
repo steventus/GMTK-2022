@@ -21,7 +21,10 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] bool canCharge;
 
+    [SerializeField] bool canDash;
+
     [SerializeField] bool IsAvailable = true;
+
 
     [SerializeField] float CooldownDuration = 1.0f;
 
@@ -77,7 +80,7 @@ public class EnemyMovement : MonoBehaviour
                     transform.position = Vector3.Lerp(transform.position + offset, playerTransform.position, speed).normalized;
                     break;
                 case UpgradeEnemy.UpgradeFour:
-
+                    UseAbility();
                     break;
                 default:
                     Debug.Log("Upgrade Types not valid");
@@ -95,6 +98,7 @@ public class EnemyMovement : MonoBehaviour
             canCharge = false;
         }
 
+   
         /*Debug.Log(upgradeTypes);*/
         /*Debug.Log(canCharge);*/
     }
@@ -157,6 +161,9 @@ public class EnemyMovement : MonoBehaviour
 
         // made it here then ability is available to use...
         // UseAbilityCode goes here
+        Transform saveCurrentPlayerPosition;
+        saveCurrentPlayerPosition = playerTransform;
+        transform.position = Vector2.Lerp(-transform.position, saveCurrentPlayerPosition.position, 2* speed);
 
         // start the cooldown timer
         StartCoroutine(StartCooldown());
@@ -169,4 +176,18 @@ public class EnemyMovement : MonoBehaviour
         yield return new WaitForSeconds(CooldownDuration);
         IsAvailable = true;
     }
+
+   /* public IEnumerator DashMovement()
+    {
+        yield return new WaitForSeconds(1f);
+        speed = 1;
+        transform.position = Vector2.Lerp(transform.position, playerTransform.position, speed);
+        StartCoroutine(StopDashMovement());
+    }
+
+    public IEnumerator StopDashMovement()
+    {
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(DashMovement());
+    }*/
 }
