@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &154953212
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -409,7 +409,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMovingRight: 1
+  playerTransform: {fileID: 0}
   currentEnemyType: 0
+  currentUpgradeEnemy: 0
 --- !u!212 &1784579861
 SpriteRenderer:
   m_ObjectHideFlags: 0
