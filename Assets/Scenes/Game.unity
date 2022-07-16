@@ -495,14 +495,14 @@ MonoBehaviour:
   RoundNum: 1
   ValueHandler: {fileID: 1789986702}
   waves:
-  - enemiesNum: 1
+  - enemiesNum: 2
     Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
-    timeBetweenEnemeySpawn: 0.1
-  - enemiesNum: 1
+    timeBetweenEnemeySpawn: 0.5
+  - enemiesNum: 2
     Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
-    timeBetweenEnemeySpawn: 0.1
+    timeBetweenEnemeySpawn: 0.5
   spawnPoints:
   - {fileID: 49975290}
   - {fileID: 280499864}
@@ -2599,8 +2599,8 @@ MonoBehaviour:
   - enemiesNum: 3
     Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
-    timeBetweenEnemeySpawn: 0.1
-  - enemiesNum: 2
+    timeBetweenEnemeySpawn: 1
+  - enemiesNum: 3
     Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
@@ -4517,6 +4517,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1789986705}
+--- !u!1 &1905471098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1905471100}
+  - component: {fileID: 1905471099}
+  m_Layer: 0
+  m_Name: Debug
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1905471099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905471098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e86e9320a93d9a4d99aef6f46f4ca3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1905471100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905471098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.684214, y: 0.44871643, z: 2.617013}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1957298983
 GameObject:
   m_ObjectHideFlags: 0
@@ -5181,6 +5225,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9188689436653734582, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: sceneCamera
+      value: 
+      objectReference: {fileID: 1626174415}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
 --- !u!1001 &4472511684429942171

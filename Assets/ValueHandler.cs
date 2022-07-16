@@ -23,7 +23,7 @@ public class ValueHandler : MonoBehaviour
             if (round_Label != null)
             {
                 round_Label.text = "Finished";
-                Messenger.Broadcast(GameEvent.RoundsFinishedEvent);
+                //Messenger.Broadcast(GameEvent.RoundsFinishedEvent);
             }
             
            

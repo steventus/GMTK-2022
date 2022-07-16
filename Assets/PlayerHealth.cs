@@ -43,7 +43,8 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Take Damage");
         if (curHealth <= 0)
         {
-            Messenger.Broadcast(GameEvent.PlayerDeathEvent);
+            //Messenger.Broadcast(GameEvent.PlayerDeathEvent);
+
             Death();
         }
         else
@@ -63,8 +64,6 @@ public class PlayerHealth : MonoBehaviour
 
         }
     }
-
-    
     private void Death()
     {
         onDeath.Invoke();
