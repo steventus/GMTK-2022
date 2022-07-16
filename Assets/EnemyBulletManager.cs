@@ -11,11 +11,20 @@ public class EnemyBulletManager : BulletManager
 
     }
 
-    void Update()
+    protected override void Update()
     {
         CallFire();
     }
-
+    public override void CallFire()
+    {
+        //FIRE
+        if (Time.time >= timeLastFired + (1 / fireRate) && !firing && ifCanFire && CheckAmmo(curFireCost))
+        {
+            timeLastFired = Time.time;
+            firing = true;
+            StartCoroutine(FireCycle(numberOfTimesToFirePerCycle));
+        }
+    }
     protected override void Fire(float _rotation)
     {
         GameObject _bullet = null;

@@ -17,20 +17,20 @@ public class BulletManager : MonoBehaviour
     //Ammo
     public int maxAmmo;
     public int curAmmo;
-
+    public int ammoRegenPerSec;
 
     #region 
     //Firing a cycle
     [HideInInspector] public float fireRate = 1, radius = 1, bulletSpeed = 5, delayBetweenCycleInSec = 0.1f;
     [HideInInspector] public int numberOfTimesToFirePerCycle, numberOfCycles = 1;
     [HideInInspector] public bool ifFireFromBack = false;
-    [HideInInspector] private int curFireCost;
+    [HideInInspector] protected int curFireCost;
 
     //Properties within each firing cycle
     [HideInInspector] public float angleBetweenEachBulletInCycle, delayBetweenEachRapidFireInSec;
     private int fireIndex, secondaryFireIndex;
 
-    private float timeLastFired;
+    protected float timeLastFired;
     private float currentAngle;
 
     //Object pooling
@@ -40,8 +40,10 @@ public class BulletManager : MonoBehaviour
     //Sound
     [HideInInspector] public AudioClip bulletFire, bulletDie;
 
-    private bool firing = false;
+    protected bool firing = false;
     public bool ifCanFire = true;
+
+    private Coroutine coro_bulletRegen;
     #endregion
     private void Awake()
     {
@@ -102,7 +104,7 @@ public class BulletManager : MonoBehaviour
         InitialiseBullet();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         //UPDATE MOUSE POSITION
 
@@ -111,9 +113,20 @@ public class BulletManager : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Mouse0))
             CallFire();
+
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            if (coro_bulletRegen != null)
+            {
+                Debug.Log("interuppted");
+                StopCoroutine(coro_bulletRegen);
+            }
+
+            coro_bulletRegen = StartCoroutine(BeginRegen());
+        }
     }
 
-    public void CallFire()
+    public virtual void CallFire()
     {
         //FIRE
         if (Time.time >= timeLastFired + (1 / fireRate) && !firing && ifCanFire && CheckAmmo(curFireCost))
@@ -169,7 +182,7 @@ public class BulletManager : MonoBehaviour
 
         //INITIALISE BULLET
     }
-    IEnumerator FireCycle(int _numberOfRapidFire)
+    protected IEnumerator FireCycle(int _numberOfRapidFire)
     {
         bool _isEven = false;
         if (numberOfTimesToFirePerCycle % 2 == 0)
@@ -210,15 +223,36 @@ public class BulletManager : MonoBehaviour
         }
     }
 
-    private bool CheckAmmo(int _cost)
+    protected bool CheckAmmo(int _cost)
     {
         if (curAmmo >= _cost) return true;
         else return false;
     }
 
-    private void UpdateAmmo(int _cost)
+    protected void UpdateAmmo(int _cost)
     {
         curAmmo -= _cost;
         FindObjectOfType<UiPlayerAmmo>().SetPlayerAmmo(curAmmo);
+    }
+
+    IEnumerator BeginRegen()
+    {
+        yield return new WaitForSeconds(1);
+        Debug.Log("begin regen");
+        while (curAmmo < maxAmmo)
+        {
+            yield return new WaitForSeconds(1);
+            curAmmo += ammoRegenPerSec;
+            FindObjectOfType<UiPlayerAmmo>().SetPlayerAmmo(curAmmo);
+            
+            if (curAmmo >= maxAmmo)
+            {
+                curAmmo = maxAmmo;
+                FindObjectOfType<UiPlayerAmmo>().SetPlayerAmmo(curAmmo);
+                break;
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
     }
 }

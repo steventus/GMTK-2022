@@ -11,7 +11,7 @@ public class UiPlayerAmmo : MonoBehaviour
     }
     public void Initialise()
     {
-        GetComponent<Slider>().value = GetComponent<Slider>().maxValue = 100; 
+        GetComponent<Slider>().value = GetComponent<Slider>().maxValue = 50; 
     }
 
     public void SetPlayerAmmo(float curAmmo)

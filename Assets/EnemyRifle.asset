@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62076d9a91baa9841857f662d79a4ab8, type: 3}
   m_Name: EnemyRifle
   m_EditorClassIdentifier: 
-  fireRate: 0
+  fireRate: 1.2
   costPerShot: 0
-  numOfBulletsInBurst: 0
-  angleBetweenBullet: 0
+  numOfBulletsInBurst: 3
+  angleBetweenBullet: 10

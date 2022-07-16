@@ -9,7 +9,8 @@ TagManager:
   - F_Enemy
   - Fake
   - PlayerBullet
-  - MusicManager
+  - enemyBullet
+
   layers:
   - Default
   - TransparentFX
