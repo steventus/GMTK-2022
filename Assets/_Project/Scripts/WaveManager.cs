@@ -63,7 +63,6 @@ public class WaveManager : MonoBehaviour
             }
             return;
         }
-        Debug.Log("Completed waves");
 
         //Slotmachine anim
         FindObjectOfType<SlotMachine>().GetComponent<Animator>().Play("slotMachine_flyIn");
@@ -81,6 +80,7 @@ public class WaveManager : MonoBehaviour
     }
     public void StartNextRound()
     {
+        RandomizeSlotMachine();
         ValueHandler.currentRoundNum++;
         onRoundStart.Invoke();
     }
