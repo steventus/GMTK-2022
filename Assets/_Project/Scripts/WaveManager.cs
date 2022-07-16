@@ -14,6 +14,7 @@ public class Wave
 public class WaveManager : MonoBehaviour
 {
 
+    public ArenaPerk ArenaPerk;
     public BulletManager BulletManager;
     public int RoundNum;
 
@@ -71,7 +72,15 @@ public class WaveManager : MonoBehaviour
 
         onRoundEnd.Invoke();
         BulletManager = FindObjectOfType<BulletManager>();
+        
+        ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
+        ArenaPerk.Randomize();
+    }
+
+    public void RandomizeSlotMachine()
+    {
         BulletManager.SelectWeapon();
+        ArenaPerk.Randomize();
     }
 
     private bool isUsed;

@@ -15,6 +15,7 @@ public class EnemyMovement : MonoBehaviour
     
     [SerializeField] EnemyTypes currentEnemyType;
 
+    public float speed;
     void Start()
     {
 
@@ -46,7 +47,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (distance < 6f)
         {
-            float speed = 3f * Time.deltaTime;
+            speed = 3f * Time.deltaTime;
             transform.position = Vector2.Lerp(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position, speed);
         }
     }
@@ -57,7 +58,7 @@ public class EnemyMovement : MonoBehaviour
         
         if (distance < 3f)
         {
-            float speed = 10f * Time.deltaTime;
+            speed = 10f * Time.deltaTime;
             var myPos = transform.position;
             var otherPos = GameObject.FindGameObjectWithTag("Player").transform.position;
             var dist = (myPos - otherPos).magnitude;
