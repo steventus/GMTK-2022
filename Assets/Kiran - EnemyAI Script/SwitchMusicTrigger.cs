@@ -5,8 +5,8 @@ using UnityEngine;
 public class SwitchMusicTrigger : MonoBehaviour
 {
 
-    public AudioClip newTrack;
-
+    public AudioClip track1, track2;
+    private AudioClip oldTrack;
     private MusicManager musicManager;
 
     // Start is called before the first frame update
@@ -19,11 +19,18 @@ public class SwitchMusicTrigger : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
-        {
-            if (newTrack != null)
+        {           
+            if (oldTrack == track1)
             {
-                musicManager.ChangeBackgroundMusic(newTrack);
-                Debug.Log("Music Changed!");
+                musicManager.ChangeBackgroundMusic(track2);
+                oldTrack = track2;
+
+            }
+
+            else
+            {
+                musicManager.ChangeBackgroundMusic(track1);
+                oldTrack = track1;
             }
         }
     }
