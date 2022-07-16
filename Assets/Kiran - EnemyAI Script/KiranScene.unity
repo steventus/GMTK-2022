@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &154953212
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -373,6 +373,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MusicManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3533939052038373631, guid: 00a04c330108fa04f859a603a1a514c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00a04c330108fa04f859a603a1a514c2, type: 3}
 --- !u!1 &1784579859
@@ -409,7 +413,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMovingRight: 1
+  playerTransform: {fileID: 0}
   currentEnemyType: 0
+  currentUpgradeEnemy: 4
+  canCharge: 0
+  canDash: 0
+  IsAvailable: 1
+  CooldownDuration: 10
+  speed: 0.4
 --- !u!212 &1784579861
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -489,7 +500,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2013b9fc14c2400468097cfebff2e4c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 0
+  enemyHealth: 100
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &1784579864
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -614,7 +631,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2041438711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.9, y: -1.28, z: 0}
+  m_LocalPosition: {x: -0.66, y: -1.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
