@@ -1831,6 +1831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArenaPerk: {fileID: 953379345}
   BulletManager: {fileID: 1136211994}
+  enemyAIManager: {fileID: 0}
   RoundNum: 1
   ValueHandler: {fileID: 358847337}
   waves:
@@ -1850,6 +1851,11 @@ MonoBehaviour:
   - {fileID: 302753165}
   - {fileID: 446228127}
   currentWaveNumber: 0
+  CriticalRole: 0
+  enemyHealthUpgrade: 0
+  enemyFireRateUpgrade: 0
+  numOfBulletsUpgrade: 0
+  rng_upgrade: 0
   onRoundStart:
     m_PersistentCalls:
       m_Calls: []
@@ -2074,6 +2080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArenaPerk: {fileID: 953379345}
   BulletManager: {fileID: 1136211994}
+  enemyAIManager: {fileID: 0}
   RoundNum: 2
   ValueHandler: {fileID: 358847337}
   waves:
@@ -2093,6 +2100,11 @@ MonoBehaviour:
   - {fileID: 409381659}
   - {fileID: 1387919874}
   currentWaveNumber: 0
+  CriticalRole: 0
+  enemyHealthUpgrade: 0
+  enemyFireRateUpgrade: 0
+  numOfBulletsUpgrade: 0
+  rng_upgrade: 0
   onRoundStart:
     m_PersistentCalls:
       m_Calls: []
@@ -2685,11 +2697,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &965330667 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 3574017244600064199, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
-  m_PrefabInstance: {fileID: 1136211992}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1030359600
 GameObject:
   m_ObjectHideFlags: 0
@@ -3598,11 +3605,6 @@ Transform:
   m_Father: {fileID: 953379346}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1078202217 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3847836646075427787, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
-  m_PrefabInstance: {fileID: 1136211992}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1136211992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3661,15 +3663,15 @@ PrefabInstance:
     - target: {fileID: 4430640474824362383, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: gun
       value: 
-      objectReference: {fileID: 1078202217}
+      objectReference: {fileID: 0}
     - target: {fileID: 4430640474824362383, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: aimCursor
       value: 
-      objectReference: {fileID: 1573308460}
+      objectReference: {fileID: 0}
     - target: {fileID: 4430640474824362383, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: gunSprite
       value: 
-      objectReference: {fileID: 965330667}
+      objectReference: {fileID: 0}
     - target: {fileID: 4430640474824362383, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: sceneCamera
       value: 
@@ -3746,6 +3748,10 @@ PrefabInstance:
       propertyPath: RegainHealthSystems.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9188689436653734582, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: sceneCamera
+      value: 
+      objectReference: {fileID: 874147749}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
 --- !u!114 &1136211993 stripped
@@ -4448,11 +4454,6 @@ Transform:
   m_Father: {fileID: 732989388}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1573308460 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5324931445999976556, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
-  m_PrefabInstance: {fileID: 1136211992}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1577631437
 GameObject:
   m_ObjectHideFlags: 0
