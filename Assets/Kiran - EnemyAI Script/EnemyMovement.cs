@@ -17,6 +17,9 @@ public class EnemyMovement : MonoBehaviour
     
     [SerializeField] EnemyTypes currentEnemyType;
 
+
+    public float speed;
+
     [SerializeField] UpgradeEnemy currentUpgradeEnemy;
 
     [SerializeField] bool canCharge;
@@ -24,6 +27,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] bool IsAvailable = true;
 
     [SerializeField] float CooldownDuration = 1.0f;
+
 
     void Start()
     {
@@ -59,6 +63,10 @@ public class EnemyMovement : MonoBehaviour
 
         if (distance < 6f)
         {
+
+            speed = 3f * Time.deltaTime;
+            transform.position = Vector2.Lerp(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position, speed);
+
             switch (upgradeTypes)
             {
                 case UpgradeEnemy.Base:
@@ -92,6 +100,7 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             canCharge = false;
+
         }
 
         /*Debug.Log(upgradeTypes);*/
@@ -107,6 +116,14 @@ public class EnemyMovement : MonoBehaviour
 
         if (distance < 3f)
         {
+
+            speed = 10f * Time.deltaTime;
+            var myPos = transform.position;
+            var otherPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+            var dist = (myPos - otherPos).magnitude;
+            var mapped = Mathf.InverseLerp(10, 5, dist);
+            transform.position = Vector2.MoveTowards(myPos, otherPos, -mapped * speed);
+
             switch (upgradeTypes)
             {
                 case UpgradeEnemy.Base:
@@ -126,6 +143,7 @@ public class EnemyMovement : MonoBehaviour
                     Debug.Log("Upgrade Types not valid");
                     break;
             }
+
         }
 
         if (currentEnemyType == EnemyTypes.RangedAI && currentUpgradeEnemy == UpgradeEnemy.UpgradeOne)
