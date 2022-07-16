@@ -7,7 +7,7 @@ public class EnemyMovement : MonoBehaviour
 {
     enum EnemyTypes { MeleeAI, RangedAI };
 
-    enum UpgradeEnemy { Base, UpgradeOne, UpgradeTwo, UpgradeThree, UpgradeFour };
+    public enum UpgradeEnemy { Base, UpgradeOne, UpgradeTwo, UpgradeThree, UpgradeFour };
 
     enum GunTypes { Shotgun, AutoFire, BurstFire, Sniper };
 
@@ -17,7 +17,7 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] EnemyTypes currentEnemyType;
 
-    [SerializeField] UpgradeEnemy currentUpgradeEnemy;
+    [SerializeField] public UpgradeEnemy currentUpgradeEnemy;
 
     [SerializeField] bool canCharge;
 
@@ -148,8 +148,6 @@ public class EnemyMovement : MonoBehaviour
             Debug.Log("Finish Charging");
         }
     }
-
-
 
     void UseAbility()
     {
