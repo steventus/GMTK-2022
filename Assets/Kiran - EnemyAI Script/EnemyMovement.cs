@@ -21,6 +21,10 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] bool canCharge;
 
+    [SerializeField] bool IsAvailable = true;
+
+    [SerializeField] float CooldownDuration = 1.0f;
+
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -116,22 +120,17 @@ public class EnemyMovement : MonoBehaviour
                     break;
                 case UpgradeEnemy.UpgradeOne:
 
-                    transform.position = Vector2.Lerp(transform.position, playerTransform.position, speed);
-                    
-                    break;
-                case UpgradeEnemy.UpgradeTwo:
-
-                    break;
-                case UpgradeEnemy.UpgradeThree:
-
-                    break;
-                case UpgradeEnemy.UpgradeFour:
-
+                    transform.position = Vector2.Lerp(transform.position, playerTransform.position, speed);    
                     break;
                 default:
                     Debug.Log("Upgrade Types not valid");
                     break;
             }
+        }
+
+        if (currentEnemyType == EnemyTypes.RangedAI && currentUpgradeEnemy == UpgradeEnemy.UpgradeOne)
+        {
+            UseAbility();
         }
     }
 
@@ -143,5 +142,30 @@ public class EnemyMovement : MonoBehaviour
             yield return new WaitForSeconds(1f);
             Debug.Log("Finish Charging");
         }
+    }
+
+    
+
+    void UseAbility()
+    {
+        // if not available to use (still cooling down) just exit
+        if (IsAvailable == false)
+        {
+            return;
+        }
+
+        // made it here then ability is available to use...
+        // UseAbilityCode goes here
+
+        // start the cooldown timer
+        StartCoroutine(StartCooldown());
+    }
+
+    public IEnumerator StartCooldown()
+    {
+        IsAvailable = false;
+        Debug.Log("Start Cooldown");
+        yield return new WaitForSeconds(CooldownDuration);
+        IsAvailable = true;
     }
 }
