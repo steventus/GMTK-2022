@@ -64,7 +64,8 @@ public class PlayerController : MonoBehaviour
 
     public void Upgrade()
     {
-        curRunSpeed = runSpeed + PlayerUpgrades.numMoveSpeedUp * GetComponent<PlayerUpgrades>().moveSpeedUpgrade;
+        curRunSpeed = Mathf.Pow(runSpeed, PlayerUpgrades.numMoveSpeedUp * GetComponent<PlayerUpgrades>().moveSpeedUpgrade);
+        runSpeed = curRunSpeed;
     }
 
 }

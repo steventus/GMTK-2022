@@ -4,26 +4,29 @@ using UnityEngine;
 using UnityEngine.Events;
 public class EnemyAIManager : MonoBehaviour
 {
-    public float enemyHealth;
+    public float iniEnemyHealth;
+    public float curEnemyHealth;
 
     [Space]
     public UnityEvent onTakeDamage, onDeath;
-
+    private void Awake()
+    {
+        curEnemyHealth = iniEnemyHealth;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "bullet")
         {
             collision.gameObject.SetActive(false);
             TakeDamage(10);
-
         }
     }
 
     private void TakeDamage(float _delta)
     {
-        enemyHealth -= _delta;
+        curEnemyHealth -= _delta;
 
-        if (enemyHealth <= 0)
+        if (curEnemyHealth <= 0)
         {
             Messenger.Broadcast(GameEvent.EnemyDeathEvent);
             Messenger.Broadcast(GameEvent.PlayerReGainHealth);

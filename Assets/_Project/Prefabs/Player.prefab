@@ -235,6 +235,7 @@ MonoBehaviour:
   isTemporaryReady: 0
   desiredWeapon:
   - {fileID: 11400000, guid: 4b101f4d843c77241b8e2b685805a96b, type: 2}
+  - {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
   templateBullet: {fileID: 3525454690951914276, guid: f86a7464927f53a4790d2ae23783f439, type: 3}
   maxAmmo: 50
   ammoRegenPerSec: 30
@@ -375,6 +376,7 @@ MonoBehaviour:
   isTemporaryReady: 0
   desiredWeapon:
   - {fileID: 11400000, guid: 4b101f4d843c77241b8e2b685805a96b, type: 2}
+  - {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
   templateBullet: {fileID: 3525454690951914276, guid: f86a7464927f53a4790d2ae23783f439, type: 3}
   maxAmmo: 50
   ammoRegenPerSec: 30
@@ -654,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c658c2f78a987974e814ad569b7ae89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedUpgrade: 5
+  moveSpeedUpgrade: 1.1
   maxAmmoUpgrade: 20
   regenAmmoPerSecUpgrade: 10
 --- !u!114 &9188689436653734582
