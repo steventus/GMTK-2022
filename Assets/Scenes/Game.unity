@@ -5207,6 +5207,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4861032664390039586, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4861032665933890660}
+    - target: {fileID: 4861032664390039586, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReloadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861032664390039586, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameOverr, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4861032664455173656, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
       propertyPath: onSlotExit.m_PersistentCalls.m_Calls.Array.size
       value: 7
@@ -5557,3 +5569,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
+--- !u!114 &4861032665933890660 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4861032665250810812, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
+  m_PrefabInstance: {fileID: 4861032665933890659}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eccb7512ed51e4148a1872ffddae8b9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
