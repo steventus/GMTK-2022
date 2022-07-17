@@ -1204,9 +1204,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 464786790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ca8a2273a376cb4db25be2363c0d9a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a02eb9bf0010dd4782b4725710752ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
+  usedPerk: 0
+  ArenaPerk: {fileID: 1372895068}
 --- !u!4 &464786792
 Transform:
   m_ObjectHideFlags: 0

@@ -40,7 +40,7 @@ public class RoundHandler : MonoBehaviour
 
         
         if (round_Label != null)
-            round_Label.text = currentRoundNum.ToString();
+            round_Label.text = (currentRoundNum - 1).ToString();
        
     }
 
