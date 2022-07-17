@@ -250,7 +250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d582dbde32728439940e333bfecf79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
 --- !u!4 &101231893
 Transform:
   m_ObjectHideFlags: 0
@@ -385,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eccb7512ed51e4148a1872ffddae8b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ValueHandler: {fileID: 208666295}
+  roundHandler: {fileID: 0}
   roundsSurvived: {fileID: 1566119670}
   enemiesKilled: {fileID: 1408017988}
   OnRoundFinished:
@@ -592,9 +591,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentRoundNum: 1
   round_Label: {fileID: 1434612925}
-  _waveManager:
-  - {fileID: 985718125}
-  - {fileID: 1853441873}
+  EnemySpawnMax: 3
+  EnemySpawnMin: 1
 --- !u!4 &208666296
 Transform:
   m_ObjectHideFlags: 0
@@ -820,6 +818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ccff9f35f30714e956b31ab0e6aa85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usedPerk: 0
 --- !u!4 &456952926
 Transform:
   m_ObjectHideFlags: 0
@@ -902,6 +901,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: gunSprite
+      value: 
+      objectReference: {fileID: 1376682148}
+    - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: ammoRegenPerSec
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: desiredWeapon.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: desiredWeapon.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: f2f693d55bc89cb4fb2b90e664e4c32a, type: 2}
     - target: {fileID: 4430640474824362387, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: m_Name
       value: Player
@@ -913,6 +928,10 @@ PrefabInstance:
     - target: {fileID: 4430640474824362387, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6120532819967952834, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.035
       objectReference: {fileID: 0}
     - target: {fileID: 6165160813485028465, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: m_Layer
@@ -929,6 +948,10 @@ PrefabInstance:
     - target: {fileID: 7783212066405389985, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803340829422482760, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: maxHealth
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7803340829422482760, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.size
@@ -1227,6 +1250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca8a2273a376cb4db25be2363c0d9a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usedPerk: 0
   ArenaPerk: {fileID: 1372895068}
 --- !u!4 &464786792
 Transform:
@@ -1463,6 +1487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef548cd177c6df4485621b9a7a5dfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usedPerk: 0
   PlayerController: {fileID: 458084138}
 --- !u!4 &613752529
 Transform:
@@ -1824,14 +1849,15 @@ MonoBehaviour:
   ArenaPerk: {fileID: 1372895068}
   BulletManager: {fileID: 458084139}
   RoundNum: 1
-  ValueHandler: {fileID: 208666295}
+  roundHandler: {fileID: 208666295}
   waves:
-  - enemiesNum: 2
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.5
-  - enemiesNum: 2
-    Enemytype:
+  - Enemytype:
+    - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
+    timeBetweenEnemeySpawn: 0.5
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.5
   spawnPoints:
@@ -1850,6 +1876,7 @@ MonoBehaviour:
   onRoundEnd:
     m_PersistentCalls:
       m_Calls: []
+  enemiesNum: 0
 --- !u!4 &985718126
 Transform:
   m_ObjectHideFlags: 0
@@ -2508,6 +2535,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1376682148 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6698357750694874648, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+  m_PrefabInstance: {fileID: 458084137}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1408017986
 GameObject:
   m_ObjectHideFlags: 0
@@ -4177,7 +4209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1853441873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4193,18 +4225,15 @@ MonoBehaviour:
   ArenaPerk: {fileID: 1372895068}
   BulletManager: {fileID: 458084139}
   RoundNum: 2
-  ValueHandler: {fileID: 208666295}
+  roundHandler: {fileID: 0}
   waves:
-  - enemiesNum: 2
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
-  - enemiesNum: 3
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 1
-  - enemiesNum: 3
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
   spawnPoints:
@@ -4223,6 +4252,7 @@ MonoBehaviour:
   onRoundEnd:
     m_PersistentCalls:
       m_Calls: []
+  enemiesNum: 0
 --- !u!4 &1853441874
 Transform:
   m_ObjectHideFlags: 0
@@ -7066,6 +7096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c516a42d781f0643ad88d63d05bd5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usedPerk: 0
   BulletDatas:
   - {fileID: 11400000, guid: 3a8ea7f170496e24b9e592c9eecbf8f1, type: 2}
   - {fileID: 11400000, guid: 5b52c14c30487a742bfd5789d67bd94d, type: 2}

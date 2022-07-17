@@ -20,6 +20,7 @@ public class AimMouse : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
     }
 
