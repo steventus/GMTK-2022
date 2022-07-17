@@ -17,6 +17,7 @@ MonoBehaviour:
   numOfBulletsInBurst: 5
   angleBetweenBullet: 10
   bulletData: {fileID: 11400000, guid: 5b52c14c30487a742bfd5789d67bd94d, type: 2}
+  gunSprite: {fileID: 21300000, guid: 342f5e2f426592e45ac54f1d06085fcf, type: 3}
   soundOnFire: {fileID: 8300000, guid: 72e93e563ac286342a81448bb6cab48f, type: 3}
   soundOnReload: {fileID: 8300000, guid: 86ba7d8a5c6b2e047917bda566ed9f26, type: 3}
   soundOnFinishReload: {fileID: 8300000, guid: 3389eeab1cfecc24faaee5f896912068, type: 3}

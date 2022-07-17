@@ -8,8 +8,8 @@ public class PlayerHealth : MonoBehaviour
 {
 
 
-    public float maxHealth = 100;
-    public float curHealth;
+    public int maxHealth = 3;
+    public int curHealth;
 
     public int enemiesKilled;
 
@@ -40,7 +40,8 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float _delta)
     {
-        curHealth -= _delta;
+        curHealth -= 1;
+        Messenger<int>.Broadcast(UiEvent.player_takeDamage, curHealth);
 
         Debug.Log("Take Damage");
         if (curHealth <= 0)
@@ -94,9 +95,10 @@ public class PlayerHealth : MonoBehaviour
 
         if (requredKill == enemiesKilled)
         {
-            curHealth += 100;
+            curHealth += 1;
+            Messenger<int>.Broadcast(UiEvent.player_takeDamage, curHealth);
         }
-        
+
         requredKill = enemiesKilled * 2;
        
     }

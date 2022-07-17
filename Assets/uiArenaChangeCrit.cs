@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class uiEnemyUpgrade : MonoBehaviour
+public class uiArenaChangeCrit : MonoBehaviour
 {
     public Image thisImage;
 
@@ -13,15 +13,15 @@ public class uiEnemyUpgrade : MonoBehaviour
     }
     private void OnEnable()
     {
-        Messenger<Sprite>.AddListener(UiEvent.enemy_upgradeChange, SetImage);
+        Messenger<bool>.AddListener(UiEvent.arena_perkChangeCrit, setImage);
     }
     private void OnDisable()
     {
-        Messenger<Sprite>.RemoveListener(UiEvent.enemy_upgradeChange, SetImage);
+        Messenger<bool>.RemoveListener(UiEvent.arena_perkChangeCrit, setImage);
 
     }
-    public void SetImage(Sprite _image)
+    public void setImage(bool _state)
     {
-        thisImage.sprite = _image;
+        GetComponent<Image>().enabled = _state;
     }
 }

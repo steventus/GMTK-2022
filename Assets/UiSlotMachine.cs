@@ -35,6 +35,15 @@ public class UiSlotMachine : MonoBehaviour
         readyToBegin = false;
         readyToExit = false;
     }
+    private void OnEnable()
+    {
+        Messenger<Sprite>.AddListener(UiEvent.player_gunChange, wheels[0].SetImage);
+    }
+    private void OnDisable()
+    {
+        Messenger<Sprite>.RemoveListener(UiEvent.player_gunChange, wheels[0].SetImage);
+
+    }
     public void SlotEnter(int _playerUpgradeNumber, int _enemyUpgradeNumber, int _arenaUpgradeNumber, bool _ifPlayerCrit, bool _ifEnemyCrit, bool _ifArenaCrit)
     {
         //Animation - wait for 1 seconds
@@ -75,7 +84,7 @@ public class UiSlotMachine : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         //Run through each wheel slowly and show results
-        wheels[0].ShowWheel(playerUpgrades[playerUpgradeNumber], playerCrit);
+        wheels[0].ShowWheelSpecial(playerCrit);
         Debug.Log("player:" + playerUpgradeNumber);
         yield return new WaitForSeconds(0.3f);
         wheels[1].ShowWheel(enemyUpgrades[enemyUpgradeNumber], enemyCrit);
