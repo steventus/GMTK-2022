@@ -119,6 +119,7 @@ public class WaveManager : MonoBehaviour
         onRoundStart.Invoke();
 
     }
+    
     private bool isUsed;
     private bool GetValidate()
     {

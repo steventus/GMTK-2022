@@ -21,6 +21,19 @@ public class PlayerSprite : MonoBehaviour
     private Vector3 oldVel;
     private bool ifFacingRight, oldFacingRight;
 
+    public Animator Animator;
+
+    private string currentState;
+    public PlayerController PlayerController;
+    
+    public void SwitchState(string newState)
+    {
+        if (currentState == newState) return;
+
+        currentState = newState;
+        Animator.Play(currentState);
+    }
+    
     public enum Direction
     {
         down = (int)0,
@@ -48,25 +61,36 @@ public class PlayerSprite : MonoBehaviour
         float _value = Vector3.Dot(Vector3.Normalize(Vector3.down), Vector3.Normalize(_playerAim));
 
         //Debug.Log(_value);
+        
+
 
         Direction _choice;
 
         #region Math
-        if (_value <= 1 && _value > 0.7f)
-            _choice = Direction.down;
-
-        else if (_value <= 0.7f && _value > 0.2f)
-            _choice = Direction.diagonaldown;
-
-        else if (_value <= 0.2f && _value > -0.2f)
-            _choice = Direction.right;
-
-        else _choice = Direction.diagonalup;
+        switch (_value)
+        {
+            case <= 1 and > 0.7f:
+                _choice = Direction.down;
+                SwitchState(PlayerController.isMoving ? "Running-1" : "Idle-1");
+                break;
+            case <= 0.7f and > 0.2f:
+                _choice = Direction.diagonaldown;
+                SwitchState(PlayerController.isMoving? "Running-1" : "Idle-1");
+                break;
+            case <= 0.2f and > -0.2f:
+                _choice = Direction.right;
+                SwitchState(PlayerController.isMoving? "Running-1" : "Idle-1");
+                break;
+            default:
+                _choice = Direction.diagonalup;
+                SwitchState(PlayerController.isMoving ? "Running-2" : "Idle-2");
+                break;
+        }
         #endregion
 
         //Debug.Log(_choice);
 
-        GetComponent<SpriteRenderer>().sprite = sprites[((int)_choice)].sprite;
+        //GetComponent<SpriteRenderer>().sprite = sprites[((int)_choice)].sprite;
     }
 
     public void SetDirection()

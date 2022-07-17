@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
 
     public Camera sceneCamera;
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     float moveX;
     float moveY;
@@ -29,20 +30,39 @@ public class PlayerController : MonoBehaviour
     void Update ()
     {
         HandleInput();
+        Animate();
     }
-    
+
+    private void Animate()
+    {
+        if (input.magnitude > 0.1f || input.magnitude < -0.1f)
+        {
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+        }
+    }
+
     private void FixedUpdate()
     {  
         Move();
     }
+    
+    
 
     public float forceAmount;
+    public bool isMoving;
     private void HandleInput()
     {
         moveX = Input.GetAxisRaw("Horizontal");
         moveY = Input.GetAxisRaw("Vertical");
 
         moveDir = new Vector2(moveX, moveY);
+        input = new Vector2(moveX, moveY);
+        input.Normalize();
+
         mousePos = sceneCamera.ScreenToWorldPoint(Input.mousePosition);
         
       
@@ -52,6 +72,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public Vector2 input;
     public void Knockback(float amount)
     {
         var direction =  mousePos - rb.position;
