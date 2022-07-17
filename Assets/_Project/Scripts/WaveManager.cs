@@ -31,8 +31,11 @@ public class WaveManager : MonoBehaviour
     private bool TrySpawn = false;
 
     //Critical Roll
-    [SerializeField] public static bool CriticalRoll;
-    public static EnemyMovement.UpgradeEnemy chosenUpgradeType;
+    [SerializeField] private bool CriticalRoll;
+
+    public enum RNG_Upgrade { Common, Uncommon, Critical }
+
+    public RNG_Upgrade rng_upgrade;
 
     private bool ShouldStop;
     private int myRoundNumber;
@@ -83,17 +86,17 @@ public class WaveManager : MonoBehaviour
     }
     public void RandomizeSlotMachine()
     {
-        ////Select new Weapon or just upgrade player properties
-        ////Check for Critical roll
-        //BulletManager.SlotMachine();
-        //
-        ////Select enemy AI upgrade or just upgrade enemy properties
-        ////Check for Critical roll
-        //CriticalRoll = GetComponent<EnemyUpgradeManager>().SlotMachineIfCritical();
-        //
-        ////Select new perk - Karim
-        //ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
-        //ArenaPerk.Randomize();
+        //Select new Weapon or just upgrade player properties
+        //Check for Critical roll
+        BulletManager.SlotMachine();
+
+        //Select enemy AI upgrade or just upgrade enemy properties
+        //Check for Critical roll
+        CriticalRoll = GetComponent<EnemyUpgradeManager>().SlotMachineIfCritical();
+      
+        //Select new perk - Karim
+        ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
+        ArenaPerk.Randomize();
     }
     public void StartNextRound()
     {
@@ -136,49 +139,33 @@ public class WaveManager : MonoBehaviour
     {
         GameObject randomEnemy = currentWave.Enemytype[Random.Range(0, currentWave.Enemytype.Length)];
         Transform randomPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
- 
-        //Apply AI upgrades based on Critical Roll or not
+
+        //Apply upgrades
+        //Enemy Property upgrades
+        EnemyAIManager _enemyHp = randomEnemy.GetComponent<EnemyAIManager>();
+        _enemyHp.curEnemyHealth = _enemyHp.iniEnemyHealth + (EnemyUpgradeManager.numhealthUp * GetComponent<EnemyUpgradeManager>().healthUpgrade);
+
+        //Select AI Upgrade
+        EnemyMovement.UpgradeEnemy _upgrade = GetComponent<EnemyUpgradeManager>().findAvailableUpgrade();
+
+        //AI upgrades
         switch (CriticalRoll)
         {
             //If Critical Roll
             case true:
-                randomEnemy.GetComponent<EnemyMovement>().currentUpgradeEnemy = chosenUpgradeType;
+                randomEnemy.GetComponent<EnemyMovement>().currentUpgradeEnemy = _upgrade;
                 break;
 
             //Else
             case false:
                 //10%
                 if (Random.Range(0,101) >= 90)
-                    randomEnemy.GetComponent<EnemyMovement>().currentUpgradeEnemy = chosenUpgradeType;
+                    randomEnemy.GetComponent<EnemyMovement>().currentUpgradeEnemy = _upgrade;
                 break;
         }
 
         Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
     }
 
-    public void UpdateEnemyUpgrade(int _choice)
-    {
-        switch (_choice)
-        {
-            case 0:
-                chosenUpgradeType = EnemyMovement.UpgradeEnemy.UpgradeOne;
-                break;
-
-            case 1:
-                chosenUpgradeType = EnemyMovement.UpgradeEnemy.UpgradeTwo;
-                break;
-
-            case 2:
-                chosenUpgradeType = EnemyMovement.UpgradeEnemy.UpgradeThree;
-                break;
-
-            case 3:
-                chosenUpgradeType = EnemyMovement.UpgradeEnemy.UpgradeFour;
-                break;
-
-            default:
-                Debug.Log("Received invalid int _choice to apply upgrade");
-                break;
-        }
-    }
+   
 }
