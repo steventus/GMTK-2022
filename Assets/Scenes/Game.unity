@@ -7590,7 +7590,7 @@ Transform:
   - {fileID: 1957298984}
   - {fileID: 673626610}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1577782515
 GameObject:
@@ -8294,7 +8294,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1632934517
 GameObject:
@@ -10678,13 +10678,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1094909561962837675, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: desiredWeapon.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1094909561962837675, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: desiredWeapon.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b101f4d843c77241b8e2b685805a96b, type: 2}
+    - target: {fileID: 1094909561962837675, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: desiredWeapon.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
+    - target: {fileID: 4430640474824362381, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: 
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430640474824362381, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430640474824362381, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430640474824362381, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4430640474824362383, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: sceneCamera
       value: 
       objectReference: {fileID: 1626174415}
     - target: {fileID: 4430640474824362384, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4430640474824362384, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10749,7 +10777,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4472511685336592942, guid: 307892d5eed7d1d4199faecf240446bf, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4472511685336592942, guid: 307892d5eed7d1d4199faecf240446bf, type: 3}
       propertyPath: m_LocalPosition.x

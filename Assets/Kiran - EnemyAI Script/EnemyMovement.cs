@@ -94,10 +94,12 @@ public class EnemyMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        /*if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            isTouchingPlayer = true;
-        }*/
+            float health = 10f;
+            playerRb.GetComponent<PlayerHealth>().TakeDamage(health);
+            Debug.Log(playerRb.GetComponent<PlayerHealth>().curHealth);
+        }
        
         if (currentEnemyType == EnemyTypes.RangedAI && collision.CompareTag("Wall"))
         {
