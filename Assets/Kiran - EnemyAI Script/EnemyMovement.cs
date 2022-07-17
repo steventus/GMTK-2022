@@ -50,8 +50,8 @@ public class EnemyMovement : MonoBehaviour
 
     public float speed;
 
-    [SerializeField] private float RotateSpeed = 5f;
-    [SerializeField] private float Radius;
+    [SerializeField] private float RotateSpeed = 3f;
+    [SerializeField] private float Radius = 2f;
 
     private Vector2 _centre;
     private float _angle;
@@ -245,16 +245,32 @@ public class EnemyMovement : MonoBehaviour
 
                 isFlanking = true;
 
-                float cursor = playerRb.GetComponent<AimMouse>().aimCursor.eulerAngles.z + 180;
-                if(cursor > 180)
+                if(distance > 3f)
                 {
-                    cursor = cursor - 360;
-                }
-                //Debug.Log(cursor);
-                //Debug.Log(cursor);
+                    float cursor = playerRb.GetComponent<AimMouse>().aimCursor.eulerAngles.z + 180;
+                    if (cursor > 180)
+                    {
+                        cursor = cursor - 360;
+                    }
+                    //Debug.Log(cursor);
+                    //Debug.Log(cursor);
 
-                Vector2 target = new Vector2(Mathf.Sin(cursor), Mathf.Cos(cursor)).normalized * 5f + playerRb.position;
-                rb.position = Vector2.MoveTowards(rb.position, target, 3f * Time.deltaTime);
+                    Vector2 target = new Vector2(Mathf.Sin(cursor), Mathf.Cos(cursor)).normalized * 5f + playerRb.position;
+                    rb.position = Vector2.MoveTowards(rb.position, target, 3f * Time.deltaTime);
+                }
+                else
+                {
+                    _centre = playerRb.position;
+
+                    _angle += 2.4f * Time.deltaTime;
+                    var offset = new Vector2(Mathf.Sin(_angle), Mathf.Cos(_angle)) * 2f;
+                    rb.position = _centre + offset;
+                    isFlanking = false;
+
+                    
+                }
+
+
 
                 break;
 
