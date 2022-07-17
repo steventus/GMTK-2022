@@ -25,7 +25,7 @@ public class PlayerSprite : MonoBehaviour
 
     private string currentState;
     public PlayerController PlayerController;
-    
+
     public void SwitchState(string newState)
     {
         if (currentState == newState) return;
@@ -33,6 +33,7 @@ public class PlayerSprite : MonoBehaviour
         currentState = newState;
         Animator.Play(currentState);
     }
+
     
     public enum Direction
     {
@@ -45,7 +46,11 @@ public class PlayerSprite : MonoBehaviour
     {
         thisSprite = GetComponent<SpriteRenderer>();
         thisBody = GetComponent<Rigidbody2D>();
+
+        PlayerController = GetComponent<PlayerController>();
+        Animator = GetComponent<Animator>();
     }
+
 
     private void Update()
     {
