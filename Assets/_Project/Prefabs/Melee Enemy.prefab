@@ -50,9 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de7f51eb93f42044bccbfa41c7222fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTemporary: 0
+  isTemporaryReady: 0
   desiredWeapon: []
-  desiredBullet:
-  - {fileID: 11400000, guid: 3a8ea7f170496e24b9e592c9eecbf8f1, type: 2}
   templateBullet: {fileID: 3525454690951914276, guid: f86a7464927f53a4790d2ae23783f439, type: 3}
   maxAmmo: 0
   ammoRegenPerSec: 0
@@ -149,8 +149,9 @@ MonoBehaviour:
   isMovingRight: 1
   playerTransform: {fileID: 0}
   currentEnemyType: 0
-  currentUpgradeEnemy: 3
+  currentUpgradeEnemy: 1
   canCharge: 0
+  canDash: 0
   IsAvailable: 1
   CooldownDuration: 1
   speed: 0
@@ -239,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2013b9fc14c2400468097cfebff2e4c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 100
+  enemyHealth: 0
   onTakeDamage:
     m_PersistentCalls:
       m_Calls: []

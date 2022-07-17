@@ -12,7 +12,7 @@ public class BulletManager : MonoBehaviour
 
     //Fire Properties
     public List<WeaponData> desiredWeapon;
-    private WeaponData curWeapon;
+    protected WeaponData curWeapon;
     private WeaponData oldWeapon;
 
     [SerializeField] private GameObject templateBullet;
@@ -88,7 +88,7 @@ public class BulletManager : MonoBehaviour
 
         curWeapon = desiredWeapon[Random.Range(0, desiredWeapon.Count)];
 
-        Debug.Log("Weapon: " + curWeapon.name);
+        //Debug.Log("Weapon: " + curWeapon.name);
 
         //Initialise stats from SO
         fireRate = curWeapon.fireRate;
@@ -138,6 +138,8 @@ public class BulletManager : MonoBehaviour
             if (!CheckAmmo(curFireCost))
                 return;
 
+            Debug.Log("Fire");
+            
             InterruptRegen();
             CallFire();
         }
@@ -314,7 +316,7 @@ public class BulletManager : MonoBehaviour
     {
         if (coro_bulletRegen != null)
         {
-            Debug.Log("interuppted");
+            //Debug.Log("interuppted");
             StopCoroutine(coro_bulletRegen);
             onFinishRegenAmmo.Invoke(curWeapon.soundOnFinishReload);
             coro_bulletRegen = null;
@@ -373,16 +375,16 @@ public class BulletManager : MonoBehaviour
                     GetComponent<PlayerUpgrades>().IncreaseUpgrade(PlayerUpgrades.PlayerUpgradeType.regenAmmoUp);
                     break;
             }
-            Debug.Log("Common");
-            Debug.Log("numMove: " + PlayerUpgrades.numMoveSpeedUp);
-            Debug.Log("numAmmo: " + PlayerUpgrades.numAmmoUp);
-            Debug.Log("numRegen: " + PlayerUpgrades.numRegenUp);
+            //Debug.Log("Common");
+            //Debug.Log("numMove: " + PlayerUpgrades.numMoveSpeedUp);
+            //Debug.Log("numAmmo: " + PlayerUpgrades.numAmmoUp);
+            //Debug.Log("numRegen: " + PlayerUpgrades.numRegenUp);
         }
         //New Gun
         else if (_RNG >= 66 && _RNG < 88)
         {
             InitialiseWeapon();
-            Debug.Log("Uncommon");
+            //Debug.Log("Uncommon");
 
         }
         //Critical Roll

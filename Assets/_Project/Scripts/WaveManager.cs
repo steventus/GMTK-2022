@@ -16,7 +16,6 @@ public class WaveManager : MonoBehaviour
 
     public ArenaPerk ArenaPerk;
     public BulletManager BulletManager;
-    public EnemyAIManager enemyAIManager;
     public int RoundNum;
 
     public ValueHandler ValueHandler;
@@ -32,10 +31,7 @@ public class WaveManager : MonoBehaviour
     private bool TrySpawn = false;
 
     //Critical Roll
-    [SerializeField] private bool CriticalRole;
-    [SerializeField] float enemyHealthUpgrade;
-    [SerializeField] float enemyFireRateUpgrade;
-    [SerializeField] int numOfBulletsUpgrade;
+    [SerializeField] private bool CriticalRoll;
 
     public enum RNG_Upgrade { Common, Uncommon, Critical }
 
@@ -50,7 +46,7 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
-        CriticalRole = false;
+        CriticalRoll = false;
         enemyGameObject = GameObject.FindGameObjectWithTag("Fake");
     }
 
@@ -94,16 +90,10 @@ public class WaveManager : MonoBehaviour
         //Check for Critical roll
         BulletManager.SlotMachine();
 
-        if (CriticalRole)
-        {
-          
-        }
-
-
         //Select enemy AI upgrade or just upgrade enemy properties
         //Check for Critical roll
-
-
+        CriticalRoll = GetComponent<EnemyUpgradeManager>().SlotMachineIfCritical();
+      
         //Select new perk - Karim
         ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
         ArenaPerk.Randomize();
@@ -152,32 +142,27 @@ public class WaveManager : MonoBehaviour
 
         //Apply upgrades
         //Enemy Property upgrades
-        /*   randomEnemy.GetComponent<EnemyAIManager>().enemyHealth += 100;
-           randomEnemy.GetComponent<EnemyMovement>().speed += 5;*/
+        EnemyAIManager _enemyHp = randomEnemy.GetComponent<EnemyAIManager>();
+        _enemyHp.curEnemyHealth = _enemyHp.iniEnemyHealth + (EnemyUpgradeManager.numhealthUp * GetComponent<EnemyUpgradeManager>().healthUpgrade);
+
+        //Select AI Upgrade
+        EnemyMovement.UpgradeEnemy _upgrade = GetComponent<EnemyUpgradeManager>().findAvailableUpgrade();
 
         //AI upgrades
-        //if is critical roll
-        //else (Random.Range(0,101) >= 90) run code to apply upgrade
-        bool _ifCriticalRoll = false;
-
-        switch (_ifCriticalRoll)
+        switch (CriticalRoll)
         {
+            //If Critical Roll
             case true:
+                randomEnemy.GetComponent<EnemyMovement>().currentUpgradeEnemy = _upgrade;
                 break;
 
+            //Else
             case false:
-                //Check unlocked upgrades
-
-                //Select one
-
-                //Apply upgrade
+                //10%
+                if (Random.Range(0,101) >= 90)
+                    randomEnemy.GetComponent<EnemyMovement>().currentUpgradeEnemy = _upgrade;
                 break;
         }
-
-
-
-
-
 
         Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
     }

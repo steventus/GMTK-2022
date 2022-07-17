@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
-    
+    public float forceAmount;
     private void HandleInput()
     {
         moveX = Input.GetAxisRaw("Horizontal");
@@ -44,8 +44,19 @@ public class PlayerController : MonoBehaviour
 
         moveDir = new Vector2(moveX, moveY);
         mousePos = sceneCamera.ScreenToWorldPoint(Input.mousePosition);
+        
+      
+        if (Input.GetMouseButtonDown(0))
+        {
+            Knockback(forceAmount);
+        }
     }
 
+    public void Knockback(float amount)
+    {
+        var direction =  mousePos - rb.position;
+        rb.AddForce(-direction * amount, ForceMode2D.Force);
+    }
     void Move()
     {
         rb.velocity = new Vector2(moveX * runSpeed, moveY * runSpeed);
@@ -54,7 +65,7 @@ public class PlayerController : MonoBehaviour
         float aimAngle = Mathf.Atan2(desiredAimDir.y, desiredAimDir.x) * Mathf.Rad2Deg - 90f;
 
         Debug.DrawRay(transform.position, desiredAimDir);
-        //rb.rotation = aimAngle;
+       
     }
 
     public void Reset()
@@ -64,7 +75,8 @@ public class PlayerController : MonoBehaviour
 
     public void Upgrade()
     {
-        curRunSpeed = runSpeed + PlayerUpgrades.numMoveSpeedUp * GetComponent<PlayerUpgrades>().moveSpeedUpgrade;
+        curRunSpeed = Mathf.Pow(runSpeed, PlayerUpgrades.numMoveSpeedUp * GetComponent<PlayerUpgrades>().moveSpeedUpgrade);
+        runSpeed = curRunSpeed;
     }
 
 }

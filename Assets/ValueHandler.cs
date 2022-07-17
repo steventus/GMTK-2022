@@ -21,8 +21,12 @@ public class ValueHandler : MonoBehaviour
         if (currentRoundNum == _waveManager.Length + 1)
         {
             if (round_Label != null)
+            {
                 round_Label.text = "Finished";
-            return;
+                Messenger.Broadcast(GameEvent.RoundsFinishedEvent);
+            }
+            
+           
         }
         else
         {
