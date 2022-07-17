@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/_Project/Scenes/MainMenu_Scene.unity
+    guid: 4fd1c7482e86f554fb76efb8cb6b9436
+  - enabled: 1
+    path: Assets/_Project/Scenes/KarimGame.unity
+    guid: d88d5fd0860ae454196e42a70940680d
+  - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 66030ad8d8241f14b94891102b4b198b
   m_configObjects:

@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameOverr : MonoBehaviour
 {
@@ -47,8 +48,18 @@ public class GameOverr : MonoBehaviour
 
     void RoundFinished()
     {
+        Cursor.visible = true;
+        
         OnRoundFinished?.Invoke();
         Time.timeScale = 0;
     }
-    
+
+    public void ReloadScene()
+    {
+        Cursor.visible = false;
+        
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }

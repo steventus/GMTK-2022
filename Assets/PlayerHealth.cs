@@ -43,12 +43,14 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Take Damage");
         if (curHealth <= 0)
         {
-            //Messenger.Broadcast(GameEvent.PlayerDeathEvent);
+            Reference.cam.ShakeCamera(0.25f,0.25f);
+            Messenger.Broadcast(GameEvent.PlayerDeathEvent);
 
             Death();
         }
         else
         {
+            Reference.cam.ShakeCamera(0.15f,0.15f);
             onTakeDamage.Invoke();
         }
         

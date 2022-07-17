@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] private bool isMovingRight = true;
 
-    [SerializeField] Transform playerTransform;
+    [SerializeField] Rigidbody2D playerRb;
 
     [SerializeField] EnemyTypes currentEnemyType;
 
@@ -25,13 +26,21 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] bool IsAvailable = true;
 
+    public Rigidbody2D rb;
 
     [SerializeField] float CooldownDuration = 1.0f;
 
     public float speed;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     void Start()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        var GO = GameObject.FindGameObjectWithTag("Player");
+        playerRb = GO.GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
@@ -56,9 +65,9 @@ public class EnemyMovement : MonoBehaviour
 
     public void ChasePlayerEnemyMovement()
     {
-        float distance = Vector2.Distance(this.gameObject.transform.position, playerTransform.position);
+        float distance = Vector2.Distance(this.gameObject.transform.position, playerRb.position);
         float speed = 3f * Time.deltaTime;
-        Vector3 offset = transform.position - playerTransform.position;
+        Vector3 offset = rb.position - playerRb.position;
         var upgradeTypes = currentUpgradeEnemy;
 
         if (distance < 6f)
@@ -66,18 +75,18 @@ public class EnemyMovement : MonoBehaviour
             switch (upgradeTypes)
             {
                 case UpgradeEnemy.Base:
-                    transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed);
+                    transform.position = Vector2.MoveTowards(transform.position, playerRb.position, speed);
                     break;
                 case UpgradeEnemy.UpgradeOne:
-                    transform.position = Vector2.Lerp(transform.position, playerTransform.position, speed);
+                    transform.position = Vector2.Lerp(transform.position, playerRb.position, speed);
                     break;
                 case UpgradeEnemy.UpgradeTwo:
 
-                    transform.position = Vector2.Lerp(transform.position, playerTransform.position, speed);
+                    transform.position = Vector2.Lerp(transform.position, playerRb.position, speed);
                     break;
                 case UpgradeEnemy.UpgradeThree:
 
-                    transform.position = Vector3.Lerp(transform.position + offset, playerTransform.position, speed).normalized;
+                    transform.position = Vector3.Lerp(transform.position + offset, playerRb.position, speed).normalized;
                     break;
                 case UpgradeEnemy.UpgradeFour:
                     UseAbility();
@@ -116,16 +125,16 @@ public class EnemyMovement : MonoBehaviour
             {
                 case UpgradeEnemy.Base:
 
-                    var enemyPosition = transform.position;
-                    var playerPosition = playerTransform.position;
+                    var enemyPosition = rb.position;
+                    var playerPosition = playerRb.position;
                     var dist = (enemyPosition - playerPosition).magnitude;
                     var mapped = Mathf.InverseLerp(10, 5, dist);
-                    transform.position = Vector2.MoveTowards(enemyPosition, playerPosition, -mapped * speed);
+                    rb.position = Vector2.MoveTowards(enemyPosition, playerPosition, -mapped * speed);
 
                     break;
                 case UpgradeEnemy.UpgradeOne:
 
-                    transform.position = Vector2.Lerp(transform.position, playerTransform.position, speed);
+                    transform.position = Vector2.Lerp(transform.position, playerRb.position, speed);
                     break;
                 default:
                     Debug.Log("Upgrade Types not valid");
@@ -159,8 +168,8 @@ public class EnemyMovement : MonoBehaviour
 
         // made it here then ability is available to use...
         // UseAbilityCode goes here
-        Transform saveCurrentPlayerPosition;
-        saveCurrentPlayerPosition = playerTransform;
+        Rigidbody2D saveCurrentPlayerPosition;
+        saveCurrentPlayerPosition = playerRb;
         transform.position = Vector2.Lerp(-transform.position, saveCurrentPlayerPosition.position, 2* speed);
 
         // start the cooldown timer

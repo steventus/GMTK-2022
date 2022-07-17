@@ -13,15 +13,15 @@ public class AimMouse : MonoBehaviour
     public Transform gun;
 
     public SpriteRenderer gunSprite;
-
-
-
-
     private Vector2 moveDir;
 
     private Vector2 mousePos;
-    
 
+
+    private void Start()
+    {
+        Cursor.visible = false;
+    }
 
     void Update ()
     {
