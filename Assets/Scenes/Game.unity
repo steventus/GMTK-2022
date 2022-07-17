@@ -356,7 +356,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f3d36e827d2012468f18e58948ba716, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 03413e1d14c2fbb4db37292ac3c40958, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -415,6 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef548cd177c6df4485621b9a7a5dfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usedPerk: 0
   PlayerController: {fileID: 1970575114}
 --- !u!4 &109554984
 Transform:
@@ -490,7 +491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 909676b1a61ab2642a1da24ebb15ff8f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ae602f1f29082c4eab76970b0cb5033, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -698,14 +699,12 @@ MonoBehaviour:
   ArenaPerk: {fileID: 542094115}
   BulletManager: {fileID: 1970575107}
   RoundNum: 1
-  ValueHandler: {fileID: 1789986702}
+  roundHandler: {fileID: 1789986702}
   waves:
-  - enemiesNum: 1
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.5
-  - enemiesNum: 2
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.5
   spawnPoints:
@@ -716,12 +715,15 @@ MonoBehaviour:
   - {fileID: 2022529971}
   - {fileID: 1095700205}
   currentWaveNumber: 0
+  CriticalRoll: 0
+  rng_upgrade: 0
   onRoundStart:
     m_PersistentCalls:
       m_Calls: []
   onRoundEnd:
     m_PersistentCalls:
       m_Calls: []
+  enemiesNum: 0
 --- !u!114 &203154230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2889,7 +2891,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: de13123fd8bc7ef458daea7bbe137cc0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a01089ea8dc683e4093b06fbcd4a918d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3035,8 +3037,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 909676b1a61ab2642a1da24ebb15ff8f, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 1ae602f1f29082c4eab76970b0cb5033, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3204,7 +3206,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1854287992, guid: cf8d929c12fec47d7b2126657c35e2e3, type: 3}
+  m_Sprite: {fileID: 666400175, guid: cf8d929c12fec47d7b2126657c35e2e3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3532,7 +3534,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: de13123fd8bc7ef458daea7bbe137cc0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a01089ea8dc683e4093b06fbcd4a918d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3610,8 +3612,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 909676b1a61ab2642a1da24ebb15ff8f, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 1ae602f1f29082c4eab76970b0cb5033, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3657,7 +3659,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d582dbde32728439940e333bfecf79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
 --- !u!4 &592350831
 Transform:
   m_ObjectHideFlags: 0
@@ -3830,18 +3831,15 @@ MonoBehaviour:
   ArenaPerk: {fileID: 542094115}
   BulletManager: {fileID: 1970575107}
   RoundNum: 2
-  ValueHandler: {fileID: 1789986702}
+  roundHandler: {fileID: 1789986702}
   waves:
-  - enemiesNum: 2
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
-  - enemiesNum: 3
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 1
-  - enemiesNum: 3
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
   spawnPoints:
@@ -3852,12 +3850,15 @@ MonoBehaviour:
   - {fileID: 1468759307}
   - {fileID: 1415961458}
   currentWaveNumber: 0
+  CriticalRoll: 0
+  rng_upgrade: 0
   onRoundStart:
     m_PersistentCalls:
       m_Calls: []
   onRoundEnd:
     m_PersistentCalls:
       m_Calls: []
+  enemiesNum: 0
 --- !u!114 &626483437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4622,7 +4623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eccb7512ed51e4148a1872ffddae8b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ValueHandler: {fileID: 1789986702}
+  roundHandler: {fileID: 1789986702}
   roundsSurvived: {fileID: 1268249063}
   enemiesKilled: {fileID: 976372238}
   OnRoundFinished:
@@ -4871,7 +4872,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: de13123fd8bc7ef458daea7bbe137cc0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a01089ea8dc683e4093b06fbcd4a918d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4949,7 +4950,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f3d36e827d2012468f18e58948ba716, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 03413e1d14c2fbb4db37292ac3c40958, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5364,7 +5365,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1854287992, guid: cf8d929c12fec47d7b2126657c35e2e3, type: 3}
+  m_Sprite: {fileID: 666400175, guid: cf8d929c12fec47d7b2126657c35e2e3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5930,7 +5931,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1854287992, guid: cf8d929c12fec47d7b2126657c35e2e3, type: 3}
+  m_Sprite: {fileID: 666400175, guid: cf8d929c12fec47d7b2126657c35e2e3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6314,7 +6315,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f3d36e827d2012468f18e58948ba716, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 03413e1d14c2fbb4db37292ac3c40958, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6658,6 +6659,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231742031}
   m_CullTransparentMesh: 1
+--- !u!212 &1236012244 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6698357750694874648, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+  m_PrefabInstance: {fileID: 4430640476285716671}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1268249060
 GameObject:
   m_ObjectHideFlags: 0
@@ -7338,8 +7344,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 909676b1a61ab2642a1da24ebb15ff8f, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a01089ea8dc683e4093b06fbcd4a918d, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7671,6 +7677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca8a2273a376cb4db25be2363c0d9a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usedPerk: 0
   ArenaPerk: {fileID: 542094115}
 --- !u!1 &1541189676
 GameObject:
@@ -7804,6 +7811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c516a42d781f0643ad88d63d05bd5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usedPerk: 0
   BulletDatas:
   - {fileID: 11400000, guid: 3a8ea7f170496e24b9e592c9eecbf8f1, type: 2}
   - {fileID: 11400000, guid: 5b52c14c30487a742bfd5789d67bd94d, type: 2}
@@ -8172,8 +8180,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 909676b1a61ab2642a1da24ebb15ff8f, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 1ae602f1f29082c4eab76970b0cb5033, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8491,6 +8499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ccff9f35f30714e956b31ab0e6aa85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usedPerk: 0
 --- !u!4 &1612601986
 Transform:
   m_ObjectHideFlags: 0
@@ -8847,8 +8856,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 909676b1a61ab2642a1da24ebb15ff8f, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 1ae602f1f29082c4eab76970b0cb5033, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -9251,9 +9260,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentRoundNum: 1
   round_Label: {fileID: 1371836683}
-  _waveManager:
-  - {fileID: 203154229}
-  - {fileID: 626483436}
+  EnemySpawnMax: 2
+  EnemySpawnMin: 0
 --- !u!4 &1789986703
 Transform:
   m_ObjectHideFlags: 0
@@ -9512,8 +9520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e86e9320a93d9a4d99aef6f46f4ca3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisMachine: {fileID: 2028245627}
-  thisSlot: {fileID: 4472511684429942172}
 --- !u!4 &1905471100
 Transform:
   m_ObjectHideFlags: 0
@@ -10275,7 +10281,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: de5a56403a5ed334286ec7088f8480dd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4b2000fa4e4335c4493476b78ea17dcc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10849,17 +10855,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: gunSprite
+      value: 
+      objectReference: {fileID: 1236012244}
+    - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: desiredWeapon.Array.size
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: desiredWeapon.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 4b101f4d843c77241b8e2b685805a96b, type: 2}
+      objectReference: {fileID: 11400000, guid: f2f693d55bc89cb4fb2b90e664e4c32a, type: 2}
     - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: desiredWeapon.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
+      objectReference: {fileID: 11400000, guid: 76fa79a5dccd04141a7ee38a2591b01d, type: 2}
     - target: {fileID: 4430640474824362387, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: m_Name
       value: Player
@@ -10927,14 +10937,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 307892d5eed7d1d4199faecf240446bf, type: 3}
---- !u!114 &4472511684429942172 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2053852584257114884, guid: 307892d5eed7d1d4199faecf240446bf, type: 3}
-  m_PrefabInstance: {fileID: 4472511684429942171}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeab3f12581862b47adab95f0eb0ffb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
