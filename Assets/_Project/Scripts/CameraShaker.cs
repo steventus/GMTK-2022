@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class CameraShaker : MonoBehaviour
 {
-    public Rigidbody2D rb;
     private void Update()
     {
         if(Reference.cam != this)
@@ -15,6 +14,6 @@ public class CameraShaker : MonoBehaviour
     }
     
     public void ShakeCamera(float strength = 1f, float duration = 3f){
-        Camera.main.DOShakePosition(duration, strength, 10, 90);
+        transform.DOShakePosition(duration, strength, 10, 90);
     }
 }

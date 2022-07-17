@@ -160,7 +160,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -449,15 +449,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb316e9958857d47b119ef0a4de6bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTemporary: 0
+  isTemporaryReady: 0
+  gunSprite: {fileID: 0}
   desiredWeapon:
   - {fileID: 11400000, guid: b33cfb3fdbf0bc340a8f6044f129f1e1, type: 2}
   - {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
-  desiredBullet:
-  - {fileID: 11400000, guid: 3a8ea7f170496e24b9e592c9eecbf8f1, type: 2}
-  - {fileID: 11400000, guid: 5b52c14c30487a742bfd5789d67bd94d, type: 2}
   templateBullet: {fileID: 3525454690951914276, guid: f86a7464927f53a4790d2ae23783f439, type: 3}
   maxAmmo: 100
-  curAmmo: 0
+  ammoRegenPerSec: 0
+  onOutOfAmmo:
+    m_PersistentCalls:
+      m_Calls: []
+  onFire:
+    m_PersistentCalls:
+      m_Calls: []
+  onRegenAmmo:
+    m_PersistentCalls:
+      m_Calls: []
+  onFinishRegenAmmo:
+    m_PersistentCalls:
+      m_Calls: []
   fireRate: 1
   radius: 1
   bulletSpeed: 5
@@ -485,6 +497,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneCamera: {fileID: 2000714792}
   runSpeed: 3
+  desiredAimDir: {x: 0, y: 0}
+  forceAmount: 0
 --- !u!4 &365712887
 Transform:
   m_ObjectHideFlags: 0
@@ -698,7 +712,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1004,7 +1018,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMovingRight: 1
+  playerRb: {fileID: 0}
   currentEnemyType: 0
+  currentUpgradeEnemy: 0
+  canCharge: 0
+  dashed: 0
+  IsAvailable: 1
+  isTouchingPlayer: 0
+  isFlanking: 0
+  hasTakenDamage: 0
+  canTeleport: 1
+  TeleportTime: -5
+  TimeElapsed: 0
+  isFlipped: 0
+  flippedTime: 0
+  WallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  rb: {fileID: 0}
+  CooldownDuration: 10
+  speed: 0
+  RotateSpeed: 3
+  Radius: 2
 --- !u!212 &982442728
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1025,7 +1060,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1069,13 +1104,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de7f51eb93f42044bccbfa41c7222fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTemporary: 0
+  isTemporaryReady: 0
+  gunSprite: {fileID: 0}
   desiredWeapon:
   - {fileID: 11400000, guid: b33cfb3fdbf0bc340a8f6044f129f1e1, type: 2}
-  desiredBullet:
-  - {fileID: 11400000, guid: 3a8ea7f170496e24b9e592c9eecbf8f1, type: 2}
   templateBullet: {fileID: 3525454690951914276, guid: f86a7464927f53a4790d2ae23783f439, type: 3}
   maxAmmo: 0
-  curAmmo: 0
+  ammoRegenPerSec: 0
+  onOutOfAmmo:
+    m_PersistentCalls:
+      m_Calls: []
+  onFire:
+    m_PersistentCalls:
+      m_Calls: []
+  onRegenAmmo:
+    m_PersistentCalls:
+      m_Calls: []
+  onFinishRegenAmmo:
+    m_PersistentCalls:
+      m_Calls: []
   fireRate: 1
   radius: 1
   bulletSpeed: 5
@@ -1160,6 +1208,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063f6370c674e5a49912b47bb26a2561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ArenaPerk: {fileID: 0}
+  BulletManager: {fileID: 0}
+  RoundNum: 0
+  roundHandler: {fileID: 0}
+  waves: []
+  spawnPoints: []
+  currentWaveNumber: 0
+  CriticalRoll: 0
+  rng_upgrade: 0
+  onRoundStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onRoundEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  enemiesNum: 0
 --- !u!4 &1209015644
 Transform:
   m_ObjectHideFlags: 0
@@ -1285,7 +1349,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1314,7 +1378,7 @@ SpriteRenderer:
   m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1492838351
@@ -1479,7 +1543,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMovingRight: 1
+  playerRb: {fileID: 0}
   currentEnemyType: 1
+  currentUpgradeEnemy: 0
+  canCharge: 0
+  dashed: 0
+  IsAvailable: 1
+  isTouchingPlayer: 0
+  isFlanking: 0
+  hasTakenDamage: 0
+  canTeleport: 1
+  TeleportTime: -5
+  TimeElapsed: 0
+  isFlipped: 0
+  flippedTime: 0
+  WallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  rb: {fileID: 0}
+  CooldownDuration: 10
+  speed: 0
+  RotateSpeed: 3
+  Radius: 2
 --- !u!212 &1568565711
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1500,7 +1585,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1544,13 +1629,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de7f51eb93f42044bccbfa41c7222fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTemporary: 0
+  isTemporaryReady: 0
+  gunSprite: {fileID: 0}
   desiredWeapon:
   - {fileID: 11400000, guid: 9bce42af92c441a4799a3f4faeec77d1, type: 2}
-  desiredBullet:
-  - {fileID: 11400000, guid: 2fc928600a7c7ea4e8c44a89a5ee2da3, type: 2}
   templateBullet: {fileID: 3525454690951914276, guid: f86a7464927f53a4790d2ae23783f439, type: 3}
   maxAmmo: 100
-  curAmmo: 0
+  ammoRegenPerSec: 0
+  onOutOfAmmo:
+    m_PersistentCalls:
+      m_Calls: []
+  onFire:
+    m_PersistentCalls:
+      m_Calls: []
+  onRegenAmmo:
+    m_PersistentCalls:
+      m_Calls: []
+  onFinishRegenAmmo:
+    m_PersistentCalls:
+      m_Calls: []
   fireRate: 1
   radius: 1
   bulletSpeed: 5

@@ -13,7 +13,7 @@ public class BulletManager : MonoBehaviour
     //Fire Properties
     public List<WeaponData> desiredWeapon;
     protected WeaponData curWeapon;
-    private WeaponData oldWeapon;
+    [HideInInspector] public WeaponData oldWeapon;
 
     [SerializeField] private GameObject templateBullet;
 
@@ -63,30 +63,22 @@ public class BulletManager : MonoBehaviour
             _spawned.SetActive(false);
         }
 
-        SelectWeapon();
+        InitialiseWeapon(Random.Range(0, desiredWeapon.Count));
 
         curAmmo = maxAmmo;
         curMaxAmmo = maxAmmo;
     }
 
-    public void InitialiseWeapon()
+    public void InitialiseWeapon(int _choice)
     {
         if (desiredWeapon.Count == 0)
         {
             ifCanFire = false;
-            return;     
+            return;
         }
 
-        //Select weapon randomly from all possible weapons except from previous weapon of this bullet manager
-        List<WeaponData> excludedLists = new List<WeaponData>();
-        
-        for (int i = 0; i < desiredWeapon.Count; i++)
-        {
-            if (desiredWeapon[i] != oldWeapon)
-                excludedLists.Add(desiredWeapon[i]);
-        }
-
-        curWeapon = desiredWeapon[Random.Range(0, desiredWeapon.Count)];
+        curWeapon = desiredWeapon[_choice];
+        Messenger<Sprite>.Broadcast(UiEvent.player_gunChange, curWeapon.gunSprite);
 
         //Debug.Log("Weapon: " + curWeapon.name);
 
@@ -122,10 +114,6 @@ public class BulletManager : MonoBehaviour
 
     }
 
-    public void SelectWeapon()
-    {
-        InitialiseWeapon();
-    }
     protected virtual void Update()
     {
         //UPDATE MOUSE POSITION
@@ -139,7 +127,7 @@ public class BulletManager : MonoBehaviour
                 return;
 
             Debug.Log("Fire");
-            
+
             InterruptRegen();
             CallFire();
         }
@@ -213,10 +201,11 @@ public class BulletManager : MonoBehaviour
         //INITIALISE BULLET
         _bullet.GetComponentInChildren<SpriteRenderer>().sprite = curWeapon.bulletData.bulletSprite;
         _bullet.GetComponent<BaseBulletBehaviour>().Initialise(curWeapon.bulletData.bulletLifeTime, curWeapon.bulletData.velocityOverLifetime, curWeapon.bulletData.sizeOverLifetime, _bullet.transform.up * bulletSpeed);
+        _bullet.GetComponent<DamgerBullet>().BulletData = curWeapon.bulletData;
 
         #endregion
 
-        
+
     }
     protected IEnumerator FireCycle(int _numberOfRapidFire)
     {
@@ -230,7 +219,7 @@ public class BulletManager : MonoBehaviour
             firing = true;
             currentAngle = -(angleBetweenEachBulletInCycle * (float)Mathf.Floor(numberOfTimesToFirePerCycle / 2));
 
-            
+
             while (firing)
             {
                 //skip center bullet if even
@@ -268,12 +257,12 @@ public class BulletManager : MonoBehaviour
     protected bool CheckAmmo(int _cost)
     {
         if (curAmmo >= _cost) return true;
-        else 
+        else
         {
             onOutOfAmmo.Invoke(curWeapon.soundOnOutOfAmmo);
             return false;
         }
-        
+
     }
     protected void UpdateAmmo(int _cost)
     {
@@ -286,20 +275,20 @@ public class BulletManager : MonoBehaviour
 
         isReloading = true;
         yield return new WaitForSeconds(1);
-            
+
         onRegenAmmo.Invoke(curWeapon.soundOnReload);
 
         while (curAmmo < curMaxAmmo)
         {
             yield return new WaitForSeconds(1);
             int _amountToRegen = (ammoRegenPerSec + Mathf.CeilToInt(PlayerUpgrades.numRegenUp * GetComponent<PlayerUpgrades>().regenAmmoPerSecUpgrade));
-            
+
             //Debug
             Debug.Log(_amountToRegen);
 
             curAmmo += _amountToRegen;
             FindObjectOfType<UiPlayerAmmo>().SetPlayerAmmo(curAmmo);
-            
+
             if (curAmmo >= curMaxAmmo)
             {
                 isReloading = false;
@@ -355,49 +344,25 @@ public class BulletManager : MonoBehaviour
             }
         #endregion
 
-        float _RNG = Random.Range(0, 101);
-
-        //Upgrade Stat
-        if (_RNG >= 0 && _RNG < 66)
-        {
-            int _RNGint = Random.Range(0, 3);
-            switch (_RNGint)
-            {
-                case 0:
-                    GetComponent<PlayerUpgrades>().IncreaseUpgrade(PlayerUpgrades.PlayerUpgradeType.movespeedUp);
-                    break;
-
-                case 1:
-                    GetComponent<PlayerUpgrades>().IncreaseUpgrade(PlayerUpgrades.PlayerUpgradeType.maxAmmoUp);
-                    break;
-
-                case 2:
-                    GetComponent<PlayerUpgrades>().IncreaseUpgrade(PlayerUpgrades.PlayerUpgradeType.regenAmmoUp);
-                    break;
-            }
-            //Debug.Log("Common");
-            //Debug.Log("numMove: " + PlayerUpgrades.numMoveSpeedUp);
-            //Debug.Log("numAmmo: " + PlayerUpgrades.numAmmoUp);
-            //Debug.Log("numRegen: " + PlayerUpgrades.numRegenUp);
-        }
-        //New Gun
-        else if (_RNG >= 66 && _RNG < 88)
-        {
-            InitialiseWeapon();
-            //Debug.Log("Uncommon");
-
-        }
-        //Critical Roll
-        else
-        {
-            InitialiseWeapon();
-
-            foreach (BulletManager _manager in GetComponents<BulletManager>())
-                if (_manager.isTemporary)
-                {
-                    _manager.isTemporaryReady = true;
-                    _manager.InitialiseWeapon();
-                }
-        }
+        //float _RNG = Random.Range(0, 101);
+        //
+        //
+        //if (_RNG > 0  && _RNG < 90)
+        //{
+        //    InitialiseWeapon();
+        //}
+        //
+        ////Critical Roll
+        //else
+        //{
+        //    InitialiseWeapon();
+        //
+        //    foreach (BulletManager _manager in GetComponents<BulletManager>())
+        //        if (_manager.isTemporary)
+        //        {
+        //            _manager.isTemporaryReady = true;
+        //            _manager.InitialiseWeapon();
+        //        }
+        //}
     }
 }

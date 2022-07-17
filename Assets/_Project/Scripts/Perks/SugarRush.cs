@@ -7,20 +7,18 @@ public class SugarRush : Perk
 {
 
     public PlayerController PlayerController;
-    public bool UsedPerk { get; set; }
+    public float criticalSpeed = 12;
+    public float perkSpeed = 8;
 
     public override void RunPerk()
     {
-        PlayerController.runSpeed *= 2;
-
-        var totalEnemies = GameObject.FindGameObjectsWithTag("Fake").ToList();
-        foreach (var enemy in totalEnemies)
-        {
-            enemy.GetComponent<EnemyMovement>().speed *= 2;
-        }
+        usedPerk = true;
+        PlayerController.runSpeed = isCritical ? criticalSpeed : perkSpeed;
     }
 
     public override void ResetPerks()
     {
+        usedPerk = false;
+        PlayerController.runSpeed = 5;
     }
 }

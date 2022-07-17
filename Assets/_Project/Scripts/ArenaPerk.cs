@@ -11,10 +11,18 @@ public class ArenaPerk : MonoBehaviour, ISlotMachine
     
     public void Randomize()
     {
-        var UnUsedPerks = Perks.Where(x => !x.UsedPerk).ToList();
+        var UnUsedPerks = Perks.Where(x => !x.usedPerk).ToList();
         var random = Random.Range(0, UnUsedPerks.Count);
 
         SelecetedPerk = Perks[random]; 
+        SelecetedPerk.RunPerk();
+    }
+
+    public void Specific(int _choice)
+    {
+        var UnUsedPerks = Perks.Where(x => !x.usedPerk).ToList();
+
+        SelecetedPerk = Perks[_choice];
         SelecetedPerk.RunPerk();
     }
 }

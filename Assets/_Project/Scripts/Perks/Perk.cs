@@ -5,8 +5,11 @@ using UnityEngine;
 public abstract class Perk
     : MonoBehaviour
 {
-    public bool UsedPerk { get; set; }
-    public abstract void RunPerk();
 
+    public bool isCritical;
+    
+    public bool usedPerk;
+    public abstract void RunPerk();
+    
     public abstract void ResetPerks();
 }

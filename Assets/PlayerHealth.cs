@@ -12,6 +12,8 @@ public class PlayerHealth : MonoBehaviour
     public float curHealth;
 
     public int enemiesKilled;
+
+    public bool touchByEnemies;
     
 
     public UnityEvent onTakeDamage, onDeath;
@@ -45,8 +47,8 @@ public class PlayerHealth : MonoBehaviour
         {
             Reference.cam.ShakeCamera(0.25f,0.25f);
             Messenger.Broadcast(GameEvent.PlayerDeathEvent);
-
             Death();
+            
         }
         else
         {
@@ -62,7 +64,8 @@ public class PlayerHealth : MonoBehaviour
         if(collision.tag == "enemyBullet")
         {
             collision.gameObject.SetActive(false);
-            TakeDamage(10);
+            var damage = collision.GetComponent<DamgerBullet>().BulletData.damage;
+            TakeDamage(damage);
 
         }
     }

@@ -55,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTemporary: 0
   isTemporaryReady: 0
+  gunSprite: {fileID: 0}
   desiredWeapon:
   - {fileID: 11400000, guid: 9bce42af92c441a4799a3f4faeec77d1, type: 2}
   templateBullet: {fileID: 3525454690951914276, guid: c1cb9ac2dcf6062438d6979b2ef5fd19, type: 3}
@@ -106,7 +107,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -153,13 +154,26 @@ MonoBehaviour:
   isMovingRight: 1
   playerRb: {fileID: 0}
   currentEnemyType: 1
-  currentUpgradeEnemy: 0
+  currentUpgradeEnemy: 1
   canCharge: 0
-  canDash: 0
+  dashed: 0
   IsAvailable: 1
+  isTouchingPlayer: 0
+  isFlanking: 0
+  hasTakenDamage: 0
+  canTeleport: 1
+  TeleportTime: -5
+  TimeElapsed: 0
+  isFlipped: 0
+  flippedTime: 0
+  WallLayer:
+    serializedVersion: 2
+    m_Bits: 0
   rb: {fileID: 0}
   CooldownDuration: 1
   speed: 0
+  RotateSpeed: 3
+  Radius: 2
 --- !u!114 &787023095450456525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iniEnemyHealth: 100
-  curEnemyHealth: 140
+  curEnemyHealth: 120
   onTakeDamage:
     m_PersistentCalls:
       m_Calls:

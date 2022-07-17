@@ -24,9 +24,9 @@ public class PlayerSprite : MonoBehaviour
     public enum Direction
     {
         down = (int)0,
+        right = (int)1,
         diagonaldown = (int)2,
         diagonalup = (int)3,
-        right = (int)1
     }
     private void Awake()
     {

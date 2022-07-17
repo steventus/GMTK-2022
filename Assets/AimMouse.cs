@@ -20,9 +20,24 @@ public class AimMouse : MonoBehaviour
 
     private void Start()
     {
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
+    private void OnEnable()
+    {
+        Messenger<Sprite>.AddListener(UiEvent.player_gunChange, UpdateGunSprite);
     }
 
+    private void OnDisable()
+    {
+        Messenger<Sprite>.RemoveListener(UiEvent.player_gunChange, UpdateGunSprite);
+
+    }
+
+    public void UpdateGunSprite(Sprite _image)
+    {
+        gunSprite.sprite = _image;
+    }
     void Update ()
     {
         HandleInput();

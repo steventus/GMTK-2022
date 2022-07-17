@@ -6,7 +6,6 @@ using UnityEngine.Events;
 [System.Serializable]
 public class Wave
 {
-    public int enemiesNum;
     public GameObject[] Enemytype;
     public float timeBetweenEnemeySpawn;
 }
@@ -18,10 +17,12 @@ public class WaveManager : MonoBehaviour
     public BulletManager BulletManager;
     public int RoundNum;
 
-    public ValueHandler ValueHandler;
+    public RoundHandler roundHandler;
     
     public List<Wave> waves;
     public Transform[] spawnPoints;
+
+    private List<Wave> _infiniteWaves = new List<Wave>(3);
 
     private Wave currentWave;
     public int currentWaveNumber;
@@ -31,7 +32,8 @@ public class WaveManager : MonoBehaviour
     private bool TrySpawn = false;
 
     //Critical Roll
-    [SerializeField] private bool CriticalRoll;
+    public static bool CriticalRoll;
+    public EnemyMovement.UpgradeEnemy chosenUpgradeType;
 
     public enum RNG_Upgrade { Common, Uncommon, Critical }
 
@@ -44,8 +46,10 @@ public class WaveManager : MonoBehaviour
 
     public UnityEvent onRoundStart, onRoundEnd;
 
+    public int enemiesNum = 0;
     private void Start()
     {
+        enemiesNum = Random.Range(roundHandler.EnemySpawnMin, roundHandler.EnemySpawnMax);
         CriticalRoll = false;
         enemyGameObject = GameObject.FindGameObjectWithTag("Fake");
     }
@@ -53,7 +57,7 @@ public class WaveManager : MonoBehaviour
     private void Update()
     {
         if (ShouldStop) return;
-        if (ValueHandler.currentRoundNum != RoundNum) return;
+        if (roundHandler.currentRoundNum != RoundNum) return;
         
         currentWave = waves[currentWaveNumber];
         if (canSpawn && nextSpawnTime < Time.time)
@@ -67,15 +71,14 @@ public class WaveManager : MonoBehaviour
         if (currentWaveNumber + 1 != waves.Count)
         {
             if (!TrySpawn) return;
-            
-            
+            enemiesNum = Random.Range(roundHandler.EnemySpawnMin, roundHandler.EnemySpawnMax);
+
             SpawnNextWave();
 
-            if (ValueHandler.currentRoundNum > ValueHandler._waveManager.Length + 1)
-            {
-                Debug.Log("Stop heeeeeeeeeeeeeeeeeeeeeeeeee");
-                ShouldStop = true;
-            }
+            // if (roundHandler.currentRoundNum > roundHandler._waveManager.Length + 1)
+            // {
+            //     ShouldStop = true;
+            // }
             return;
         }
 
@@ -83,6 +86,8 @@ public class WaveManager : MonoBehaviour
         FindObjectOfType<SlotMachine>().GetComponent<Animator>().Play("slotMachine_flyIn");
 
         onRoundEnd.Invoke();
+        
+       
     }
     public void RandomizeSlotMachine()
     {
@@ -101,8 +106,18 @@ public class WaveManager : MonoBehaviour
     public void StartNextRound()
     {
         RandomizeSlotMachine();
-        ValueHandler.currentRoundNum++;
+        roundHandler.currentRoundNum++;
+        
+        roundHandler.EnemySpawnMin += 1;
+        roundHandler.EnemySpawnMax += 1;
+        
+        // Randomize properties        
+        RoundNum++;
+        currentWaveNumber = 0;
+        
+        
         onRoundStart.Invoke();
+
     }
     private bool isUsed;
     private bool GetValidate()
@@ -122,17 +137,18 @@ public class WaveManager : MonoBehaviour
     }
     void SpawnWave()
     {
+        
         SpawnEnemyAtRandomPos();
         GetNextWave();
 
-        if (currentWave.enemiesNum != 0) return;
+        if (enemiesNum != 0) return;
         canSpawn = false;
         TrySpawn = true;
 
     }
     private void GetNextWave()
     {
-        currentWave.enemiesNum--;
+        enemiesNum--;
         nextSpawnTime = Time.time + currentWave.timeBetweenEnemeySpawn;
     }
     private void SpawnEnemyAtRandomPos()
@@ -140,32 +156,49 @@ public class WaveManager : MonoBehaviour
         GameObject randomEnemy = currentWave.Enemytype[Random.Range(0, currentWave.Enemytype.Length)];
         Transform randomPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        //Apply upgrades
-        //Enemy Property upgrades
-        EnemyAIManager _enemyHp = randomEnemy.GetComponent<EnemyAIManager>();
-        _enemyHp.curEnemyHealth = _enemyHp.iniEnemyHealth + (EnemyUpgradeManager.numhealthUp * GetComponent<EnemyUpgradeManager>().healthUpgrade);
-
-        //Select AI Upgrade
-        EnemyMovement.UpgradeEnemy _upgrade = GetComponent<EnemyUpgradeManager>().findAvailableUpgrade();
-
-        //AI upgrades
+        //Apply AI upgrades based on Critical Roll or not
         switch (CriticalRoll)
         {
             //If Critical Roll
             case true:
-                randomEnemy.GetComponent<EnemyMovement>().currentUpgradeEnemy = _upgrade;
+                randomEnemy.GetComponent<EnemyMovement>().currentUpgradeEnemy = chosenUpgradeType;
                 break;
 
             //Else
             case false:
                 //10%
-                if (Random.Range(0,101) >= 90)
-                    randomEnemy.GetComponent<EnemyMovement>().currentUpgradeEnemy = _upgrade;
+                if (Random.Range(0, 101) >= 90)
+                    randomEnemy.GetComponent<EnemyMovement>().currentUpgradeEnemy = chosenUpgradeType;
                 break;
         }
 
         Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
     }
 
-   
+    public void UpdateEnemyUpgrade(int _choice)
+    {
+        switch (_choice)
+        {
+            case 0:
+                chosenUpgradeType = EnemyMovement.UpgradeEnemy.UpgradeOne;
+                break;
+
+            case 1:
+                chosenUpgradeType = EnemyMovement.UpgradeEnemy.UpgradeTwo;
+                break;
+
+            case 2:
+                chosenUpgradeType = EnemyMovement.UpgradeEnemy.UpgradeThree;
+                break;
+
+            case 3:
+                chosenUpgradeType = EnemyMovement.UpgradeEnemy.UpgradeFour;
+                break;
+
+            default:
+                Debug.Log("Received invalid int _choice to apply upgrade");
+                break;
+        }
+    }
+
 }
