@@ -76,10 +76,15 @@ public class UiSlotMachine : MonoBehaviour
 
         //Run through each wheel slowly and show results
         wheels[0].ShowWheel(playerUpgrades[playerUpgradeNumber], playerCrit);
+        Debug.Log("player:" + playerUpgradeNumber);
         yield return new WaitForSeconds(0.3f);
         wheels[1].ShowWheel(enemyUpgrades[enemyUpgradeNumber], enemyCrit);
+        Debug.Log("enemy: " + playerUpgradeNumber);
+
         yield return new WaitForSeconds(0.3f);
         wheels[2].ShowWheel(arenaPerks[arenaUpgradeNumber], arenaCrit);
+        Debug.Log("arena: " + playerUpgradeNumber);
+
         yield return null;
 
         //Prompt for SlotExit

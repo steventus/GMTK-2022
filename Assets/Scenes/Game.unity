@@ -415,8 +415,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef548cd177c6df4485621b9a7a5dfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
   usedPerk: 0
   PlayerController: {fileID: 1970575114}
+  criticalSpeed: 12
+  perkSpeed: 8
 --- !u!4 &109554984
 Transform:
   m_ObjectHideFlags: 0
@@ -7677,6 +7680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02eb9bf0010dd4782b4725710752ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
   usedPerk: 0
   ArenaPerk: {fileID: 542094115}
 --- !u!1 &1541189676
@@ -7811,12 +7815,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c516a42d781f0643ad88d63d05bd5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
   usedPerk: 0
   BulletDatas:
   - {fileID: 11400000, guid: 3a8ea7f170496e24b9e592c9eecbf8f1, type: 2}
   - {fileID: 11400000, guid: 5b52c14c30487a742bfd5789d67bd94d, type: 2}
   - {fileID: 11400000, guid: 2fc928600a7c7ea4e8c44a89a5ee2da3, type: 2}
-  AdditionalSpeed: 5
+  additionalPerkSpeed: 4
+  additionalCriticalSpeed: 10
 --- !u!4 &1545645857
 Transform:
   m_ObjectHideFlags: 0
@@ -8499,6 +8505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ccff9f35f30714e956b31ab0e6aa85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
   usedPerk: 0
 --- !u!4 &1612601986
 Transform:
@@ -10349,16 +10356,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1791b8ebfdbf79f4fae32245551ba96c, type: 3}
   - {fileID: 21300000, guid: fe41b88ac0325be4c8f98f8c481f72e4, type: 3}
   enemyUpgrades:
-  - {fileID: 21300000, guid: fe55ebbaa1cbd2c44b335da2a8b9670d, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: d44d671327c5a4a0c908d928a87d548a, type: 3}
+  - {fileID: 21300000, guid: 0554471237a2a403382f2d1e46f61155, type: 3}
+  - {fileID: 21300000, guid: e244865cde95145dab462a5c20ad4126, type: 3}
+  - {fileID: 21300000, guid: 79817952317714116a76830110e890ef, type: 3}
   - {fileID: 21300000, guid: fe41b88ac0325be4c8f98f8c481f72e4, type: 3}
   arenaPerks:
   - {fileID: 21300000, guid: 422e8c035d514484eaf598e6d1362cfa, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: d074612041bb84d0389f3275d05a97e5, type: 3}
+  - {fileID: 21300000, guid: 32fcd9522a2824d8aa12a1da23b1018d, type: 3}
   - {fileID: 21300000, guid: fe41b88ac0325be4c8f98f8c481f72e4, type: 3}
   onSlotEnter:
     m_PersistentCalls:
