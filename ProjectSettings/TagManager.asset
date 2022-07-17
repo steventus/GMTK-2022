@@ -12,6 +12,7 @@ TagManager:
   - enemyBullet
   - MusicManager
   - Wall
+  - AimCursor
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - UI
   - Post Processing
   - No PostProcessing
-  - 
+  - WallLayer
   - 
   - 
   - 
