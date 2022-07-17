@@ -234,6 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTemporary: 0
   isTemporaryReady: 0
+  gunSprite: {fileID: 0}
   desiredWeapon:
   - {fileID: 11400000, guid: 4b101f4d843c77241b8e2b685805a96b, type: 2}
   - {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
@@ -378,6 +379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTemporary: 1
   isTemporaryReady: 0
+  gunSprite: {fileID: 0}
   desiredWeapon:
   - {fileID: 11400000, guid: 4b101f4d843c77241b8e2b685805a96b, type: 2}
   - {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
@@ -596,7 +598,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -736,7 +738,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -895,7 +897,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

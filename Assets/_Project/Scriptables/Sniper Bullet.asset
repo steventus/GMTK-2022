@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sniper Bullet
   m_EditorClassIdentifier: 
   bulletSpeed: 30
-  damage: 10
+  damage: 200
   bulletLifeTime: 30
   velocityOverLifetime:
     serializedVersion: 2

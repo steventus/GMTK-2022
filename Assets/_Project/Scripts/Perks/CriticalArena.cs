@@ -10,14 +10,15 @@ public class CriticalArena : Perk
     public override void RunPerk()
     {
         if (hasUsed) return;
-        ArenaPerk.Randomize();
-        ArenaPerk.Randomize();
-
         hasUsed = true;
+        
+        isCritical = true;
+        ArenaPerk.Randomize();
     }
 
     public override void ResetPerks()
     {
         hasUsed = false;
+        isCritical = false;
     }
 }

@@ -200,6 +200,7 @@ public class BulletManager : MonoBehaviour
         //INITIALISE BULLET
         _bullet.GetComponentInChildren<SpriteRenderer>().sprite = curWeapon.bulletData.bulletSprite;
         _bullet.GetComponent<BaseBulletBehaviour>().Initialise(curWeapon.bulletData.bulletLifeTime, curWeapon.bulletData.velocityOverLifetime, curWeapon.bulletData.sizeOverLifetime, _bullet.transform.up * bulletSpeed);
+        _bullet.GetComponent<DamgerBullet>().BulletData = curWeapon.bulletData;
 
         #endregion
 

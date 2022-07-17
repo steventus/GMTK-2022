@@ -221,50 +221,6 @@ Transform:
   m_Father: {fileID: 985718126}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &101231891
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 101231893}
-  - component: {fileID: 101231892}
-  m_Layer: 0
-  m_Name: Camera shaker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &101231892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101231891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00d582dbde32728439940e333bfecf79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &101231893
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101231891}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.305419, y: 0.59861135, z: -0.07279952}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 15
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &138380175 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4430640474824362387, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
@@ -384,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eccb7512ed51e4148a1872ffddae8b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundHandler: {fileID: 0}
+  roundHandler: {fileID: 208666295}
   roundsSurvived: {fileID: 1566119670}
   enemiesKilled: {fileID: 1408017988}
   OnRoundFinished:
@@ -586,11 +542,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 208666291}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 909fe80517cbaad47a49285e1074619a, type: 3}
+  m_Script: {fileID: 11500000, guid: a7f03fd693f546f458c66b57d152b0b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentRoundNum: 1
-  round_Label: {fileID: 1434612925}
+  round_Label: {fileID: 1566119670}
   EnemySpawnMax: 3
   EnemySpawnMin: 1
 --- !u!4 &208666296
@@ -818,6 +774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ccff9f35f30714e956b31ab0e6aa85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
   usedPerk: 0
 --- !u!4 &456952926
 Transform:
@@ -916,7 +873,7 @@ PrefabInstance:
     - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: desiredWeapon.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: f2f693d55bc89cb4fb2b90e664e4c32a, type: 2}
+      objectReference: {fileID: 11400000, guid: 76fa79a5dccd04141a7ee38a2591b01d, type: 2}
     - target: {fileID: 4430640474824362387, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: m_Name
       value: Player
@@ -951,7 +908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803340829422482760, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: maxHealth
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7803340829422482760, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.size
@@ -1250,8 +1207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca8a2273a376cb4db25be2363c0d9a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usedPerk: 0
-  ArenaPerk: {fileID: 1372895068}
 --- !u!4 &464786792
 Transform:
   m_ObjectHideFlags: 0
@@ -1487,8 +1442,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef548cd177c6df4485621b9a7a5dfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
   usedPerk: 0
   PlayerController: {fileID: 458084138}
+  criticalSpeed: 12
+  perkSpeed: 8
 --- !u!4 &613752529
 Transform:
   m_ObjectHideFlags: 0
@@ -1656,6 +1614,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e86e9320a93d9a4d99aef6f46f4ca3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thisMachine: {fileID: 0}
+  thisSlot: {fileID: 0}
 --- !u!4 &825991099
 Transform:
   m_ObjectHideFlags: 0
@@ -1868,7 +1828,7 @@ MonoBehaviour:
   - {fileID: 1530295846}
   - {fileID: 896305758}
   currentWaveNumber: 0
-  CriticalRoll: 0
+  chosenUpgradeType: 0
   rng_upgrade: 0
   onRoundStart:
     m_PersistentCalls:
@@ -2514,7 +2474,7 @@ MonoBehaviour:
   - {fileID: 1981226710}
   - {fileID: 456952925}
   - {fileID: 613752528}
-  - {fileID: 464786791}
+  - {fileID: 0}
   SelecetedPerk: {fileID: 613752528}
 --- !u!4 &1372895069
 Transform:
@@ -2841,6 +2801,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1434612923}
   m_CullTransparentMesh: 1
+--- !u!1 &1501242848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1501242849}
+  m_Layer: 0
+  m_Name: ======Light======
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1501242849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501242848}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.4055729, y: 1.7059023, z: -0.098099254}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1530295845
 GameObject:
   m_ObjectHideFlags: 0
@@ -3060,7 +3051,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3813,7 +3804,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4145,7 +4136,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4244,7 +4235,7 @@ MonoBehaviour:
   - {fileID: 617112443}
   - {fileID: 2124484086}
   currentWaveNumber: 0
-  CriticalRoll: 0
+  chosenUpgradeType: 0
   rng_upgrade: 0
   onRoundStart:
     m_PersistentCalls:
@@ -4673,7 +4664,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6614,6 +6605,7 @@ GameObject:
   - component: {fileID: 1920529627}
   - component: {fileID: 1920529630}
   - component: {fileID: 1920529631}
+  - component: {fileID: 1920529632}
   m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6764,6 +6756,18 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+--- !u!114 &1920529632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920529625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d582dbde32728439940e333bfecf79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1946326955
 GameObject:
   m_ObjectHideFlags: 0
@@ -7096,12 +7100,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c516a42d781f0643ad88d63d05bd5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
   usedPerk: 0
   BulletDatas:
   - {fileID: 11400000, guid: 3a8ea7f170496e24b9e592c9eecbf8f1, type: 2}
   - {fileID: 11400000, guid: 5b52c14c30487a742bfd5789d67bd94d, type: 2}
   - {fileID: 11400000, guid: 2fc928600a7c7ea4e8c44a89a5ee2da3, type: 2}
-  AdditionalSpeed: 5
+  additionalPerkSpeed: 4
+  additionalCriticalSpeed: 10
 --- !u!4 &1981226711
 Transform:
   m_ObjectHideFlags: 0
