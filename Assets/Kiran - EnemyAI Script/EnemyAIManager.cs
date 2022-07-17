@@ -18,8 +18,7 @@ public class EnemyAIManager : MonoBehaviour
         if(collision.tag == "bullet")
         {
             collision.gameObject.SetActive(false);
-            var damage = collision.GetComponent<DamgerBullet>().BulletData.damage;
-            TakeDamage(damage);
+            TakeDamage(10);
         }
     }
 
@@ -42,7 +41,6 @@ public class EnemyAIManager : MonoBehaviour
 
         else
         {
-            Messenger.Broadcast(GameEvent.PlayerTakeDamage);
             onTakeDamage.Invoke();
             Reference.cam.ShakeCamera(0.15f,0.15f);
         }

@@ -8,7 +8,6 @@ public class BulletData : ScriptableObject
 {
     public float bulletSpeed;
     public UnityAction onSpawn, onHit;
-    public int damage = 10;
 
     //Bullet properties
     public float bulletLifeTime;
