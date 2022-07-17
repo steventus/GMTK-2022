@@ -7,8 +7,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 public class SlotMachine : MonoBehaviour
 {
-    public float timer = 2;
-    private bool rolled = false;
+    public bool rolled = false;
   
     private IEnumerator Spin()
     {
@@ -23,6 +22,11 @@ public class SlotMachine : MonoBehaviour
 
     public void Roll()
     {
+        //Ini
+        bool _playerCrit = false;
+        bool _enemyCrit = false;
+        bool _arenaCrit = false;
+
 
         //Roll for new stuff
         int _player = Random.Range(0, FindObjectOfType<UiSlotMachine>().playerUpgrades.Count); //Phaser, Shotgun, Uzi, Sniper, Critical;
@@ -31,22 +35,40 @@ public class SlotMachine : MonoBehaviour
 
         Debug.Log("BEFORE: " + "Player: " + _player + "Enemy: " + _enemy + "Arena: " + _arena);
 
-
         //Apply new stuff
         //PLAYER CHECK CRITICAL
         if (_player == FindObjectOfType<UiSlotMachine>().playerUpgrades.Count - 1)
         {
-            //Roll Secondary
-            TemporaryBullletManager _tempWep = GameObject.Find("Player").GetComponent<TemporaryBullletManager>();
-            while (_tempWep.oldWeapon = _tempWep.desiredWeapon[_player])
-            {
-                _player = Random.Range(0, FindObjectOfType<TemporaryBullletManager>().desiredWeapon.Count);
-            }
-            _tempWep.InitialiseWeapon(_player);
+            BulletManager[] _weapons = GameObject.Find("Player").GetComponents<BulletManager>();
+            BulletManager _temporaryWeapon = null;
 
+            //Roll Secondary
+            foreach (BulletManager _temp in _weapons)
+            {
+                if (_temp.isTemporary)
+                    _temporaryWeapon = _temp;
+            }
+
+            _player = Random.Range(0, _temporaryWeapon.desiredWeapon.Count);
+
+            //Don't choose duplicate weapon
+            if (_temporaryWeapon.oldWeapon != null)
+                if (_temporaryWeapon.oldWeapon = _temporaryWeapon.desiredWeapon[_player])
+                {
+                    List<int> _choices = new List<int>() { 0, 1, 2, 3 };
+                    _choices.Remove(_player);
+
+                    _player = _choices[Random.Range(0, _choices.Count)];
+                }
+
+            //Initialise Weapon
+            _temporaryWeapon.InitialiseWeapon(_player);
+            
             //Roll Primary
             _player = Random.Range(0, FindObjectOfType<BulletManager>().desiredWeapon.Count);
             RollPlayer(_player);
+
+            _playerCrit = true;
         }
         else RollPlayer(_player);
 
@@ -56,6 +78,8 @@ public class SlotMachine : MonoBehaviour
             _enemy = Random.Range(0, 5); //0,1,2,3
             WaveManager.CriticalRoll = true;
             RollEnemy(_enemy);
+
+            _enemyCrit = true;
         }
         else
         {
@@ -70,10 +94,13 @@ public class SlotMachine : MonoBehaviour
             RollArena(_arena);
 
             //Apply Critical
+
+            _arenaCrit = true;
         }
         else RollArena(_arena);
 
-        FindObjectOfType<UiSlotMachine>().SlotEnter(_player, _enemy, _arena);
+        FindObjectOfType<UiSlotMachine>().SlotEnter(_player, _enemy, _arena, _playerCrit, _enemyCrit, _arenaCrit);
+
         Debug.Log("AFTER: " + "Player: " + _player + "Enemy: " + _enemy + "Arena: " + _arena);
     }
     private void OnTriggerEnter2D(Collider2D col)
@@ -81,6 +108,8 @@ public class SlotMachine : MonoBehaviour
         if(!col.CompareTag("Player")) return;
 
         if (rolled) return;
+
+        Debug.Log("test");
         rolled = true;
         Roll();
     }
@@ -90,6 +119,8 @@ public class SlotMachine : MonoBehaviour
         //Player Normal
         BulletManager[] _weapons = GameObject.Find("Player").GetComponents<BulletManager>();
         BulletManager _chosen = null;
+
+        //Choose correct bullet manager
         foreach (BulletManager _wep in _weapons)
         {
             _wep.isTemporaryReady = false;
@@ -98,15 +129,18 @@ public class SlotMachine : MonoBehaviour
                 _chosen = _wep;
         }
 
-        
-
+        //Disable temporary bullet managers
         _chosen.SlotMachine();
 
         //Don't choose duplicate weapon
-        while (_chosen.oldWeapon = _chosen.desiredWeapon[_choice])
-        {
-            _choice = Random.Range(0, FindObjectOfType<BulletManager>().desiredWeapon.Count);
-        }
+        if (_chosen.oldWeapon != null)
+            if (_chosen.oldWeapon = _chosen.desiredWeapon[_choice])
+            {
+                List<int> _choices = new List<int>(){ 0, 1, 2, 3};
+                _choices.Remove(_choice);
+
+                _choice = _choices[Random.Range(0, _choices.Count)];
+            }
 
         //Initialise Weapon
         _chosen.InitialiseWeapon(_choice);
@@ -115,7 +149,6 @@ public class SlotMachine : MonoBehaviour
     {
         FindObjectOfType<WaveManager>().UpdateEnemyUpgrade(_choice);
     }
-
     private void RollArena(int _choice)
     {
         WaveManager _waveManager = FindObjectOfType<WaveManager>();

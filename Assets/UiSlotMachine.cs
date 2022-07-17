@@ -10,7 +10,8 @@ public class UiSlotMachine : MonoBehaviour
     public List<UiWheel> wheels;
 
     public static int playerUpgradeNumber, enemyUpgradeNumber, arenaUpgradeNumber;
-
+    private bool playerCrit, enemyCrit, arenaCrit;
+    
     [Space]
     public List<Sprite> playerUpgrades, enemyUpgrades, arenaPerks;
 
@@ -34,25 +35,27 @@ public class UiSlotMachine : MonoBehaviour
         readyToBegin = false;
         readyToExit = false;
     }
-    public void SlotEnter(int _playerUpgradeNumber, int _enemyUpgradeNumber, int _arenaUpgradeNumber)
+    public void SlotEnter(int _playerUpgradeNumber, int _enemyUpgradeNumber, int _arenaUpgradeNumber, bool _ifPlayerCrit, bool _ifEnemyCrit, bool _ifArenaCrit)
     {
-
         //Animation - wait for 1 seconds
-        StartCoroutine(Coro_SlotEnter(_playerUpgradeNumber, _enemyUpgradeNumber, _arenaUpgradeNumber));
-        
+        StartCoroutine(Coro_SlotEnter(_playerUpgradeNumber, _enemyUpgradeNumber, _arenaUpgradeNumber,  _ifPlayerCrit,  _ifEnemyCrit,  _ifArenaCrit));
         onSlotEnter.Invoke();
     }
-    private IEnumerator Coro_SlotEnter(int _playerUpgradeNumber, int _enemyUpgradeNumber, int _arenaUpgradeNumber)
+    private IEnumerator Coro_SlotEnter(int _playerUpgradeNumber, int _enemyUpgradeNumber, int _arenaUpgradeNumber, bool _ifPlayerCrit, bool _ifEnemyCrit, bool _ifArenaCrit)
     {
         yield return new WaitForSeconds(1f);
-        UpdateReadyToBegin(_playerUpgradeNumber, _enemyUpgradeNumber, _arenaUpgradeNumber);
+        UpdateReadyToBegin(_playerUpgradeNumber, _enemyUpgradeNumber, _arenaUpgradeNumber,  _ifPlayerCrit,  _ifEnemyCrit,  _ifArenaCrit);
     }
 
-    public void UpdateReadyToBegin(int _playerUpgradeNumber, int _enemyUpgradeNumber, int _arenaUpgradeNumber)
+    public void UpdateReadyToBegin(int _playerUpgradeNumber, int _enemyUpgradeNumber, int _arenaUpgradeNumber, bool _ifPlayerCrit, bool _ifEnemyCrit, bool _ifArenaCrit)
     {
         playerUpgradeNumber = _playerUpgradeNumber;
         enemyUpgradeNumber = _enemyUpgradeNumber;
-        arenaUpgradeNumber = _enemyUpgradeNumber;
+        arenaUpgradeNumber = _arenaUpgradeNumber;
+
+        playerCrit = _ifPlayerCrit;
+        enemyCrit = _ifEnemyCrit;
+        arenaCrit = _ifArenaCrit;
 
         readyToBegin = true;
     }
@@ -72,11 +75,11 @@ public class UiSlotMachine : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         //Run through each wheel slowly and show results
-        wheels[0].ShowWheel(playerUpgrades[playerUpgradeNumber]);
+        wheels[0].ShowWheel(playerUpgrades[playerUpgradeNumber], playerCrit);
         yield return new WaitForSeconds(0.3f);
-        wheels[1].ShowWheel(enemyUpgrades[enemyUpgradeNumber]);
+        wheels[1].ShowWheel(enemyUpgrades[enemyUpgradeNumber], enemyCrit);
         yield return new WaitForSeconds(0.3f);
-        wheels[2].ShowWheel(arenaPerks[arenaUpgradeNumber]);
+        wheels[2].ShowWheel(arenaPerks[arenaUpgradeNumber], arenaCrit);
         yield return null;
 
         //Prompt for SlotExit

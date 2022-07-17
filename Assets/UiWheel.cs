@@ -12,7 +12,9 @@ public class UiWheel : MonoBehaviour
     public Image flashImage;
 
     public UnityEvent wheelRolled, wheelCriticalRolled;
-    
+
+    public bool ifCrit;
+
     private void Awake()
     {
         DOTween.Init(false, false);
@@ -26,7 +28,7 @@ public class UiWheel : MonoBehaviour
         _ini.Play();
     }
 
-    public void ShowWheel(Sprite _selectedImage)
+    public void ShowWheel(Sprite _selectedImage, bool _ifCrit)
     {
         //Ini
         wheelImage.sprite = _selectedImage;
@@ -39,6 +41,15 @@ public class UiWheel : MonoBehaviour
         _ini.Append(flashImage.DOFade(0, 1));
         _ini.Join(thisGroup.DOFade(1, 0));
 
-        wheelRolled.Invoke();
+        switch (_ifCrit)
+        {
+            case false:
+                wheelRolled.Invoke();
+                break;
+
+            case true:
+                wheelCriticalRolled.Invoke();
+                break;
+        }
     }
 }
