@@ -16,7 +16,7 @@ MonoBehaviour:
   costPerShot: 2
   numOfBulletsInBurst: 1
   angleBetweenBullet: 0
-  bulletData: {fileID: 11400000, guid: 50a90c430ce88c246a04dd05cb9a8709, type: 2}
+  bulletData: {fileID: 11400000, guid: 0ab231e8b36662a4293d8026e3de83ec, type: 2}
   gunSprite: {fileID: 21300000, guid: 2a2072a1673eab44788fa76a9491b59e, type: 3}
   soundOnFire: {fileID: 8300000, guid: dadf3f2cc1074a64190c855f81f33e56, type: 3}
   soundOnReload: {fileID: 8300000, guid: 86ba7d8a5c6b2e047917bda566ed9f26, type: 3}

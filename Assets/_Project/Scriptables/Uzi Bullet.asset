@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Uzi Bullet
   m_EditorClassIdentifier: 
   bulletSpeed: 10
-  damage: 5
+  damage: 1
   bulletLifeTime: 15
   velocityOverLifetime:
     serializedVersion: 2
