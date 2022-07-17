@@ -7,18 +7,23 @@ public class DoubleTime : Perk
 {
     public List<BulletData> BulletDatas = new List<BulletData>();
     
-    public float AdditionalSpeed = 5f;
-    private float oldSpeed;
+    public float additionalPerkSpeed = 4f;
+    public float additionalCriticalSpeed = 10f;
+
+    
+    private float _newSpeed;
 
 
     public override void RunPerk()
     {
         usedPerk = true;
+        var speed = isCritical ? additionalCriticalSpeed : additionalPerkSpeed;
+        _newSpeed += speed;
         
-        oldSpeed = AdditionalSpeed;
         foreach (var bullet in BulletDatas)
         {
-            bullet.bulletSpeed += AdditionalSpeed;
+            
+            bullet.bulletSpeed += speed;
         }
     }
 
@@ -26,7 +31,7 @@ public class DoubleTime : Perk
     {
         foreach (var bullet in BulletDatas)
         {
-            bullet.bulletSpeed = AdditionalSpeed;
+            bullet.bulletSpeed -= _newSpeed;
         }
 
         usedPerk = false;

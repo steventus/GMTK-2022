@@ -204,12 +204,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb316e9958857d47b119ef0a4de6bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTemporary: 0
+  isTemporaryReady: 0
+  gunSprite: {fileID: 0}
   desiredWeapon:
   - {fileID: 11400000, guid: b33cfb3fdbf0bc340a8f6044f129f1e1, type: 2}
   - {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
-  desiredBullet:
-  - {fileID: 11400000, guid: 3a8ea7f170496e24b9e592c9eecbf8f1, type: 2}
-  - {fileID: 11400000, guid: 5b52c14c30487a742bfd5789d67bd94d, type: 2}
   templateBullet: {fileID: 3525454690951914276, guid: f86a7464927f53a4790d2ae23783f439, type: 3}
   maxAmmo: 5000
   ammoRegenPerSec: 15
@@ -253,6 +253,7 @@ MonoBehaviour:
   sceneCamera: {fileID: 2050963530}
   runSpeed: 3
   desiredAimDir: {x: 0, y: 0}
+  forceAmount: 0
 --- !u!4 &31835113
 Transform:
   m_ObjectHideFlags: 0
@@ -289,7 +290,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -707,11 +708,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c516a42d781f0643ad88d63d05bd5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
+  usedPerk: 0
   BulletDatas:
   - {fileID: 11400000, guid: 3a8ea7f170496e24b9e592c9eecbf8f1, type: 2}
   - {fileID: 11400000, guid: 5b52c14c30487a742bfd5789d67bd94d, type: 2}
   - {fileID: 11400000, guid: 2fc928600a7c7ea4e8c44a89a5ee2da3, type: 2}
-  AdditionalSpeed: 5
+  additionalPerkSpeed: 4
+  additionalCriticalSpeed: 10
 --- !u!4 &501527629
 Transform:
   m_ObjectHideFlags: 0
@@ -764,7 +768,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1147,9 +1151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentRoundNum: 1
   round_Label: {fileID: 1421589830}
-  _waveManager:
-  - {fileID: 1900368445}
-  - {fileID: 1560260800}
+  EnemySpawnMax: 2
+  EnemySpawnMin: 0
 --- !u!1 &1306228594
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,7 +1228,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef548cd177c6df4485621b9a7a5dfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
+  usedPerk: 0
   PlayerController: {fileID: 31835112}
+  criticalSpeed: 12
+  perkSpeed: 8
 --- !u!1 &1330110540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1317,6 +1324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ccff9f35f30714e956b31ab0e6aa85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
+  usedPerk: 0
 --- !u!4 &1408626161
 Transform:
   m_ObjectHideFlags: 0
@@ -1626,14 +1635,12 @@ MonoBehaviour:
   ArenaPerk: {fileID: 229435605}
   BulletManager: {fileID: 31835111}
   RoundNum: 2
-  ValueHandler: {fileID: 1167674739}
+  roundHandler: {fileID: 0}
   waves:
-  - enemiesNum: 1
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
-  - enemiesNum: 1
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
   spawnPoints:
@@ -1644,12 +1651,15 @@ MonoBehaviour:
   - {fileID: 632009399}
   - {fileID: 1671274435}
   currentWaveNumber: 0
+  CriticalRoll: 0
+  rng_upgrade: 0
   onRoundStart:
     m_PersistentCalls:
       m_Calls: []
   onRoundEnd:
     m_PersistentCalls:
       m_Calls: []
+  enemiesNum: 0
 --- !u!1 &1575992855
 GameObject:
   m_ObjectHideFlags: 0
@@ -1976,14 +1986,12 @@ MonoBehaviour:
   ArenaPerk: {fileID: 229435605}
   BulletManager: {fileID: 31835111}
   RoundNum: 1
-  ValueHandler: {fileID: 1167674739}
+  roundHandler: {fileID: 0}
   waves:
-  - enemiesNum: 1
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
-  - enemiesNum: 2
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
   spawnPoints:
@@ -1994,12 +2002,15 @@ MonoBehaviour:
   - {fileID: 1056481751}
   - {fileID: 1306228595}
   currentWaveNumber: 0
+  CriticalRoll: 0
+  rng_upgrade: 0
   onRoundStart:
     m_PersistentCalls:
       m_Calls: []
   onRoundEnd:
     m_PersistentCalls:
       m_Calls: []
+  enemiesNum: 0
 --- !u!1 &1975654732
 GameObject:
   m_ObjectHideFlags: 0
@@ -2052,7 +2063,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
