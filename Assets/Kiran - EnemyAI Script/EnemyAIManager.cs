@@ -18,7 +18,8 @@ public class EnemyAIManager : MonoBehaviour
         if(collision.tag == "bullet")
         {
             collision.gameObject.SetActive(false);
-            TakeDamage(10);
+            var damage = collision.GetComponent<DamgerBullet>().BulletData.damage;
+            TakeDamage(damage);
         }
     }
 
