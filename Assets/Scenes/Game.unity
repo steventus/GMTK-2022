@@ -415,8 +415,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef548cd177c6df4485621b9a7a5dfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
   usedPerk: 0
   PlayerController: {fileID: 1970575114}
+  criticalSpeed: 12
+  perkSpeed: 8
 --- !u!4 &109554984
 Transform:
   m_ObjectHideFlags: 0
@@ -3412,7 +3415,7 @@ Animator:
   m_GameObject: {fileID: 541915120}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0ad32333c03bfaa4785fd3e9b253d700, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9e2c42585c465a54b9d826b04f7a5970, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5571,7 +5574,7 @@ Animator:
   m_GameObject: {fileID: 930725626}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0ad32333c03bfaa4785fd3e9b253d700, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9e2c42585c465a54b9d826b04f7a5970, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6137,7 +6140,7 @@ Animator:
   m_GameObject: {fileID: 992604180}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0ad32333c03bfaa4785fd3e9b253d700, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9e2c42585c465a54b9d826b04f7a5970, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7677,6 +7680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02eb9bf0010dd4782b4725710752ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
   usedPerk: 0
   ArenaPerk: {fileID: 542094115}
 --- !u!1 &1541189676
@@ -7811,12 +7815,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c516a42d781f0643ad88d63d05bd5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
   usedPerk: 0
   BulletDatas:
   - {fileID: 11400000, guid: 3a8ea7f170496e24b9e592c9eecbf8f1, type: 2}
   - {fileID: 11400000, guid: 5b52c14c30487a742bfd5789d67bd94d, type: 2}
   - {fileID: 11400000, guid: 2fc928600a7c7ea4e8c44a89a5ee2da3, type: 2}
-  AdditionalSpeed: 5
+  additionalPerkSpeed: 4
+  additionalCriticalSpeed: 10
 --- !u!4 &1545645857
 Transform:
   m_ObjectHideFlags: 0
@@ -8499,6 +8505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ccff9f35f30714e956b31ab0e6aa85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
   usedPerk: 0
 --- !u!4 &1612601986
 Transform:
@@ -8975,6 +8982,7 @@ GameObject:
   - component: {fileID: 1747123583}
   - component: {fileID: 1747123582}
   - component: {fileID: 1747123581}
+  - component: {fileID: 1747123584}
   m_Layer: 5
   m_Name: UiEnemy
   m_TagString: Untagged
@@ -9065,6 +9073,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1747123579}
   m_CullTransparentMesh: 1
+--- !u!114 &1747123584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747123579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dba1e107c7480b49bf14ead9ddd6aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisImage: {fileID: 0}
 --- !u!1 &1756230123
 GameObject:
   m_ObjectHideFlags: 0
@@ -10335,16 +10356,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1791b8ebfdbf79f4fae32245551ba96c, type: 3}
   - {fileID: 21300000, guid: fe41b88ac0325be4c8f98f8c481f72e4, type: 3}
   enemyUpgrades:
-  - {fileID: 21300000, guid: fe55ebbaa1cbd2c44b335da2a8b9670d, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: d44d671327c5a4a0c908d928a87d548a, type: 3}
+  - {fileID: 21300000, guid: 0554471237a2a403382f2d1e46f61155, type: 3}
+  - {fileID: 21300000, guid: e244865cde95145dab462a5c20ad4126, type: 3}
+  - {fileID: 21300000, guid: 79817952317714116a76830110e890ef, type: 3}
   - {fileID: 21300000, guid: fe41b88ac0325be4c8f98f8c481f72e4, type: 3}
   arenaPerks:
   - {fileID: 21300000, guid: 422e8c035d514484eaf598e6d1362cfa, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: d074612041bb84d0389f3275d05a97e5, type: 3}
+  - {fileID: 21300000, guid: 32fcd9522a2824d8aa12a1da23b1018d, type: 3}
   - {fileID: 21300000, guid: fe41b88ac0325be4c8f98f8c481f72e4, type: 3}
   onSlotEnter:
     m_PersistentCalls:
@@ -10394,7 +10414,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: UiSlotMachine_flyIn
+          m_StringArgument: uiSlotMachine_flyIn
           m_BoolArgument: 0
         m_CallState: 2
   onSlotBegin:
@@ -10475,7 +10495,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: UiSlotMachine_flyOut
+          m_StringArgument: uiSlotMachine_flyOut
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!225 &2028245628
@@ -10596,7 +10616,7 @@ Animator:
   m_GameObject: {fileID: 2028245623}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e949c138bf5fade478b5f04087828b0a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -10807,18 +10827,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1094909561962837675, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
-      propertyPath: desiredWeapon.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1094909561962837675, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
-      propertyPath: desiredWeapon.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 4b101f4d843c77241b8e2b685805a96b, type: 2}
-    - target: {fileID: 1094909561962837675, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
-      propertyPath: desiredWeapon.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
     - target: {fileID: 4430640474824362383, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: sceneCamera
       value: 
@@ -10871,18 +10879,6 @@ PrefabInstance:
       propertyPath: gunSprite
       value: 
       objectReference: {fileID: 1236012244}
-    - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
-      propertyPath: desiredWeapon.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
-      propertyPath: desiredWeapon.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: f2f693d55bc89cb4fb2b90e664e4c32a, type: 2}
-    - target: {fileID: 4430640474824362385, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
-      propertyPath: desiredWeapon.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 76fa79a5dccd04141a7ee38a2591b01d, type: 2}
     - target: {fileID: 4430640474824362387, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: m_Name
       value: Player

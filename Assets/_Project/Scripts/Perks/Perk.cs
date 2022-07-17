@@ -10,6 +10,6 @@ public abstract class Perk
     
     public bool usedPerk;
     public abstract void RunPerk();
-
+    
     public abstract void ResetPerks();
 }

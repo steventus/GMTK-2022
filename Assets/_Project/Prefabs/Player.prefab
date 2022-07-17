@@ -238,6 +238,9 @@ MonoBehaviour:
   desiredWeapon:
   - {fileID: 11400000, guid: 4b101f4d843c77241b8e2b685805a96b, type: 2}
   - {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
+  - {fileID: 11400000, guid: f2f693d55bc89cb4fb2b90e664e4c32a, type: 2}
+  - {fileID: 11400000, guid: 76fa79a5dccd04141a7ee38a2591b01d, type: 2}
+  oldWeapon: {fileID: 0}
   templateBullet: {fileID: 3525454690951914276, guid: f86a7464927f53a4790d2ae23783f439, type: 3}
   maxAmmo: 50
   ammoRegenPerSec: 30
@@ -380,6 +383,9 @@ MonoBehaviour:
   desiredWeapon:
   - {fileID: 11400000, guid: 4b101f4d843c77241b8e2b685805a96b, type: 2}
   - {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
+  - {fileID: 11400000, guid: f2f693d55bc89cb4fb2b90e664e4c32a, type: 2}
+  - {fileID: 11400000, guid: 76fa79a5dccd04141a7ee38a2591b01d, type: 2}
+  oldWeapon: {fileID: 0}
   templateBullet: {fileID: 3525454690951914276, guid: f86a7464927f53a4790d2ae23783f439, type: 3}
   maxAmmo: 50
   ammoRegenPerSec: 30

@@ -91,9 +91,8 @@ public class SlotMachine : MonoBehaviour
         if (_arena == FindObjectOfType<UiSlotMachine>().arenaPerks.Count - 1)
         {
             _arena = Random.Range(0, FindObjectOfType<WaveManager>().ArenaPerk.Perks.Count - 1);
-            RollArena(_arena);
-
             //Apply Critical
+            RollArenaCrit(_arena);
 
             _arenaCrit = true;
         }
@@ -154,6 +153,15 @@ public class SlotMachine : MonoBehaviour
         WaveManager _waveManager = FindObjectOfType<WaveManager>();
 
         _waveManager.ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
-        _waveManager.ArenaPerk.Randomize();
+        _waveManager.ArenaPerk.Perks[_choice].RunPerk();
+    }
+
+    private void RollArenaCrit(int _choice)
+    {
+        WaveManager _waveManager = FindObjectOfType<WaveManager>();
+
+        _waveManager.ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
+        _waveManager.ArenaPerk.Perks[_choice].isCritical = true;
+        _waveManager.ArenaPerk.Perks[_choice].RunPerk();
     }
 }
