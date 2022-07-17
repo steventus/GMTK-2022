@@ -95,6 +95,7 @@ public class SlotMachine : MonoBehaviour
 
             //Apply Critical
 
+
             _arenaCrit = true;
         }
         else RollArena(_arena);
@@ -144,6 +145,8 @@ public class SlotMachine : MonoBehaviour
 
         //Initialise Weapon
         _chosen.InitialiseWeapon(_choice);
+
+        Messenger<Sprite>.Broadcast(UiEvent.player_gunChange, _chosen.desiredWeapon[_choice].gunSprite);
     }
     private void RollEnemy(int _choice)
     {
@@ -154,6 +157,6 @@ public class SlotMachine : MonoBehaviour
         WaveManager _waveManager = FindObjectOfType<WaveManager>();
 
         _waveManager.ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
-        _waveManager.ArenaPerk.Randomize();
+        _waveManager.ArenaPerk.Perks[_choice].RunPerk();
     }
 }
