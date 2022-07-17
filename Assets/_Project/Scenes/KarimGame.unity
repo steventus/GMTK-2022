@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eccb7512ed51e4148a1872ffddae8b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ValueHandler: {fileID: 208666295}
+  roundHandler: {fileID: 0}
   roundsSurvived: {fileID: 1566119670}
   enemiesKilled: {fileID: 1408017988}
   OnRoundFinished:
@@ -591,9 +591,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentRoundNum: 1
   round_Label: {fileID: 1434612925}
-  _waveManager:
-  - {fileID: 985718125}
-  - {fileID: 1853441873}
+  EnemySpawnMax: 3
+  EnemySpawnMin: 1
 --- !u!4 &208666296
 Transform:
   m_ObjectHideFlags: 0
@@ -949,6 +948,10 @@ PrefabInstance:
     - target: {fileID: 7783212066405389985, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803340829422482760, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
+      propertyPath: maxHealth
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7803340829422482760, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.size
@@ -1846,14 +1849,15 @@ MonoBehaviour:
   ArenaPerk: {fileID: 1372895068}
   BulletManager: {fileID: 458084139}
   RoundNum: 1
-  ValueHandler: {fileID: 208666295}
+  roundHandler: {fileID: 208666295}
   waves:
-  - enemiesNum: 2
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.5
-  - enemiesNum: 2
-    Enemytype:
+  - Enemytype:
+    - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
+    timeBetweenEnemeySpawn: 0.5
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.5
   spawnPoints:
@@ -1872,6 +1876,7 @@ MonoBehaviour:
   onRoundEnd:
     m_PersistentCalls:
       m_Calls: []
+  enemiesNum: 0
 --- !u!4 &985718126
 Transform:
   m_ObjectHideFlags: 0
@@ -4204,7 +4209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1853441873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4220,18 +4225,15 @@ MonoBehaviour:
   ArenaPerk: {fileID: 1372895068}
   BulletManager: {fileID: 458084139}
   RoundNum: 2
-  ValueHandler: {fileID: 208666295}
+  roundHandler: {fileID: 0}
   waves:
-  - enemiesNum: 2
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
-  - enemiesNum: 3
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 1
-  - enemiesNum: 3
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
   spawnPoints:
@@ -4250,6 +4252,7 @@ MonoBehaviour:
   onRoundEnd:
     m_PersistentCalls:
       m_Calls: []
+  enemiesNum: 0
 --- !u!4 &1853441874
 Transform:
   m_ObjectHideFlags: 0

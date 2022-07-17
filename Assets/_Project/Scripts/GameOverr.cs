@@ -11,7 +11,7 @@ public class GameOverr : MonoBehaviour
 {
     
 
-    public ValueHandler ValueHandler;
+    public RoundHandler roundHandler;
     public TMP_Text roundsSurvived;
     public TMP_Text enemiesKilled;
 
@@ -36,7 +36,7 @@ public class GameOverr : MonoBehaviour
 
     private void Update()
     {
-        roundsSurvived.text = (ValueHandler.currentRoundNum -1).ToString();
+        roundsSurvived.text = (roundHandler.currentRoundNum -1).ToString();
     }
 
     void OnEnemyDeath()
@@ -48,6 +48,7 @@ public class GameOverr : MonoBehaviour
 
     void RoundFinished()
     {
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         
         OnRoundFinished?.Invoke();
@@ -56,6 +57,7 @@ public class GameOverr : MonoBehaviour
 
     public void ReloadScene()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
         
         Time.timeScale = 1;

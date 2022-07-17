@@ -11,13 +11,7 @@ public class SugarRush : Perk
     public override void RunPerk()
     {
         usedPerk = true;
-        PlayerController.runSpeed = 2;
-
-        var totalEnemies = GameObject.FindGameObjectsWithTag("Fake").ToList();
-        foreach (var enemy in totalEnemies)
-        {
-            enemy.GetComponent<EnemyMovement>().speed *= 2;
-        }
+        PlayerController.runSpeed = 8;
     }
 
     public override void ResetPerks()

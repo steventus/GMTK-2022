@@ -6,11 +6,6 @@ public class EnemyBulletManager : BulletManager
 {
     public GameObject player;
 
-    void Start()
-    {
-
-    }
-
     protected override void Update()
     {
         CallFire();
