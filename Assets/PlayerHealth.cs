@@ -47,8 +47,8 @@ public class PlayerHealth : MonoBehaviour
         {
             Reference.cam.ShakeCamera(0.25f,0.25f);
             Messenger.Broadcast(GameEvent.PlayerDeathEvent);
-
             Death();
+            
         }
         else
         {
