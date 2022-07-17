@@ -1,14 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
+
 public class BulletManager : MonoBehaviour
 {
     public bool isTemporary;
     public bool isTemporaryReady;
 
-
-    //PlayerInput
+    public SpriteRenderer gunSprite;
 
     //Fire Properties
     public List<WeaponData> desiredWeapon;
@@ -87,6 +89,12 @@ public class BulletManager : MonoBehaviour
         }
 
         curWeapon = desiredWeapon[Random.Range(0, desiredWeapon.Count)];
+        
+        // Set weapon Sprite
+        if(curWeapon.gunSprite != null)
+        {
+            gunSprite.sprite = curWeapon.gunSprite;
+        }
 
         //Debug.Log("Weapon: " + curWeapon.name);
 
@@ -110,6 +118,7 @@ public class BulletManager : MonoBehaviour
     private void InitialiseBullet()
     {
         BulletData _selectedBullet = curWeapon.bulletData;
+        
         Debug.Log("Bullet: " + _selectedBullet.name);
 
         foreach (GameObject _bullet in availableBullets)
@@ -213,10 +222,11 @@ public class BulletManager : MonoBehaviour
         //INITIALISE BULLET
         _bullet.GetComponentInChildren<SpriteRenderer>().sprite = curWeapon.bulletData.bulletSprite;
         _bullet.GetComponent<BaseBulletBehaviour>().Initialise(curWeapon.bulletData.bulletLifeTime, curWeapon.bulletData.velocityOverLifetime, curWeapon.bulletData.sizeOverLifetime, _bullet.transform.up * bulletSpeed);
+        _bullet.GetComponent<DamgerBullet>().BulletData = curWeapon.bulletData;
 
         #endregion
 
-        
+
     }
     protected IEnumerator FireCycle(int _numberOfRapidFire)
     {

@@ -64,7 +64,8 @@ public class PlayerHealth : MonoBehaviour
         if(collision.tag == "enemyBullet")
         {
             collision.gameObject.SetActive(false);
-            TakeDamage(10);
+            var damage = collision.GetComponent<DamgerBullet>().BulletData.damage;
+            TakeDamage(damage);
 
         }
     }
