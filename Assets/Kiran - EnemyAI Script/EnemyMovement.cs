@@ -370,10 +370,5 @@ public class EnemyMovement : MonoBehaviour
     {
         Messenger.RemoveListener(GameEvent.PlayerTakeDamage, CancelTeleport);
     }
-
-    private void OnDestroy()
-    {
-        Messenger.RemoveListener(GameEvent.PlayerTakeDamage, CancelTeleport);
-    }
-
+    
 }

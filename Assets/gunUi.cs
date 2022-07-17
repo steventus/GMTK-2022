@@ -15,6 +15,7 @@ public class gunUi : MonoBehaviour
     }
     public void changeImage(Sprite _image)
     {
+        Debug.Log("test");
         GetComponent<Image>().sprite = _image;
     }
 }

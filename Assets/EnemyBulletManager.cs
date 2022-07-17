@@ -49,7 +49,7 @@ public class EnemyBulletManager : BulletManager
         //ROTATE TO PLAYER
         Vector3 targetdirection = player.transform.position - transform.position;
         targetdirection.z = -20;
-        _bullet.transform.rotation = Quaternion.LookRotation(targetdirection, ifFireFromBack ? -Vector3.forward : Vector3.forward);
+        _bullet.transform.rotation = Quaternion.LookRotation(targetdirection, ifFireFromBack ? Vector3.forward : Vector3.forward);
 
         //ALTER ROTATION 
         _bullet.transform.Rotate(0, 0, _rotation);

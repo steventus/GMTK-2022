@@ -42,6 +42,8 @@ public class GameOverr : MonoBehaviour
     void OnEnemyDeath()
     {
         killedEnemies++;
+        Messenger<int>.Broadcast(UiEvent.player_kill, killedEnemies);
+
         enemiesKilled.text = killedEnemies.ToString();
     }
 

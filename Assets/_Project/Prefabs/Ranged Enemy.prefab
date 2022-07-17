@@ -55,9 +55,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTemporary: 0
   isTemporaryReady: 0
-  gunSprite: {fileID: 0}
   desiredWeapon:
   - {fileID: 11400000, guid: 9bce42af92c441a4799a3f4faeec77d1, type: 2}
+  curWeapon: {fileID: 0}
+  oldWeapon: {fileID: 0}
   templateBullet: {fileID: 3525454690951914276, guid: c1cb9ac2dcf6062438d6979b2ef5fd19, type: 3}
   maxAmmo: 100
   ammoRegenPerSec: 0
@@ -172,8 +173,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   CooldownDuration: 1
   speed: 0
-  RotateSpeed: 3
-  Radius: 2
+  RotateSpeed: 2
+  Radius: 4
 --- !u!114 &787023095450456525
 MonoBehaviour:
   m_ObjectHideFlags: 0

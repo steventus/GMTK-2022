@@ -78,7 +78,9 @@ public class BulletManager : MonoBehaviour
         }
 
         curWeapon = desiredWeapon[_choice];
-        Messenger<Sprite>.Broadcast(UiEvent.player_gunChange, curWeapon.gunSprite);
+
+        if (gameObject.name == "Player")
+            Messenger<Sprite>.Broadcast(UiEvent.player_gunChange, curWeapon.gunSprite);
 
         //Debug.Log("Weapon: " + curWeapon.name);
 
