@@ -32,7 +32,8 @@ public class WaveManager : MonoBehaviour
     private bool TrySpawn = false;
 
     //Critical Roll
-    [SerializeField] private bool CriticalRoll;
+    public static bool CriticalRoll;
+    public EnemyMovement.UpgradeEnemy chosenUpgradeType;
 
     public enum RNG_Upgrade { Common, Uncommon, Critical }
 
@@ -155,32 +156,49 @@ public class WaveManager : MonoBehaviour
         GameObject randomEnemy = currentWave.Enemytype[Random.Range(0, currentWave.Enemytype.Length)];
         Transform randomPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        //Apply upgrades
-        //Enemy Property upgrades
-        EnemyAIManager _enemyHp = randomEnemy.GetComponent<EnemyAIManager>();
-        _enemyHp.curEnemyHealth = _enemyHp.iniEnemyHealth + (EnemyUpgradeManager.numhealthUp * GetComponent<EnemyUpgradeManager>().healthUpgrade);
-
-        //Select AI Upgrade
-        EnemyMovement.UpgradeEnemy _upgrade = GetComponent<EnemyUpgradeManager>().findAvailableUpgrade();
-
-        //AI upgrades
+        //Apply AI upgrades based on Critical Roll or not
         switch (CriticalRoll)
         {
             //If Critical Roll
             case true:
-                randomEnemy.GetComponent<EnemyMovement>().currentUpgradeEnemy = _upgrade;
+                randomEnemy.GetComponent<EnemyMovement>().currentUpgradeEnemy = chosenUpgradeType;
                 break;
 
             //Else
             case false:
                 //10%
-                if (Random.Range(0,101) >= 90)
-                    randomEnemy.GetComponent<EnemyMovement>().currentUpgradeEnemy = _upgrade;
+                if (Random.Range(0, 101) >= 90)
+                    randomEnemy.GetComponent<EnemyMovement>().currentUpgradeEnemy = chosenUpgradeType;
                 break;
         }
 
         Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
     }
 
-   
+    public void UpdateEnemyUpgrade(int _choice)
+    {
+        switch (_choice)
+        {
+            case 0:
+                chosenUpgradeType = EnemyMovement.UpgradeEnemy.UpgradeOne;
+                break;
+
+            case 1:
+                chosenUpgradeType = EnemyMovement.UpgradeEnemy.UpgradeTwo;
+                break;
+
+            case 2:
+                chosenUpgradeType = EnemyMovement.UpgradeEnemy.UpgradeThree;
+                break;
+
+            case 3:
+                chosenUpgradeType = EnemyMovement.UpgradeEnemy.UpgradeFour;
+                break;
+
+            default:
+                Debug.Log("Received invalid int _choice to apply upgrade");
+                break;
+        }
+    }
+
 }

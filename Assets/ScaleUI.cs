@@ -1,39 +1,116 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.Events;
+using DG.Tweening;
 
-public class ScaleUI : MonoBehaviour
+public class UiSlotMachine : MonoBehaviour
 {
-    public string MainSceneToLoad;
-    public int sceneNum;
+    public List<UiWheel> wheels;
 
-    private Vector3 scale;
+    public static int playerUpgradeNumber, enemyUpgradeNumber, arenaUpgradeNumber;
+    private bool playerCrit, enemyCrit, arenaCrit;
 
+    [Space]
+    public List<Sprite> playerUpgrades, enemyUpgrades, arenaPerks;
 
-    private Vector3 startScale;
+    private bool readyToBegin = false;
+    private bool readyToExit = false;
 
+    public UnityEvent onSlotEnter, onSlotBegin, onSlotStop, onSlotExit;
 
-    public void MouseOn() => transform.DOScale(new Vector3(2.2f,2.2f,2.2f), 0.5f);
-    public void MouseOff() => transform.DOScale(new Vector3(2,2,2), 0.5f);
-
-    public void LoadLevel()
+    private void Awake()
     {
-        StartCoroutine(Coro());
+        InitialiseWheels();
+        DOTween.Init(false, false);
     }
-    private IEnumerator Coro()
+    public void InitialiseWheels()
     {
-        yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(MainSceneToLoad);
+        foreach (UiWheel _wheel in wheels)
+        {
+            _wheel.Initialise();
+        }
 
+        readyToBegin = false;
+        readyToExit = false;
     }
-    public void QuitGame()
+    public void SlotEnter(int _playerUpgradeNumber, int _enemyUpgradeNumber, int _arenaUpgradeNumber, bool _ifPlayerCrit, bool _ifEnemyCrit, bool _ifArenaCrit)
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-        Application.Quit();
+        //Animation - wait for 1 seconds
+        StartCoroutine(Coro_SlotEnter(_playerUpgradeNumber, _enemyUpgradeNumber, _arenaUpgradeNumber, _ifPlayerCrit, _ifEnemyCrit, _ifArenaCrit));
+        onSlotEnter.Invoke();
+    }
+    private IEnumerator Coro_SlotEnter(int _playerUpgradeNumber, int _enemyUpgradeNumber, int _arenaUpgradeNumber, bool _ifPlayerCrit, bool _ifEnemyCrit, bool _ifArenaCrit)
+    {
+        yield return new WaitForSeconds(1f);
+        UpdateReadyToBegin(_playerUpgradeNumber, _enemyUpgradeNumber, _arenaUpgradeNumber, _ifPlayerCrit, _ifEnemyCrit, _ifArenaCrit);
+    }
+
+    public void UpdateReadyToBegin(int _playerUpgradeNumber, int _enemyUpgradeNumber, int _arenaUpgradeNumber, bool _ifPlayerCrit, bool _ifEnemyCrit, bool _ifArenaCrit)
+    {
+        playerUpgradeNumber = _playerUpgradeNumber;
+        enemyUpgradeNumber = _enemyUpgradeNumber;
+        arenaUpgradeNumber = _arenaUpgradeNumber;
+
+        playerCrit = _ifPlayerCrit;
+        enemyCrit = _ifEnemyCrit;
+        arenaCrit = _ifArenaCrit;
+
+        readyToBegin = true;
+    }
+    public void SlotBegin()
+    {
+        readyToBegin = false;
+
+        //Run through each wheel slowly and show results
+        StartCoroutine(Coro_Slots());
+
+        onSlotBegin.Invoke();
+    }
+
+    private IEnumerator Coro_Slots()
+    {
+        //Run animations for a few seconds
+        yield return new WaitForSeconds(3f);
+
+        //Run through each wheel slowly and show results
+        wheels[0].ShowWheel(playerUpgrades[playerUpgradeNumber], playerCrit);
+        yield return new WaitForSeconds(0.3f);
+        wheels[1].ShowWheel(enemyUpgrades[enemyUpgradeNumber], enemyCrit);
+        yield return new WaitForSeconds(0.3f);
+        wheels[2].ShowWheel(arenaPerks[arenaUpgradeNumber], arenaCrit);
+        yield return null;
+
+        //Prompt for SlotExit
+        readyToExit = true;
+
+        onSlotStop.Invoke();
+    }
+    public void SlotExit()
+    {
+        StartCoroutine(Coro_Exit());
+
+        onSlotExit.Invoke();
+    }
+    private IEnumerator Coro_Exit()
+    {
+        yield return new WaitForSeconds(1);
+
+        //Update relevant ui with new images
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && readyToBegin)
+        {
+            readyToBegin = false;
+            SlotBegin();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && readyToExit)
+        {
+            readyToExit = false;
+            SlotExit();
+        }
     }
 }
