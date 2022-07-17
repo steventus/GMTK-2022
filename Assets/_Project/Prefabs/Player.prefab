@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 7803340829422482760}
   - component: {fileID: 1843499621836002513}
   - component: {fileID: 9188689436653734582}
+  - component: {fileID: 5465699294769666080}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -217,9 +218,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneCamera: {fileID: 0}
+  rb: {fileID: 0}
   runSpeed: 5
   desiredAimDir: {x: 0, y: 0}
   forceAmount: 0
+  isMoving: 0
+  input: {x: 0, y: 0}
 --- !u!114 &4430640474824362385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,6 +582,8 @@ MonoBehaviour:
     sprite: {fileID: 1957302503, guid: 5e63fefe35ff9244294299140de5e8cd, type: 3}
   - Dir: 3
     sprite: {fileID: -1373409848, guid: 5e63fefe35ff9244294299140de5e8cd, type: 3}
+  Animator: {fileID: 0}
+  PlayerController: {fileID: 0}
 --- !u!212 &4430640474824362380
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -686,6 +692,26 @@ MonoBehaviour:
   aimCursor: {fileID: 2777702512436239870}
   gun: {fileID: 2934635704977511199}
   gunSprite: {fileID: 6698357750694874648}
+--- !u!95 &5465699294769666080
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4430640474824362387}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 23c20c2e0a1e9a546a97df7d968abd06, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6165160813485028465
 GameObject:
   m_ObjectHideFlags: 0

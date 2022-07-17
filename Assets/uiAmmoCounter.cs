@@ -37,7 +37,7 @@ public class uiAmmoCounter : MonoBehaviour
         {
             SetImage(empty);
         }
-        transform.position = new Vector3(_pos.x, _pos.y + 0.5f, _pos.z);
+        transform.position = new Vector3(_pos.x, _pos.y + 1.5f, _pos.z);
         
     }
 

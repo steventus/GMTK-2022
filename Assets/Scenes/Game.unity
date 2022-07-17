@@ -3193,11 +3193,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1699522574 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4472511685336592943, guid: 307892d5eed7d1d4199faecf240446bf, type: 3}
-  m_PrefabInstance: {fileID: 4472511684429942171}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1756882750
 GameObject:
   m_ObjectHideFlags: 0
@@ -3508,7 +3503,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2053852584257114884, guid: 307892d5eed7d1d4199faecf240446bf, type: 3}
   m_PrefabInstance: {fileID: 4472511684429942171}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1699522574}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eeab3f12581862b47adab95f0eb0ffb8, type: 3}
@@ -4429,6 +4424,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4861032664455173656, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
+      propertyPath: onSlotExit.m_PersistentCalls.m_Calls.Array.data[7].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861032664455173656, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
       propertyPath: onSlotEnter.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
       value: 4
       objectReference: {fileID: 0}
@@ -4439,7 +4438,7 @@ PrefabInstance:
     - target: {fileID: 4861032664455173656, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
       propertyPath: onSlotExit.m_PersistentCalls.m_Calls.Array.data[5].m_Target
       value: 
-      objectReference: {fileID: 1699522574}
+      objectReference: {fileID: 1914415955}
     - target: {fileID: 4861032664455173656, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
       propertyPath: onSlotExit.m_PersistentCalls.m_Calls.Array.data[6].m_Target
       value: 
@@ -4453,8 +4452,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4861032664455173656, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
+      propertyPath: onSlotExit.m_PersistentCalls.m_Calls.Array.data[7].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861032664455173656, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
       propertyPath: onSlotEnter.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861032664455173656, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
+      propertyPath: onSlotExit.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
+      value: Initialise
       objectReference: {fileID: 0}
     - target: {fileID: 4861032664455173656, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
       propertyPath: onSlotExit.m_PersistentCalls.m_Calls.Array.data[6].m_MethodName
@@ -4469,12 +4476,20 @@ PrefabInstance:
       value: UnityEngine.CanvasGroup, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4861032664455173656, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
+      propertyPath: onSlotExit.m_PersistentCalls.m_Calls.Array.data[7].m_TargetAssemblyTypeName
+      value: UnityEngine.CanvasGroup, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861032664455173656, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
       propertyPath: onSlotEnter.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
       value: UnityEngine.CanvasGroup, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4861032664455173656, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
       propertyPath: onSlotExit.m_PersistentCalls.m_Calls.Array.data[6].m_Arguments.m_FloatArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861032664455173656, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
+      propertyPath: onSlotExit.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4861032664455173656, guid: 1164e2f542350df42befbb0153bf9749, type: 3}
       propertyPath: onSlotExit.m_PersistentCalls.m_Calls.Array.data[6].m_Arguments.m_ObjectArgumentAssemblyTypeName
