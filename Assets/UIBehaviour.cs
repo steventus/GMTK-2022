@@ -20,8 +20,8 @@ public class UIBehaviour : MonoBehaviour
     }
     public void FadeOut()
     {
-        thisImage?.DOFade(0, 2);
-        thisGroup?.DOFade(0, 2);
+        thisImage?.DOFade(0, 1);
+        thisGroup?.DOFade(0, 1);
 
         if (thisGroup != null)
             thisGroup.blocksRaycasts = false;
@@ -29,10 +29,20 @@ public class UIBehaviour : MonoBehaviour
 
     public void FadeIn()
     {
-        thisImage?.DOFade(1, 2);
-        thisGroup?.DOFade(1, 2);
+        thisImage?.DOFade(1, 1);
+        thisGroup?.DOFade(1, 1);
 
         if (thisGroup != null)
             thisGroup.blocksRaycasts = true;
+    }
+    public void FadeInDelay()
+    {
+        StartCoroutine(DelayCoro());
+    }
+
+    private IEnumerator DelayCoro()
+    {
+        yield return new WaitForSeconds(1);
+        FadeIn();
     }
 }

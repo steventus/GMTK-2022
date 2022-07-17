@@ -140,15 +140,11 @@ public class WaveManager : MonoBehaviour
         GameObject randomEnemy = currentWave.Enemytype[Random.Range(0, currentWave.Enemytype.Length)];
         Transform randomPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        //Apply upgrades
-        //Enemy Property upgrades
-        EnemyAIManager _enemyHp = randomEnemy.GetComponent<EnemyAIManager>();
-        _enemyHp.curEnemyHealth = _enemyHp.iniEnemyHealth + (EnemyUpgradeManager.numhealthUp * GetComponent<EnemyUpgradeManager>().healthUpgrade);
-
+        //Apply upgrades        
         //Select AI Upgrade
         EnemyMovement.UpgradeEnemy _upgrade = GetComponent<EnemyUpgradeManager>().findAvailableUpgrade();
 
-        //AI upgrades
+        //Apply AI upgrades based on Critical Roll or not
         switch (CriticalRoll)
         {
             //If Critical Roll
@@ -166,6 +162,4 @@ public class WaveManager : MonoBehaviour
 
         Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
     }
-
-   
 }
