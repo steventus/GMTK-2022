@@ -67,10 +67,15 @@ public class SlotMachine : MonoBehaviour
             //Roll Primary
             _player = Random.Range(0, FindObjectOfType<BulletManager>().desiredWeapon.Count);
             RollPlayer(_player);
+            Messenger<bool>.Broadcast(UiEvent.player_gunChangeCrit, true);
 
             _playerCrit = true;
         }
-        else RollPlayer(_player);
+        else 
+        { 
+            RollPlayer(_player);
+            Messenger<bool>.Broadcast(UiEvent.player_gunChangeCrit, false);
+        }
 
         //ENEMY CHECK CRITICAL
         if (_enemy == FindObjectOfType<UiSlotMachine>().enemyUpgrades.Count - 1)
@@ -78,13 +83,14 @@ public class SlotMachine : MonoBehaviour
             _enemy = Random.Range(0, 5); //0,1,2,3
             WaveManager.CriticalRoll = true;
             RollEnemy(_enemy);
-
+            Messenger<bool>.Broadcast(UiEvent.enemy_upgradeChangeCrit, true);
             _enemyCrit = true;
         }
         else
         {
             WaveManager.CriticalRoll = false;
             RollEnemy(_enemy);
+            Messenger<bool>.Broadcast(UiEvent.enemy_upgradeChangeCrit, false);
         }
 
         //ARENA CHECK CRITICAL
@@ -93,10 +99,15 @@ public class SlotMachine : MonoBehaviour
             _arena = Random.Range(0, FindObjectOfType<WaveManager>().ArenaPerk.Perks.Count - 1);
             //Apply Critical
             RollArenaCrit(_arena);
+            Messenger<bool>.Broadcast(UiEvent.arena_perkChangeCrit, true);
 
             _arenaCrit = true;
         }
-        else RollArena(_arena);
+        else 
+        {
+            RollArena(_arena);
+            Messenger<bool>.Broadcast(UiEvent.arena_perkChangeCrit, false);
+        }
 
         FindObjectOfType<UiSlotMachine>().SlotEnter(_player, _enemy, _arena, _playerCrit, _enemyCrit, _arenaCrit);
 
@@ -143,10 +154,12 @@ public class SlotMachine : MonoBehaviour
 
         //Initialise Weapon
         _chosen.InitialiseWeapon(_choice);
+        //Debug.Log("RollPlayer choice: " + _choice);
     }
     private void RollEnemy(int _choice)
     {
         FindObjectOfType<WaveManager>().UpdateEnemyUpgrade(_choice);
+        Messenger<Sprite>.Broadcast(UiEvent.enemy_upgradeChange, FindObjectOfType<UiSlotMachine>().enemyUpgrades[_choice]);
     }
     private void RollArena(int _choice)
     {
@@ -154,6 +167,8 @@ public class SlotMachine : MonoBehaviour
 
         _waveManager.ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
         _waveManager.ArenaPerk.Perks[_choice].RunPerk();
+
+        Messenger<Sprite>.Broadcast(UiEvent.arena_perkChange, FindObjectOfType<UiSlotMachine>().arenaPerks[_choice]);
     }
 
     private void RollArenaCrit(int _choice)
@@ -163,5 +178,8 @@ public class SlotMachine : MonoBehaviour
         _waveManager.ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
         _waveManager.ArenaPerk.Perks[_choice].isCritical = true;
         _waveManager.ArenaPerk.Perks[_choice].RunPerk();
+
+        Messenger<Sprite>.Broadcast(UiEvent.arena_perkChange, FindObjectOfType<UiSlotMachine>().arenaPerks[_choice]);
+
     }
 }

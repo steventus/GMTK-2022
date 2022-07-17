@@ -52,4 +52,41 @@ public class UiWheel : MonoBehaviour
                 break;
         }
     }
+
+    public void ShowWheelSpecial(bool _ifCrit)
+    {
+        Sequence _ini = DOTween.Sequence();
+
+        //Flash to white on the wheel
+        _ini.Append(flashImage.DOFade(1, 0.2f));
+
+        //Flash fade to image
+        _ini.Append(flashImage.DOFade(0, 1));
+        _ini.Join(thisGroup.DOFade(1, 0));
+
+        switch (_ifCrit)
+        {
+            case false:
+                wheelRolled.Invoke();
+                break;
+
+            case true:
+                wheelCriticalRolled.Invoke();
+                break;
+        }
+    }
+
+    public void RemoveImage()
+    {
+        Sequence _ini = DOTween.Sequence();
+
+        //Flash fade to image
+        _ini.Append(flashImage.DOFade(0, 3));
+        _ini.Join(thisGroup.DOFade(0, 3));
+    }
+
+    public void SetImage(Sprite _image)
+    {
+        wheelImage.sprite = _image;
+    }
 }

@@ -12,7 +12,7 @@ public class BulletManager : MonoBehaviour
 
     //Fire Properties
     public List<WeaponData> desiredWeapon;
-    protected WeaponData curWeapon;
+    [SerializeField] protected WeaponData curWeapon;
     [HideInInspector] public WeaponData oldWeapon;
 
     [SerializeField] private GameObject templateBullet;
