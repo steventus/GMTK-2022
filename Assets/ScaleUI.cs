@@ -9,6 +9,7 @@ public class ScaleUI : MonoBehaviour
 {
     public string MainSceneToLoad;
     public int sceneNum;
+    private bool playingLevel;
 
     private Vector3 scale;
 
@@ -16,18 +17,19 @@ public class ScaleUI : MonoBehaviour
     private Vector3 startScale;
 
 
-    public void MouseOn() => transform.DOScale(new Vector3(2.2f,2.2f,2.2f), 0.5f);
-    public void MouseOff() => transform.DOScale(new Vector3(2,2,2), 0.5f);
+    public void MouseOn() => transform.DOScale(new Vector3(2.2f, 2.2f, 2.2f), 0.5f);
+    public void MouseOff() => transform.DOScale(new Vector3(2, 2, 2), 0.5f);
 
     public void LoadLevel()
     {
-        StartCoroutine(Coro());
+        if (!playingLevel)
+            StartCoroutine(DelayLoad());
     }
-    private IEnumerator Coro()
+    private IEnumerator DelayLoad()
     {
-        yield return new WaitForSeconds(2);
+        playingLevel = true;
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(MainSceneToLoad);
-
     }
     public void QuitGame()
     {
