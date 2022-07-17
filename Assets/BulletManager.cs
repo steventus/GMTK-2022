@@ -364,4 +364,3 @@ public class BulletManager : MonoBehaviour
         //}
     }
 }
-a
