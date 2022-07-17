@@ -12,8 +12,6 @@ public class PlayerHealth : MonoBehaviour
     public float curHealth;
 
     public int enemiesKilled;
-
-    public bool touchByEnemies;
     
 
     public UnityEvent onTakeDamage, onDeath;
@@ -64,8 +62,7 @@ public class PlayerHealth : MonoBehaviour
         if(collision.tag == "enemyBullet")
         {
             collision.gameObject.SetActive(false);
-            var damage = collision.GetComponent<DamgerBullet>().BulletData.damage;
-            TakeDamage(damage);
+            TakeDamage(10);
 
         }
     }

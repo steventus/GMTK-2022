@@ -22,39 +22,15 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] bool canCharge;
 
-    [SerializeField] bool dashed;
+    [SerializeField] bool canDash;
 
     [SerializeField] bool IsAvailable = true;
 
-    [SerializeField] bool isTouchingPlayer;
-
-    [SerializeField] bool isFlanking = false;
-
-    [SerializeField] bool hasTakenDamage = false;
-
-    [SerializeField] bool canTeleport = true;
-
-    public float TeleportTime = -5f;
-
-    public float TimeElapsed = 0f;
-
-    public bool isFlipped = false;
-
-    [SerializeField] float flippedTime = 0f;  
-
-    [SerializeField] public LayerMask WallLayer;
-
     public Rigidbody2D rb;
 
-    [SerializeField] float CooldownDuration = 10f;
+    [SerializeField] float CooldownDuration = 1.0f;
 
     public float speed;
-
-    [SerializeField] private float RotateSpeed = 3f;
-    [SerializeField] private float Radius = 2f;
-
-    private Vector2 _centre;
-    private float _angle;
 
     private void Awake()
     {
@@ -65,9 +41,6 @@ public class EnemyMovement : MonoBehaviour
     {
         var GO = GameObject.FindGameObjectWithTag("Player");
         playerRb = GO.GetComponent<Rigidbody2D>();
-        isTouchingPlayer = false;
-        canCharge = true;
-        rb.freezeRotation = true;
     }
 
     void FixedUpdate()
@@ -87,129 +60,36 @@ public class EnemyMovement : MonoBehaviour
                 Debug.Log("Error");
                 break;
         }
-
-        TimeElapsed += Time.deltaTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-
-        /*if (collision.CompareTag("Player"))
-        {
-            isTouchingPlayer = true;
-        }*/
-       
-        if (currentEnemyType == EnemyTypes.RangedAI && collision.CompareTag("Wall"))
-        {
-           
-            if (!isFlanking)
-            {
-                this.transform.position = Vector2.zero;
-            }
-        }
-
-        if (currentEnemyType == EnemyTypes.MeleeAI && collision.CompareTag("Wall"))
-        {
-            speed = 0;
-        }
-
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-      /*  if (collision.CompareTag("Player"))
-        {
-            isTouchingPlayer = false;
-        }*/
-    }
-
-  
-
-    public bool DetectWall()
-    {
-        Vector2 position = transform.position;
-        Vector2 direction = Vector2.down;
-        float distance = 10f;
-
-        //Debug.DrawRay(position, direction, Color.green);
-        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, WallLayer);
-        if (hit.collider != null)
-        {
-            return true;
-        }
-
-
-        return false;
-    }
-
-    public static float FindDegree(int x, int y)
-    {
-        float value = (float)((Mathf.Atan2(x, y) / Math.PI) * 180f);
-        if (value < 0) value += 360f;
-
-        return value;
-    }
 
     public void ChasePlayerEnemyMovement()
     {
         float distance = Vector2.Distance(this.gameObject.transform.position, playerRb.position);
-
+        float speed = 3f * Time.deltaTime;
+        Vector3 offset = rb.position - playerRb.position;
         var upgradeTypes = currentUpgradeEnemy;
-        _centre = playerRb.position;
 
         if (distance < 6f)
         {
             switch (upgradeTypes)
             {
                 case UpgradeEnemy.Base:
-                    
-                    
-                    speed = 3f;
-          
-                    if (distance > 1f)
-                    {
-                        rb.position = Vector2.MoveTowards(rb.position, playerRb.position, speed * Time.deltaTime);
-                    }
-
+                    transform.position = Vector2.MoveTowards(transform.position, playerRb.position, speed);
                     break;
                 case UpgradeEnemy.UpgradeOne:
-
-                    if (TimeElapsed >= flippedTime)
-                    {
-                        flippedTime = TimeElapsed + 4f;
-                        isFlipped = !isFlipped;
-
-                        if (isFlipped)
-                        {
-                            speed = 5f;
-                            
-                        }
-                        else
-                        {
-                            speed = 8f;
-                        }
-                    }
-
-
-                    if (distance > 1f)
-                    {
-                        rb.position = Vector2.LerpUnclamped(rb.position, playerRb.position, speed * Time.deltaTime);
-                    }
-
+                    transform.position = Vector2.Lerp(transform.position, playerRb.position, speed);
                     break;
                 case UpgradeEnemy.UpgradeTwo:
 
-                    //Enemy is not moving
-                    //Enemy Delays (Charge)
+                    transform.position = Vector2.Lerp(transform.position, playerRb.position, speed);
+                    break;
+                case UpgradeEnemy.UpgradeThree:
 
-                    speed = 0;
-
-                    if (canCharge)
-                    {
-                        StartCoroutine(ChargeAttack());
-                    }
-
-
+                    transform.position = Vector3.Lerp(transform.position + offset, playerRb.position, speed).normalized;
+                    break;
+                case UpgradeEnemy.UpgradeFour:
+                    UseAbility();
                     break;
                 default:
                     Debug.Log("Upgrade Types not valid");
@@ -217,103 +97,68 @@ public class EnemyMovement : MonoBehaviour
             }
         }
 
+        if (currentUpgradeEnemy == UpgradeEnemy.UpgradeTwo)
+        {
+            StartCoroutine(ChargeAttack());
+            canCharge = true;
+        }
+        else
+        {
+            canCharge = false;
+        }
+
+   
+        /*Debug.Log(upgradeTypes);*/
+        /*Debug.Log(canCharge);*/
     }
 
     public void RunFromPlayerEnemyMovement()
     {
         float distance = Vector2.Distance(this.gameObject.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
         var upgradeTypes = currentUpgradeEnemy;
-        speed = 10f * Time.deltaTime;
-        isFlanking = false;
+        float speed = 10f * Time.deltaTime;
 
-        switch (upgradeTypes)
+
+        if (distance < 3f)
         {
-            case UpgradeEnemy.Base:
+            switch (upgradeTypes)
+            {
+                case UpgradeEnemy.Base:
 
-                if(distance < 3f)
-                {
                     var enemyPosition = rb.position;
                     var playerPosition = playerRb.position;
                     var dist = (enemyPosition - playerPosition).magnitude;
                     var mapped = Mathf.InverseLerp(10, 5, dist);
                     rb.position = Vector2.MoveTowards(enemyPosition, playerPosition, -mapped * speed);
-                }
 
-                break;
+                    break;
+                case UpgradeEnemy.UpgradeOne:
 
-            case UpgradeEnemy.UpgradeThree:
-
-                isFlanking = true;
-
-                if(distance > 3f)
-                {
-                    float cursor = playerRb.GetComponent<AimMouse>().aimCursor.eulerAngles.z + 180;
-                    if (cursor > 180)
-                    {
-                        cursor = cursor - 360;
-                    }
-                    //Debug.Log(cursor);
-                    //Debug.Log(cursor);
-
-                    Vector2 target = new Vector2(Mathf.Sin(cursor), Mathf.Cos(cursor)).normalized * 5f + playerRb.position;
-                    rb.position = Vector2.MoveTowards(rb.position, target, 3f * Time.deltaTime);
-                }
-                else
-                {
-                    _centre = playerRb.position;
-
-                    _angle += 2.4f * Time.deltaTime;
-                    var offset = new Vector2(Mathf.Sin(_angle), Mathf.Cos(_angle)) * 2f;
-                    rb.position = _centre + offset;
-                    isFlanking = false;
-
-                    
-                }
-
-
-
-                break;
-
-            case UpgradeEnemy.UpgradeFour:
-
-                if(TimeElapsed >= TeleportTime + 5f)
-                {
-                    rb.position = GenerateTeleportCoordinate();
-                    TeleportTime = TimeElapsed;
-  
-                }
-
-                break;
-            default:
-                Debug.Log("Upgrade Types not valid");
-                break;
+                    transform.position = Vector2.Lerp(transform.position, playerRb.position, speed);
+                    break;
+                default:
+                    Debug.Log("Upgrade Types not valid");
+                    break;
+            }
         }
 
+        if (currentEnemyType == EnemyTypes.RangedAI && currentUpgradeEnemy == UpgradeEnemy.UpgradeOne)
+        {
+            UseAbility();
+        }
     }
 
     IEnumerator ChargeAttack()
     {
-       
-        canCharge = false;
-        //Debug.Log("Charging.... ");
-        yield return new WaitForSeconds(5f);
-        //Enemy is keeps tracking player position
-        //Enemy saves player position
-        //Enemy dash to the saves player location
-        Transform saveCurrentPlayerPosition;
-        saveCurrentPlayerPosition = playerRb.transform;
-/*        rb.freezeRotation = true;*/
-        rb.AddForce(new Vector2(saveCurrentPlayerPosition.position.x - rb.position.x, saveCurrentPlayerPosition.position.y - rb.position.y).normalized * 15f, ForceMode2D.Impulse);
-        speed = 0;
-        /*//Debug.Log("Finish Charging");*/
-        yield return new WaitForSeconds(1f);
-        rb.velocity = Vector2.zero;
- /*       rb.freezeRotation = false;*/
-        canCharge = true;
-        /*Debug.Log("Cooldown Complete");*/
+        if (canCharge)
+        {
+            Debug.Log("Charging.... ");
+            yield return new WaitForSeconds(1f);
+            Debug.Log("Finish Charging");
+        }
     }
 
-    void MeleeDashToPlayer()
+    void UseAbility()
     {
         // if not available to use (still cooling down) just exit
         if (IsAvailable == false)
@@ -323,55 +168,33 @@ public class EnemyMovement : MonoBehaviour
 
         // made it here then ability is available to use...
         // UseAbilityCode goes here
-        /* Rigidbody2D saveCurrentPlayerPosition;
-         saveCurrentPlayerPosition = playerRb;*/
-        /*transform.position = Vector2.MoveTowards(transform.position, playerRb.position, 2 * speed);*/
-       
-       
+        Rigidbody2D saveCurrentPlayerPosition;
+        saveCurrentPlayerPosition = playerRb;
+        transform.position = Vector2.Lerp(-transform.position, saveCurrentPlayerPosition.position, 2* speed);
+
         // start the cooldown timer
-/*        StartCoroutine(CastTeleport());*/
+        StartCoroutine(StartCooldown());
     }
 
-    public IEnumerator CastTeleport()
+    public IEnumerator StartCooldown()
     {
         IsAvailable = false;
-        /*Debug.Log("Starting Cooldown.... ");*/
-        yield return new WaitForSeconds(5f);
-        /*Debug.Log("Teleporting.... ");*/
-        rb.position = GenerateTeleportCoordinate();
+        Debug.Log("Start Cooldown");
+        yield return new WaitForSeconds(CooldownDuration);
         IsAvailable = true;
-        canTeleport = true;
-        /*Debug.Log("Cooldown Complete");*/
     }
 
-    public Vector2 GenerateTeleportCoordinate()
+   /* public IEnumerator DashMovement()
     {
-        return new Vector2(UnityEngine.Random.Range(-6.5f, 5.5f), UnityEngine.Random.Range(-3.5f,3.5f));
+        yield return new WaitForSeconds(1f);
+        speed = 1;
+        transform.position = Vector2.Lerp(transform.position, playerTransform.position, speed);
+        StartCoroutine(StopDashMovement());
     }
 
-    private void CancelTeleport()
+    public IEnumerator StopDashMovement()
     {
-        TeleportTime = TimeElapsed;
-
-        /*StopCoroutine(CastTeleport());
-        Debug.Log("Cancelling Teleport");
-        canTeleport = false;
-        StartCoroutine(CastTeleport());*/
-    }
-
-    private void OnEnable()
-    {
-        Messenger.AddListener(GameEvent.PlayerTakeDamage, CancelTeleport);
-    }
-
-    private void OnDisable()
-    {
-        Messenger.RemoveListener(GameEvent.PlayerTakeDamage, CancelTeleport);
-    }
-
-    private void OnDestroy()
-    {
-        Messenger.RemoveListener(GameEvent.PlayerTakeDamage, CancelTeleport);
-    }
-
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(DashMovement());
+    }*/
 }
