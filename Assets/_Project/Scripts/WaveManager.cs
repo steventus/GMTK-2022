@@ -6,7 +6,6 @@ using UnityEngine.Events;
 [System.Serializable]
 public class Wave
 {
-    public int enemiesNum;
     public GameObject[] Enemytype;
     public float timeBetweenEnemeySpawn;
 }
@@ -18,10 +17,12 @@ public class WaveManager : MonoBehaviour
     public BulletManager BulletManager;
     public int RoundNum;
 
-    public ValueHandler ValueHandler;
+    public RoundHandler roundHandler;
     
     public List<Wave> waves;
     public Transform[] spawnPoints;
+
+    private List<Wave> _infiniteWaves = new List<Wave>(3);
 
     private Wave currentWave;
     public int currentWaveNumber;
@@ -44,8 +45,10 @@ public class WaveManager : MonoBehaviour
 
     public UnityEvent onRoundStart, onRoundEnd;
 
+    public int enemiesNum = 0;
     private void Start()
     {
+        enemiesNum = Random.Range(roundHandler.EnemySpawnMin, roundHandler.EnemySpawnMax);
         CriticalRoll = false;
         enemyGameObject = GameObject.FindGameObjectWithTag("Fake");
     }
@@ -53,7 +56,7 @@ public class WaveManager : MonoBehaviour
     private void Update()
     {
         if (ShouldStop) return;
-        if (ValueHandler.currentRoundNum != RoundNum) return;
+        if (roundHandler.currentRoundNum != RoundNum) return;
         
         currentWave = waves[currentWaveNumber];
         if (canSpawn && nextSpawnTime < Time.time)
@@ -67,15 +70,14 @@ public class WaveManager : MonoBehaviour
         if (currentWaveNumber + 1 != waves.Count)
         {
             if (!TrySpawn) return;
-            
-            
+            enemiesNum = Random.Range(roundHandler.EnemySpawnMin, roundHandler.EnemySpawnMax);
+
             SpawnNextWave();
 
-            if (ValueHandler.currentRoundNum > ValueHandler._waveManager.Length + 1)
-            {
-                Debug.Log("Stop heeeeeeeeeeeeeeeeeeeeeeeeee");
-                ShouldStop = true;
-            }
+            // if (roundHandler.currentRoundNum > roundHandler._waveManager.Length + 1)
+            // {
+            //     ShouldStop = true;
+            // }
             return;
         }
 
@@ -83,6 +85,8 @@ public class WaveManager : MonoBehaviour
         FindObjectOfType<SlotMachine>().GetComponent<Animator>().Play("slotMachine_flyIn");
 
         onRoundEnd.Invoke();
+        
+       
     }
     public void RandomizeSlotMachine()
     {
@@ -101,8 +105,18 @@ public class WaveManager : MonoBehaviour
     public void StartNextRound()
     {
         RandomizeSlotMachine();
-        ValueHandler.currentRoundNum++;
+        roundHandler.currentRoundNum++;
+        
+        roundHandler.EnemySpawnMin += 1;
+        roundHandler.EnemySpawnMax += 1;
+        
+        // Randomize properties        
+        RoundNum++;
+        currentWaveNumber = 0;
+        
+        
         onRoundStart.Invoke();
+
     }
     private bool isUsed;
     private bool GetValidate()
@@ -122,17 +136,18 @@ public class WaveManager : MonoBehaviour
     }
     void SpawnWave()
     {
+        
         SpawnEnemyAtRandomPos();
         GetNextWave();
 
-        if (currentWave.enemiesNum != 0) return;
+        if (enemiesNum != 0) return;
         canSpawn = false;
         TrySpawn = true;
 
     }
     private void GetNextWave()
     {
-        currentWave.enemiesNum--;
+        enemiesNum--;
         nextSpawnTime = Time.time + currentWave.timeBetweenEnemeySpawn;
     }
     private void SpawnEnemyAtRandomPos()

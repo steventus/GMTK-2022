@@ -9,5 +9,7 @@ public static class GameEvent
    public static readonly string RoundsFinishedEvent = "OnRoundFinished";
    public static readonly string PlayerReGainHealth = "OnRegainHealth";
    public static readonly string PlayerTakeDamage = "OnPlayerTakeDamage";
+   public static readonly string SpawnNewRound = "OnSpawnNewRound";
+
 
 }
