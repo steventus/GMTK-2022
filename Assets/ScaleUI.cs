@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,6 +9,7 @@ public class ScaleUI : MonoBehaviour
 {
     public string MainSceneToLoad;
     public int sceneNum;
+    private bool playingLevel;
 
     private Vector3 scale;
 
@@ -19,9 +22,15 @@ public class ScaleUI : MonoBehaviour
 
     public void LoadLevel()
     {
+        if (!playingLevel)
+            StartCoroutine(DelayLoad());
+    }
+    private IEnumerator DelayLoad()
+    {
+        playingLevel = true;
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(MainSceneToLoad);
     }
-
     public void QuitGame()
     {
 #if UNITY_EDITOR

@@ -1,15 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
+[System.Serializable]
 public class NoChange : Perk
 {
+    public bool UsedPerk { get; set; }
 
     public override void RunPerk()
     {
-        usedPerk = true;
+        UsedPerk = true;
     }
 
     public override void ResetPerks()
     {
-        usedPerk = false;
+        UsedPerk = false;
     }
     
     
