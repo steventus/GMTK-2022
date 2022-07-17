@@ -9,7 +9,7 @@ public class UiSlotMachine : MonoBehaviour
 {
     public List<UiWheel> wheels;
 
-    public int playerUpgradeNumber, enemyUpgradeNumber, arenaUpgradeNumber;
+    public static int playerUpgradeNumber, enemyUpgradeNumber, arenaUpgradeNumber;
 
     [Space]
     public List<Sprite> playerUpgrades, enemyUpgrades, arenaPerks;
@@ -17,11 +17,12 @@ public class UiSlotMachine : MonoBehaviour
     private bool readyToBegin = false;
     private bool readyToExit = false;
 
-    public UnityEvent onSlotEnter, onSlotBegin, onSlotStop;
+    public UnityEvent onSlotEnter, onSlotBegin, onSlotStop, onSlotExit;
 
     private void Awake()
     {
         InitialiseWheels();
+        DOTween.Init(false, false);
     }
     public void InitialiseWheels()
     {
@@ -30,11 +31,21 @@ public class UiSlotMachine : MonoBehaviour
             _wheel.Initialise();
         }
 
-        readyToBegin = readyToExit = false;
+        readyToBegin = false;
+        readyToExit = false;
     }
-    public void SlotEnter()
+    public void SlotEnter(int _playerUpgradeNumber, int _enemyUpgradeNumber, int _arenaUpgradeNumber)
     {
+
+        //Animation - wait for 1 seconds
+        StartCoroutine(Coro_SlotEnter(_playerUpgradeNumber, _enemyUpgradeNumber, _arenaUpgradeNumber));
+        
         onSlotEnter.Invoke();
+    }
+    private IEnumerator Coro_SlotEnter(int _playerUpgradeNumber, int _enemyUpgradeNumber, int _arenaUpgradeNumber)
+    {
+        yield return new WaitForSeconds(1f);
+        UpdateReadyToBegin(_playerUpgradeNumber, _enemyUpgradeNumber, _arenaUpgradeNumber);
     }
 
     public void UpdateReadyToBegin(int _playerUpgradeNumber, int _enemyUpgradeNumber, int _arenaUpgradeNumber)
@@ -50,36 +61,49 @@ public class UiSlotMachine : MonoBehaviour
         readyToBegin = false;
 
         //Run through each wheel slowly and show results
-        StartCoroutine(Coro_Slots(playerUpgradeNumber, enemyUpgradeNumber, arenaUpgradeNumber));
-
-        //Prompt for SlotExit
-        readyToExit = true;
+        StartCoroutine(Coro_Slots());
 
         onSlotBegin.Invoke();
     }
 
-    private IEnumerator Coro_Slots(int _playerUpgradeNumber, int _enemyUpgradeNumber, int _arenaUpgradeNumber)
+    private IEnumerator Coro_Slots()
     {
         //Run animations for a few seconds
         yield return new WaitForSeconds(3f);
 
         //Run through each wheel slowly and show results
-        wheels[0].ShowWheel(playerUpgrades[_playerUpgradeNumber]);
+        wheels[0].ShowWheel(playerUpgrades[playerUpgradeNumber]);
         yield return new WaitForSeconds(0.3f);
-        wheels[1].ShowWheel(enemyUpgrades[_enemyUpgradeNumber]);
+        wheels[1].ShowWheel(enemyUpgrades[enemyUpgradeNumber]);
         yield return new WaitForSeconds(0.3f);
-        wheels[2].ShowWheel(arenaPerks[_arenaUpgradeNumber]);
+        wheels[2].ShowWheel(arenaPerks[arenaUpgradeNumber]);
         yield return null;
+
+        //Prompt for SlotExit
+        readyToExit = true;
 
         onSlotStop.Invoke();
     }
     public void SlotExit()
     {
+        StartCoroutine(Coro_Exit());
 
+        onSlotExit.Invoke();
     }
+    private IEnumerator Coro_Exit()
+    {
+        yield return new WaitForSeconds(1);
 
+        //Update relevant ui with new images
+    }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && readyToBegin)
+        {
+            readyToBegin = false;
+            SlotBegin();
+        }
+
         if (Input.GetKeyDown(KeyCode.Mouse0) && readyToExit)
         {
             readyToExit = false;

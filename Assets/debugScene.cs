@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class debugScene : MonoBehaviour
 {
     public UiSlotMachine thisMachine;
+    public SlotMachine thisSlot;
 
     void Update()
     {
@@ -13,8 +14,8 @@ public class debugScene : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            Debug.Log("test");
-            thisMachine.SlotBegin(0, 0, 0);
+            thisSlot.Initialise();
+            thisSlot.Roll();
         }
     }
 }
