@@ -6,8 +6,6 @@ using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
-
-
     public int maxHealth = 3;
     public int curHealth;
 
@@ -21,6 +19,8 @@ public class PlayerHealth : MonoBehaviour
     public bool ShouldUseSO;
     public RegainSystemSO regainSystemSo;
 
+    public float invulDur;
+    private float invulTimer;
 
     private int requredKill = 2;
     private void OnEnable()
@@ -40,6 +40,9 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float _delta)
     {
+        if (Time.time < invulTimer)
+            return;
+
         curHealth -= 1;
         Messenger<int>.Broadcast(UiEvent.player_takeDamage, curHealth);
 
@@ -56,7 +59,8 @@ public class PlayerHealth : MonoBehaviour
             Reference.cam.ShakeCamera(0.15f,0.15f);
             onTakeDamage.Invoke();
         }
-        
+
+        invulTimer = Time.time + invulDur;
       
     }
 

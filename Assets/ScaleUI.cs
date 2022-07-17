@@ -19,7 +19,11 @@ public class ScaleUI : MonoBehaviour
 
     public void MouseOn() => transform.DOScale(new Vector3(2.2f, 2.2f, 2.2f), 0.5f);
     public void MouseOff() => transform.DOScale(new Vector3(2, 2, 2), 0.5f);
+    public void InstantLoad()
+    {
+        SceneManager.LoadScene(MainSceneToLoad);
 
+    }
     public void LoadLevel()
     {
         if (!playingLevel)
