@@ -57,10 +57,11 @@ public class GameOverr : MonoBehaviour
 
     public void ReloadScene()
     {
+        Time.timeScale = 1;
+        
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
         
-        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

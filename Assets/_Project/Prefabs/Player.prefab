@@ -219,6 +219,7 @@ MonoBehaviour:
   sceneCamera: {fileID: 0}
   runSpeed: 5
   desiredAimDir: {x: 0, y: 0}
+  forceAmount: 0
 --- !u!114 &4430640474824362385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,9 +234,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTemporary: 0
   isTemporaryReady: 0
+  gunSprite: {fileID: 0}
   desiredWeapon:
   - {fileID: 11400000, guid: 4b101f4d843c77241b8e2b685805a96b, type: 2}
   - {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
+  - {fileID: 11400000, guid: f2f693d55bc89cb4fb2b90e664e4c32a, type: 2}
+  - {fileID: 11400000, guid: 76fa79a5dccd04141a7ee38a2591b01d, type: 2}
+  oldWeapon: {fileID: 0}
   templateBullet: {fileID: 3525454690951914276, guid: f86a7464927f53a4790d2ae23783f439, type: 3}
   maxAmmo: 50
   ammoRegenPerSec: 30
@@ -374,9 +379,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTemporary: 1
   isTemporaryReady: 0
+  gunSprite: {fileID: 0}
   desiredWeapon:
   - {fileID: 11400000, guid: 4b101f4d843c77241b8e2b685805a96b, type: 2}
   - {fileID: 11400000, guid: 24e80292a0b50b846aee81779fdb64cd, type: 2}
+  - {fileID: 11400000, guid: f2f693d55bc89cb4fb2b90e664e4c32a, type: 2}
+  - {fileID: 11400000, guid: 76fa79a5dccd04141a7ee38a2591b01d, type: 2}
+  oldWeapon: {fileID: 0}
   templateBullet: {fileID: 3525454690951914276, guid: f86a7464927f53a4790d2ae23783f439, type: 3}
   maxAmmo: 50
   ammoRegenPerSec: 30
@@ -589,7 +598,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -636,6 +645,7 @@ MonoBehaviour:
   maxHealth: 100
   curHealth: 0
   enemiesKilled: 0
+  touchByEnemies: 0
   onTakeDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -728,7 +738,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -887,7 +897,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

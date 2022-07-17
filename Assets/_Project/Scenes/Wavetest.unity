@@ -742,9 +742,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentRoundNum: 1
   round_Label: {fileID: 720319251}
-  _waveManager:
-  - {fileID: 638406086}
-  - {fileID: 732989387}
+  EnemySpawnMax: 2
+  EnemySpawnMin: 0
 --- !u!4 &358847338
 Transform:
   m_ObjectHideFlags: 0
@@ -903,7 +902,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1831,16 +1830,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArenaPerk: {fileID: 953379345}
   BulletManager: {fileID: 1136211994}
-  enemyAIManager: {fileID: 0}
   RoundNum: 1
-  ValueHandler: {fileID: 358847337}
+  roundHandler: {fileID: 0}
   waves:
-  - enemiesNum: 1
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
-  - enemiesNum: 1
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
   spawnPoints:
@@ -1851,10 +1847,7 @@ MonoBehaviour:
   - {fileID: 302753165}
   - {fileID: 446228127}
   currentWaveNumber: 0
-  CriticalRole: 0
-  enemyHealthUpgrade: 0
-  enemyFireRateUpgrade: 0
-  numOfBulletsUpgrade: 0
+  CriticalRoll: 0
   rng_upgrade: 0
   onRoundStart:
     m_PersistentCalls:
@@ -1862,6 +1855,7 @@ MonoBehaviour:
   onRoundEnd:
     m_PersistentCalls:
       m_Calls: []
+  enemiesNum: 0
 --- !u!4 &638406087
 Transform:
   m_ObjectHideFlags: 0
@@ -2080,16 +2074,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArenaPerk: {fileID: 953379345}
   BulletManager: {fileID: 1136211994}
-  enemyAIManager: {fileID: 0}
   RoundNum: 2
-  ValueHandler: {fileID: 358847337}
+  roundHandler: {fileID: 0}
   waves:
-  - enemiesNum: 1
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
-  - enemiesNum: 1
-    Enemytype:
+  - Enemytype:
     - {fileID: 787023095450456522, guid: 97180ae633903ed4b8901464534de4d7, type: 3}
     timeBetweenEnemeySpawn: 0.1
   spawnPoints:
@@ -2100,10 +2091,7 @@ MonoBehaviour:
   - {fileID: 409381659}
   - {fileID: 1387919874}
   currentWaveNumber: 0
-  CriticalRole: 0
-  enemyHealthUpgrade: 0
-  enemyFireRateUpgrade: 0
-  numOfBulletsUpgrade: 0
+  CriticalRoll: 0
   rng_upgrade: 0
   onRoundStart:
     m_PersistentCalls:
@@ -2111,6 +2099,7 @@ MonoBehaviour:
   onRoundEnd:
     m_PersistentCalls:
       m_Calls: []
+  enemiesNum: 0
 --- !u!4 &732989388
 Transform:
   m_ObjectHideFlags: 0
@@ -2596,7 +2585,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3585,11 +3574,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c516a42d781f0643ad88d63d05bd5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
+  usedPerk: 0
   BulletDatas:
   - {fileID: 11400000, guid: 3a8ea7f170496e24b9e592c9eecbf8f1, type: 2}
   - {fileID: 11400000, guid: 5b52c14c30487a742bfd5789d67bd94d, type: 2}
   - {fileID: 11400000, guid: 2fc928600a7c7ea4e8c44a89a5ee2da3, type: 2}
-  AdditionalSpeed: 5
+  additionalPerkSpeed: 4
+  additionalCriticalSpeed: 10
 --- !u!4 &1066951820
 Transform:
   m_ObjectHideFlags: 0
@@ -4044,6 +4036,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ccff9f35f30714e956b31ab0e6aa85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
+  usedPerk: 0
 --- !u!4 &1200860178
 Transform:
   m_ObjectHideFlags: 0
@@ -4142,6 +4136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca8a2273a376cb4db25be2363c0d9a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
+  usedPerk: 0
   ArenaPerk: {fileID: 953379345}
 --- !u!1 &1291183725
 GameObject:
@@ -4175,7 +4171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eccb7512ed51e4148a1872ffddae8b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ValueHandler: {fileID: 358847337}
+  roundHandler: {fileID: 0}
   roundsSurvived: {fileID: 394073571}
   enemiesKilled: {fileID: 1590647053}
   OnRoundFinished:
@@ -4305,7 +4301,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef548cd177c6df4485621b9a7a5dfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCritical: 0
+  usedPerk: 0
   PlayerController: {fileID: 1136211993}
+  criticalSpeed: 12
+  perkSpeed: 8
 --- !u!4 &1298150494
 Transform:
   m_ObjectHideFlags: 0
