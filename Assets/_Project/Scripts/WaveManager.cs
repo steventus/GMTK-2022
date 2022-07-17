@@ -92,7 +92,7 @@ public class WaveManager : MonoBehaviour
     {
         //Select new Weapon or just upgrade player properties
         //Check for Critical roll
-        BulletManager.SelectWeapon();
+        BulletManager.SlotMachine();
 
         if (CriticalRole)
         {
@@ -103,11 +103,6 @@ public class WaveManager : MonoBehaviour
         //Select enemy AI upgrade or just upgrade enemy properties
         //Check for Critical roll
 
-        if (CriticalRole)
-        {
-
-        }
-      
 
         //Select new perk - Karim
         ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
@@ -163,45 +158,25 @@ public class WaveManager : MonoBehaviour
         //AI upgrades
         //if is critical roll
         //else (Random.Range(0,101) >= 90) run code to apply upgrade
-        //Upgrade Enemy Health
-        //Unlock Melee Upgrade 1
-        //Critical Roll Function
+        bool _ifCriticalRoll = false;
 
-        var rng = rng_upgrade;
-
-        // 66%
-        if (Random.Range(0, 101) >= 90)
+        switch (_ifCriticalRoll)
         {
-            rng_upgrade = RNG_Upgrade.Common;
+            case true:
+                break;
 
-            // 22%
-            if(Random.Range(0,34) > 11)
-            {
-                randomEnemy.GetComponent<EnemyAIManager>().enemyHealth += 2;
-            }
+            case false:
+                //Check unlocked upgrades
+
+                //Select one
+
+                //Apply upgrade
+                break;
         }
-        // 22%
-        else if (Random.Range(0, 34) > 11)
-        {
-            rng_upgrade = RNG_Upgrade.Uncommon;
 
-            //4.4%
-            if (Random.Range(4, 6) > 1)
-            {
-                randomEnemy.GetComponent<EnemyMovement>().currentUpgradeEnemy = EnemyMovement.UpgradeEnemy.UpgradeOne;
-            }
-        } 
-        //11%
-        else if (Random.Range(0, 16) > 17)
-        {
-            rng_upgrade = RNG_Upgrade.Critical;
-            CriticalRole = true;
 
-            if (Random.Range(0, 11) > 1)
-            {
-                rng_upgrade = RNG_Upgrade.Uncommon;
-            }
-        }
+
+
 
 
         Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
