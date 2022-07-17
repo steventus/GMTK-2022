@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class CameraShaker : MonoBehaviour
 {
-    public Rigidbody2D rb;
     private void Update()
     {
         if(Reference.cam != this)
