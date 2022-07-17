@@ -126,7 +126,7 @@ public class BulletManager : MonoBehaviour
             if (!CheckAmmo(curFireCost))
                 return;
 
-            Debug.Log("Fire");
+            //Debug.Log("Fire");
 
             InterruptRegen();
             CallFire();

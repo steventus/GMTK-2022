@@ -182,4 +182,10 @@ public class SlotMachine : MonoBehaviour
         Messenger<Sprite>.Broadcast(UiEvent.arena_perkChange, FindObjectOfType<UiSlotMachine>().arenaPerks[_choice]);
 
     }
+
+    public void StartNextRound()
+    {
+        FindObjectOfType<WaveManager>().StartNextRound();
+        GetComponent<Animator>().Play("slotMachine_flyOut");
+    }
 }

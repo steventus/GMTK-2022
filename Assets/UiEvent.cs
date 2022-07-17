@@ -9,4 +9,5 @@ public static class UiEvent
     public static string arena_perkChange = "arena_perkChange";
     public static string arena_perkChangeCrit = "arena_perkChangeCrit";
 
+    public static string player_takeDamage = "playerTakeDamage";
 }
