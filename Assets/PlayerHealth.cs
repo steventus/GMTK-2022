@@ -12,6 +12,8 @@ public class PlayerHealth : MonoBehaviour
     public float curHealth;
 
     public int enemiesKilled;
+
+    public bool touchByEnemies;
     
 
     public UnityEvent onTakeDamage, onDeath;
