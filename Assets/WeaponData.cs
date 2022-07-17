@@ -14,7 +14,6 @@ public class WeaponData : ScriptableObject
     public float angleBetweenBullet;
 
     public BulletData bulletData;
-    public Sprite gunSprite;
 
     [Space]
     //Audio
