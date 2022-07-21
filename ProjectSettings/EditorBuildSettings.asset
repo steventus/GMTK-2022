@@ -5,18 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/_Project/Scenes/PlatTest_Scene.unity
-    guid: 5edd40c53ab6c7d4bad8ddefdd290756
-  - enabled: 0
-    path: Assets/_Project/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/_Project/Scenes/MainMenu_Scene.unity
     guid: 4fd1c7482e86f554fb76efb8cb6b9436
   - enabled: 1
-    path: Assets/_Project/Scenes/KarimGame.unity
-    guid: d88d5fd0860ae454196e42a70940680d
+    path: Assets/Scenes/IntroCutscene.unity
+    guid: 47293889c10c77a40a557c5cf1afc0b4
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 66030ad8d8241f14b94891102b4b198b
