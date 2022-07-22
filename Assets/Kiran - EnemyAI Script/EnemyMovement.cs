@@ -53,12 +53,15 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float RotateSpeed = 3f;
     [SerializeField] private float Radius = 2f;
 
+    [SerializeField] public Animation anim;
+
     private Vector2 _centre;
     private float _angle;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+  
     }
 
     void Start()
@@ -68,6 +71,7 @@ public class EnemyMovement : MonoBehaviour
         isTouchingPlayer = false;
         canCharge = true;
         rb.freezeRotation = true;
+        anim = GetComponent<Animation>();
     }
 
     void FixedUpdate()
@@ -171,6 +175,7 @@ public class EnemyMovement : MonoBehaviour
                     if (distance > 1f)
                     {
                         rb.position = Vector2.MoveTowards(rb.position, playerRb.position, speed * Time.deltaTime);
+                        anim.Play("RedChip");
                     }
 
                     break;
@@ -196,6 +201,7 @@ public class EnemyMovement : MonoBehaviour
                     if (distance > 1f)
                     {
                         rb.position = Vector2.LerpUnclamped(rb.position, playerRb.position, speed * Time.deltaTime);
+                        anim.Play("RedChip");
                     }
 
                     break;
@@ -209,6 +215,7 @@ public class EnemyMovement : MonoBehaviour
                     if (canCharge)
                     {
                         StartCoroutine(ChargeAttack());
+                        anim.Play("RedChip");
                     }
 
 
@@ -239,6 +246,7 @@ public class EnemyMovement : MonoBehaviour
                     var dist = (enemyPosition - playerPosition).magnitude;
                     var mapped = Mathf.InverseLerp(10, 5, dist);
                     rb.position = Vector2.MoveTowards(enemyPosition, playerPosition, -mapped * speed);
+                    rb.GetComponent<Animator>().SetTrigger("run");
                 }
 
                 break;
@@ -259,6 +267,7 @@ public class EnemyMovement : MonoBehaviour
 
                     Vector2 target = new Vector2(Mathf.Sin(cursor), Mathf.Cos(cursor)).normalized * 5f + playerRb.position;
                     rb.position = Vector2.MoveTowards(rb.position, target, 3f * Time.deltaTime);
+                    rb.GetComponent<Animator>().SetTrigger("run");
                 }
                 else
                 {
@@ -268,8 +277,8 @@ public class EnemyMovement : MonoBehaviour
                     var offset = new Vector2(Mathf.Sin(_angle), Mathf.Cos(_angle)) * 2f;
                     rb.position = _centre + offset;
                     isFlanking = false;
+                    rb.GetComponent<Animator>().SetTrigger("run");
 
-                    
                 }
 
 
@@ -290,6 +299,10 @@ public class EnemyMovement : MonoBehaviour
                 Debug.Log("Upgrade Types not valid");
                 break;
         }
+
+      
+
+     
 
     }
 
