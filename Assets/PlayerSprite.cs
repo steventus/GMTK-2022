@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [System.Serializable]
 public class PlayerDirSprite
@@ -26,6 +27,9 @@ public class PlayerSprite : MonoBehaviour
     private string currentState;
     public PlayerController PlayerController;
 
+    private bool isInvul = false;
+    private Coroutine coroInvul;
+
     public void SwitchState(string newState)
     {
         if (currentState == newState) return;
@@ -49,6 +53,8 @@ public class PlayerSprite : MonoBehaviour
 
         PlayerController = GetComponent<PlayerController>();
         Animator = GetComponent<Animator>();
+
+        DOTween.Init(false, false);
     }
 
 
@@ -96,6 +102,7 @@ public class PlayerSprite : MonoBehaviour
         //Debug.Log(_choice);
 
         //GetComponent<SpriteRenderer>().sprite = sprites[((int)_choice)].sprite;
+
     }
 
     public void SetDirection()
@@ -118,4 +125,41 @@ public class PlayerSprite : MonoBehaviour
 
         oldFacingRight = ifFacingRight;
     }
+    public void Invul(bool _ifInvul)
+    {
+        if (coroInvul != null)
+            StopCoroutine(coroInvul);
+
+        if (_ifInvul)
+        {   
+            coroInvul = StartCoroutine(Coro_Invul());
+        }
+
+        else
+        {
+            isInvul = false;
+            thisSprite.DOFade(1, 0);
+        }
+    }
+    private IEnumerator Coro_Invul()
+    {
+        isInvul = true;
+
+        float _dur = GetComponent<PlayerHealth>().invulDur;
+        float _rateFrame = 0.05f;
+
+        for (int _t = 0; _t < (_dur/ (_rateFrame*2)); _t++)
+        {
+            thisSprite.DOFade(1, 0);
+            yield return new WaitForSeconds(_rateFrame);
+            thisSprite.DOFade(0, 0);
+            yield return new WaitForSeconds(_rateFrame);
+        }
+
+        thisSprite.DOFade(1, 0);
+        Invul(false);
+
+    }
+
+
 }

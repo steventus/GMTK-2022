@@ -56,6 +56,8 @@ public class EnemyMovement : MonoBehaviour
     private Vector2 _centre;
     private float _angle;
 
+    public UnityEvent onNormalSpawn, onUpgradeSpawn;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -69,7 +71,6 @@ public class EnemyMovement : MonoBehaviour
         canCharge = true;
         rb.freezeRotation = true;
     }
-
     void FixedUpdate()
     {
 
@@ -87,7 +88,6 @@ public class EnemyMovement : MonoBehaviour
                 Debug.Log("Error");
                 break;
         }
-
         TimeElapsed += Time.deltaTime;
     }
 
@@ -364,6 +364,17 @@ public class EnemyMovement : MonoBehaviour
     private void OnEnable()
     {
         Messenger.AddListener(GameEvent.PlayerTakeDamage, CancelTeleport);
+
+        switch (currentUpgradeEnemy)
+        {
+            case UpgradeEnemy.Base:
+                onNormalSpawn.Invoke();
+                break;
+
+            default:
+                onUpgradeSpawn.Invoke();
+                break;
+        }
     }
 
     private void OnDisable()
