@@ -20,6 +20,9 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] public UpgradeEnemy currentUpgradeEnemy;
 
+    [SerializeField] public List<UpgradeEnemy> correctUpgradesToShowCrown;
+
+
     [SerializeField] bool canCharge;
 
     [SerializeField] bool dashed;
@@ -372,7 +375,8 @@ public class EnemyMovement : MonoBehaviour
                 break;
 
             default:
-                onUpgradeSpawn.Invoke();
+                if (correctUpgradesToShowCrown.Contains(currentUpgradeEnemy))
+                    onUpgradeSpawn.Invoke();
                 break;
         }
     }

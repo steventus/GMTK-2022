@@ -394,6 +394,7 @@ MonoBehaviour:
   playerRb: {fileID: 0}
   currentEnemyType: 1
   currentUpgradeEnemy: 0
+  correctUpgradesToShowCrown: 0300000004000000
   canCharge: 0
   dashed: 0
   IsAvailable: 1
