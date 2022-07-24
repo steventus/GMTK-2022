@@ -14,13 +14,14 @@ public class PlayerHealth : MonoBehaviour
     public bool touchByEnemies;
     
 
-    public UnityEvent onTakeDamage, onDeath;
+    public UnityEvent onTakeDamage, onInvulEnd, onDeath, onRegainHealth;
 
     public bool ShouldUseSO;
     public RegainSystemSO regainSystemSo;
 
     public float invulDur;
     private float invulTimer;
+    private bool ifInvul = false;
 
     private int requredKill = 2;
     private void OnEnable()
@@ -38,6 +39,9 @@ public class PlayerHealth : MonoBehaviour
     {
         curHealth = maxHealth;   
     }
+
+    
+
     public void TakeDamage(float _delta)
     {
         if (Time.time < invulTimer)
@@ -57,6 +61,7 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             Reference.cam.ShakeCamera(0.15f,0.15f);
+
             onTakeDamage.Invoke();
         }
 
@@ -106,4 +111,5 @@ public class PlayerHealth : MonoBehaviour
         requredKill = enemiesKilled * 2;
        
     }
+    
 }

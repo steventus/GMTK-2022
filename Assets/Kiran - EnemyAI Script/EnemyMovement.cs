@@ -20,6 +20,9 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] public UpgradeEnemy currentUpgradeEnemy;
 
+    [SerializeField] public List<UpgradeEnemy> correctUpgradesToShowCrown;
+
+
     [SerializeField] bool canCharge;
 
     [SerializeField] bool dashed;
@@ -56,6 +59,8 @@ public class EnemyMovement : MonoBehaviour
     private Vector2 _centre;
     private float _angle;
 
+    public UnityEvent onNormalSpawn, onUpgradeSpawn;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -69,7 +74,6 @@ public class EnemyMovement : MonoBehaviour
         canCharge = true;
         rb.freezeRotation = true;
     }
-
     void FixedUpdate()
     {
 
@@ -87,7 +91,6 @@ public class EnemyMovement : MonoBehaviour
                 Debug.Log("Error");
                 break;
         }
-
         TimeElapsed += Time.deltaTime;
     }
 
@@ -364,6 +367,18 @@ public class EnemyMovement : MonoBehaviour
     private void OnEnable()
     {
         Messenger.AddListener(GameEvent.PlayerTakeDamage, CancelTeleport);
+
+        switch (currentUpgradeEnemy)
+        {
+            case UpgradeEnemy.Base:
+                onNormalSpawn.Invoke();
+                break;
+
+            default:
+                if (correctUpgradesToShowCrown.Contains(currentUpgradeEnemy))
+                    onUpgradeSpawn.Invoke();
+                break;
+        }
     }
 
     private void OnDisable()
