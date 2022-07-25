@@ -10,10 +10,6 @@ public class EnemyMovement : MonoBehaviour
 
     public enum UpgradeEnemy { Base, UpgradeOne, UpgradeTwo, UpgradeThree, UpgradeFour };
 
-    enum GunTypes { Shotgun, AutoFire, BurstFire, Sniper };
-
-    [SerializeField] private bool isMovingRight = true;
-
     [SerializeField] Rigidbody2D playerRb;
 
     [SerializeField] EnemyTypes currentEnemyType;
@@ -21,21 +17,10 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] public UpgradeEnemy currentUpgradeEnemy;
 
     [SerializeField] public List<UpgradeEnemy> correctUpgradesToShowCrown;
-
-
+    
     [SerializeField] bool canCharge;
-
-    [SerializeField] bool dashed;
-
-    [SerializeField] bool IsAvailable = true;
-
-    [SerializeField] bool isTouchingPlayer;
-
+    
     [SerializeField] bool isFlanking = false;
-
-    [SerializeField] bool hasTakenDamage = false;
-
-    [SerializeField] bool canTeleport = true;
 
     public float TeleportTime = -5f;
 
@@ -49,38 +34,33 @@ public class EnemyMovement : MonoBehaviour
 
     public Rigidbody2D rb;
 
-    [SerializeField] float CooldownDuration = 10f;
-
     public float speed;
-
-    [SerializeField] private float RotateSpeed = 3f;
-    [SerializeField] private float Radius = 2f;
 
     [SerializeField] public Animator anim;
 
     private Vector2 _centre;
     private float _angle;
-
+    public float transparency = 0f;
+    public float targetTransparency = 0f;
+    public Material mat;
     public UnityEvent onNormalSpawn, onUpgradeSpawn;
-
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-  
+        var GO = GameObject.FindGameObjectWithTag("Player");
+        playerRb = GO.GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void Start()
     {
-        var GO = GameObject.FindGameObjectWithTag("Player");
-        playerRb = GO.GetComponent<Rigidbody2D>();
-        isTouchingPlayer = false;
         canCharge = true;
         rb.freezeRotation = true;
-        anim = GetComponent<Animator>();
     }
+    
     void FixedUpdate()
     {
-
         var enemyTypes = currentEnemyType;
 
         switch (enemyTypes)
@@ -95,6 +75,7 @@ public class EnemyMovement : MonoBehaviour
                 Debug.Log("Error");
                 break;
         }
+        
         TimeElapsed += Time.deltaTime;
     }
 
@@ -123,42 +104,9 @@ public class EnemyMovement : MonoBehaviour
         }
 
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-      /*  if (collision.CompareTag("Player"))
-        {
-            isTouchingPlayer = false;
-        }*/
-    }
-
-  
-
-    public bool DetectWall()
-    {
-        Vector2 position = transform.position;
-        Vector2 direction = Vector2.down;
-        float distance = 10f;
-
-        //Debug.DrawRay(position, direction, Color.green);
-        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, WallLayer);
-        if (hit.collider != null)
-        {
-            return true;
-        }
-
-
-        return false;
-    }
-
-    public static float FindDegree(int x, int y)
-    {
-        float value = (float)((Mathf.Atan2(x, y) / Math.PI) * 180f);
-        if (value < 0) value += 360f;
-
-        return value;
-    }
-
+    
+    #region Melee AI Functions
+    
     public void ChasePlayerEnemyMovement()
     {
         float distance = Vector2.Distance(this.gameObject.transform.position, playerRb.position);
@@ -166,31 +114,27 @@ public class EnemyMovement : MonoBehaviour
         var upgradeTypes = currentUpgradeEnemy;
         _centre = playerRb.position;
 
-        if (distance < 6f)
+        if (distance < 12f)
         {
             switch (upgradeTypes)
             {
                 case UpgradeEnemy.Base:
                     
-                    
                     speed = 3f;
-                 
                     
                     if (distance > 1f)
                     {
-                        rb.position = Vector2.MoveTowards(rb.position, playerRb.position, speed * Time.deltaTime);
-                        var dir = playerRb.transform.position - rb.transform.position;
+                        rb.position = Vector2.MoveTowards(rb.position, playerRb.position, speed * Time.deltaTime); //Move Enemy to Player
+                        //var dir = playerRb.transform.position - rb.transform.position; //Calculate Player and Enemy direction
+                        //transform.up = Vector2.Lerp(-transform.forward, dir, Time.deltaTime * 3f); //Rotate towards player
+                        
                         // var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                         // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                        
-                        transform.up = Vector2.Lerp(-transform.forward, dir, Time.deltaTime * 3f);
                     }
-
+                    
                     break;
                 case UpgradeEnemy.UpgradeOne:
                     
-                    anim.SetTrigger("MeleeFight");
-
                     if (TimeElapsed >= flippedTime)
                     {
                         flippedTime = TimeElapsed + 4f;
@@ -198,25 +142,26 @@ public class EnemyMovement : MonoBehaviour
 
                         if (isFlipped)
                         {
-                            speed = 5f;
-                            
+                            speed = 4f;
+                            anim.SetTrigger("MeleeFight");
                         }
                         else
                         {
-                            speed = 8f;
+                            speed = 5f;
+                            anim.SetTrigger("MeleeFight");
                         }
                     }
 
 
                     if (distance > 1f)
                     {
-                        //rb.position = Vector2.LerpUnclamped(rb.position, playerRb.position, speed * Time.deltaTime);
-                        rb.position = Vector2.MoveTowards(rb.position, playerRb.position, speed * Time.deltaTime);
-                        var dir = playerRb.transform.position - rb.transform.position;
+ 
+                        rb.position = Vector2.MoveTowards(rb.position, playerRb.position, speed * Time.deltaTime); //Move Enemy to Player
+                        //var dir = playerRb.transform.position - rb.transform.position; //Calculate Player and Enemy direction
+                        //transform.up = Vector2.Lerp(-transform.forward, dir, Time.deltaTime * 3f); //Rotate towards player
+                        
                         // var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                         // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                        
-                        transform.up = Vector2.Lerp(-transform.forward, dir, Time.deltaTime * 3f);
                     }
 
                     break;
@@ -225,25 +170,63 @@ public class EnemyMovement : MonoBehaviour
                     //Enemy is not moving
                     //Enemy Delays (Charge)
                     
-                    var rotate = playerRb.transform.position - rb.transform.position;
-                    transform.up = Vector2.Lerp(-transform.forward, rotate, Time.deltaTime * 3f);
                     speed = 0;
-
+                    
                     if (canCharge)
                     {
+                        //targetTransparency = 1f;
+                        anim.SetTrigger("MeleeFight");
                         StartCoroutine(ChargeAttack());
                         anim.SetTrigger("MeleeFight");
                     }
+                    else
+                    {
+                        //targetTransparency = 0f;
+                    }
+                    
+                    
+                    if (transparency < targetTransparency)
+                    {
+                        transparency += .8f;
+                    }
+                    else if (transparency > targetTransparency && transparency >= 0f)
+                    {
+                        transparency -= Time.deltaTime;
+                    }
+                    
+                    mat = GetComponent<Renderer>().material;
+                    mat.SetFloat("_NegativeAmount", transparency);
 
-
+                    
                     break;
                 default:
+                    
                     upgradeTypes = UpgradeEnemy.Base;
                     break;
             }
         }
 
     }
+    
+    [SerializeField] private Transform saveCurrentPlayerPosition; //Enemy is keeps tracking player position
+    
+    IEnumerator ChargeAttack()
+    {
+        canCharge = false;
+        yield return new WaitForSeconds(5f); //Enemy is charging
+        Transform saveCurrentPlayerPosition; //Enemy is keeps tracking player position
+        saveCurrentPlayerPosition = playerRb.transform;    //Enemy saves player position
+        rb.AddForce(new Vector2(saveCurrentPlayerPosition.position.x - rb.position.x, saveCurrentPlayerPosition.position.y - rb.position.y).normalized * 15f, ForceMode2D.Impulse);  //Enemy dash to the saves player location
+        speed = 0; //After dashing, set speed back to 0
+        yield return new WaitForSeconds(1f); //Cooling Down for 1 second
+        rb.velocity = Vector2.zero;
+        canCharge = true; //Cooling down complete, set can charge back to true
+    }
+    
+ 
+    #endregion
+
+    #region Ranged AI Functions
 
     public void RunFromPlayerEnemyMovement()
     {
@@ -279,8 +262,6 @@ public class EnemyMovement : MonoBehaviour
                     {
                         cursor = cursor - 360;
                     }
-                    //Debug.Log(cursor);
-                    //Debug.Log(cursor);
 
                     Vector2 target = new Vector2(Mathf.Sin(cursor), Mathf.Cos(cursor)).normalized * 5f + playerRb.position;
                     rb.position = Vector2.MoveTowards(rb.position, target, 3f * Time.deltaTime);
@@ -295,11 +276,8 @@ public class EnemyMovement : MonoBehaviour
                     rb.position = _centre + offset;
                     isFlanking = false;
                     rb.GetComponent<Animator>().SetTrigger("run");
-
                 }
-
-
-
+                
                 break;
 
             case UpgradeEnemy.UpgradeFour:
@@ -313,69 +291,11 @@ public class EnemyMovement : MonoBehaviour
 
                 break;
             default:
-                Debug.Log("Upgrade Types not valid");
+                upgradeTypes = UpgradeEnemy.Base;
                 break;
         }
-
-      
-
-     
-
     }
-
-    IEnumerator ChargeAttack()
-    {
-       
-        canCharge = false;
-        //Debug.Log("Charging.... ");
-        yield return new WaitForSeconds(5f);
-        //Enemy is keeps tracking player position
-        //Enemy saves player position
-        //Enemy dash to the saves player location
-
-        Transform saveCurrentPlayerPosition;
-        saveCurrentPlayerPosition = playerRb.transform;
-      
-        rb.AddForce(new Vector2(saveCurrentPlayerPosition.position.x - rb.position.x, saveCurrentPlayerPosition.position.y - rb.position.y).normalized * 15f, ForceMode2D.Impulse);
-        speed = 0;
-        /*//Debug.Log("Finish Charging");*/
-        yield return new WaitForSeconds(1f);
-        rb.velocity = Vector2.zero;
-        canCharge = true;
-        /*Debug.Log("Cooldown Complete");*/
-    }
-
-    void MeleeDashToPlayer()
-    {
-        // if not available to use (still cooling down) just exit
-        if (IsAvailable == false)
-        {
-            return;
-        }
-
-        // made it here then ability is available to use...
-        // UseAbilityCode goes here
-        /* Rigidbody2D saveCurrentPlayerPosition;
-         saveCurrentPlayerPosition = playerRb;*/
-        /*transform.position = Vector2.MoveTowards(transform.position, playerRb.position, 2 * speed);*/
-       
-       
-        // start the cooldown timer
-/*        StartCoroutine(CastTeleport());*/
-    }
-
-    public IEnumerator CastTeleport()
-    {
-        IsAvailable = false;
-        /*Debug.Log("Starting Cooldown.... ");*/
-        yield return new WaitForSeconds(5f);
-        /*Debug.Log("Teleporting.... ");*/
-        rb.position = GenerateTeleportCoordinate();
-        IsAvailable = true;
-        canTeleport = true;
-        /*Debug.Log("Cooldown Complete");*/
-    }
-
+    
     public Vector2 GenerateTeleportCoordinate()
     {
         return new Vector2(UnityEngine.Random.Range(-6.5f, 5.5f), UnityEngine.Random.Range(-3.5f,3.5f));
@@ -391,6 +311,10 @@ public class EnemyMovement : MonoBehaviour
         StartCoroutine(CastTeleport());*/
     }
 
+    
+    #endregion
+    
+  
     private void OnEnable()
     {
         Messenger.AddListener(GameEvent.PlayerTakeDamage, CancelTeleport);
