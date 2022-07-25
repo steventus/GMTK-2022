@@ -200,6 +200,7 @@ public class WaveManager : MonoBehaviour
                 Debug.Log("Received invalid int _choice to apply upgrade");
                 break;
         }
+        Debug.Log("chosenUpgradeType: " + chosenUpgradeType);
     }
 
 }

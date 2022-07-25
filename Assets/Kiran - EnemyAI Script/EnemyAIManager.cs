@@ -8,10 +8,14 @@ public class EnemyAIManager : MonoBehaviour
     public float curEnemyHealth;
 
     [Space]
-    public UnityEvent onTakeDamage, onDeath;
+    public UnityEvent onTakeDamage, onDeath, onSpawn;
     private void Awake()
     {
         curEnemyHealth = iniEnemyHealth;
+    }
+    private void OnEnable()
+    {
+        onSpawn.Invoke();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
