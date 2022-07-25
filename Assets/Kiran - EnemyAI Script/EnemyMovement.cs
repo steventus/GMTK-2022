@@ -56,7 +56,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float RotateSpeed = 3f;
     [SerializeField] private float Radius = 2f;
 
-    [SerializeField] public Animation anim;
+    [SerializeField] public Animator anim;
 
     private Vector2 _centre;
     private float _angle;
@@ -76,7 +76,7 @@ public class EnemyMovement : MonoBehaviour
         isTouchingPlayer = false;
         canCharge = true;
         rb.freezeRotation = true;
-        anim = GetComponent<Animation>();
+        anim = GetComponent<Animator>();
     }
     void FixedUpdate()
     {
@@ -174,15 +174,22 @@ public class EnemyMovement : MonoBehaviour
                     
                     
                     speed = 3f;
-          
+                 
+                    
                     if (distance > 1f)
                     {
                         rb.position = Vector2.MoveTowards(rb.position, playerRb.position, speed * Time.deltaTime);
-                        anim.Play("RedChip");
+                        var dir = playerRb.transform.position - rb.transform.position;
+                        // var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                        // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                        
+                        transform.up = Vector2.Lerp(-transform.forward, dir, Time.deltaTime * 3f);
                     }
 
                     break;
                 case UpgradeEnemy.UpgradeOne:
+                    
+                    anim.SetTrigger("MeleeFight");
 
                     if (TimeElapsed >= flippedTime)
                     {
@@ -203,8 +210,13 @@ public class EnemyMovement : MonoBehaviour
 
                     if (distance > 1f)
                     {
-                        rb.position = Vector2.LerpUnclamped(rb.position, playerRb.position, speed * Time.deltaTime);
-                        anim.Play("RedChip");
+                        //rb.position = Vector2.LerpUnclamped(rb.position, playerRb.position, speed * Time.deltaTime);
+                        rb.position = Vector2.MoveTowards(rb.position, playerRb.position, speed * Time.deltaTime);
+                        var dir = playerRb.transform.position - rb.transform.position;
+                        // var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                        // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                        
+                        transform.up = Vector2.Lerp(-transform.forward, dir, Time.deltaTime * 3f);
                     }
 
                     break;
@@ -212,19 +224,21 @@ public class EnemyMovement : MonoBehaviour
 
                     //Enemy is not moving
                     //Enemy Delays (Charge)
-
+                    
+                    var rotate = playerRb.transform.position - rb.transform.position;
+                    transform.up = Vector2.Lerp(-transform.forward, rotate, Time.deltaTime * 3f);
                     speed = 0;
 
                     if (canCharge)
                     {
                         StartCoroutine(ChargeAttack());
-                        anim.Play("RedChip");
+                        anim.SetTrigger("MeleeFight");
                     }
 
 
                     break;
                 default:
-                    Debug.Log("Upgrade Types not valid");
+                    upgradeTypes = UpgradeEnemy.Base;
                     break;
             }
         }
@@ -242,7 +256,7 @@ public class EnemyMovement : MonoBehaviour
         {
             case UpgradeEnemy.Base:
 
-                if(distance < 3f)
+                if(distance < 5f)
                 {
                     var enemyPosition = rb.position;
                     var playerPosition = playerRb.position;
@@ -318,15 +332,15 @@ public class EnemyMovement : MonoBehaviour
         //Enemy is keeps tracking player position
         //Enemy saves player position
         //Enemy dash to the saves player location
+
         Transform saveCurrentPlayerPosition;
         saveCurrentPlayerPosition = playerRb.transform;
-/*        rb.freezeRotation = true;*/
+      
         rb.AddForce(new Vector2(saveCurrentPlayerPosition.position.x - rb.position.x, saveCurrentPlayerPosition.position.y - rb.position.y).normalized * 15f, ForceMode2D.Impulse);
         speed = 0;
         /*//Debug.Log("Finish Charging");*/
         yield return new WaitForSeconds(1f);
         rb.velocity = Vector2.zero;
- /*       rb.freezeRotation = false;*/
         canCharge = true;
         /*Debug.Log("Cooldown Complete");*/
     }

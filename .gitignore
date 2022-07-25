@@ -72,3 +72,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 Assets/Art Assets.meta.bak.meta~main.meta
+
+.idea/.idea.GMTK-2022/.idea/
