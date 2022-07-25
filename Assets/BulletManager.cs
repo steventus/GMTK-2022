@@ -104,7 +104,6 @@ public class BulletManager : MonoBehaviour
     private void InitialiseBullet()
     {
         BulletData _selectedBullet = curWeapon.bulletData;
-        Debug.Log("Bullet: " + _selectedBullet.name);
 
         foreach (GameObject _bullet in availableBullets)
         {
@@ -285,9 +284,7 @@ public class BulletManager : MonoBehaviour
             yield return new WaitForSeconds(1);
             int _amountToRegen = (ammoRegenPerSec + Mathf.CeilToInt(PlayerUpgrades.numRegenUp * GetComponent<PlayerUpgrades>().regenAmmoPerSecUpgrade));
 
-            //Debug
-            Debug.Log(_amountToRegen);
-
+            
             curAmmo += _amountToRegen;
             FindObjectOfType<UiPlayerAmmo>().SetPlayerAmmo(curAmmo);
 

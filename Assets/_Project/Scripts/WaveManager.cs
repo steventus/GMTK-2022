@@ -44,6 +44,7 @@ public class WaveManager : MonoBehaviour
 
     private GameObject enemyGameObject;
 
+    private bool roundEnded = false;
     public UnityEvent onRoundStart, onRoundEnd;
 
     public int enemiesNum = 0;
@@ -82,13 +83,23 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
-        //Slotmachine anim
-        FindObjectOfType<SlotMachine>().GetComponent<Animator>().Play("slotMachine_flyIn");
-
-        onRoundEnd.Invoke();
-        
-       
+        RoundEnded();
     }
+
+    private void RoundEnded()
+    {
+        if (!roundEnded)
+        {
+            roundEnded = true;
+            //Slotmachine anim
+            FindObjectOfType<SlotMachine>().GetComponent<Animator>().Play("slotMachine_flyIn");
+
+            onRoundEnd.Invoke();
+            Messenger.Broadcast(GameEvent.OnRoundEnd);
+            Debug.Log("OnRoundEnd");
+        }
+    }
+
     public void RandomizeSlotMachine()
     {
         //Select new Weapon or just upgrade player properties
@@ -117,7 +128,8 @@ public class WaveManager : MonoBehaviour
         
         
         onRoundStart.Invoke();
-
+        roundEnded = false;
+        Messenger.Broadcast(GameEvent.SpawnNewRound);
     }
     
     private bool isUsed;
@@ -175,7 +187,6 @@ public class WaveManager : MonoBehaviour
 
         Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
     }
-
     public void UpdateEnemyUpgrade(int _choice)
     {
         switch (_choice)

@@ -50,7 +50,6 @@ public class PlayerHealth : MonoBehaviour
         curHealth -= 1;
         Messenger<int>.Broadcast(UiEvent.player_takeDamage, curHealth);
 
-        Debug.Log("Take Damage");
         if (curHealth <= 0)
         {
             Reference.cam.ShakeCamera(0.25f,0.25f);

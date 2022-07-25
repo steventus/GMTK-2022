@@ -119,7 +119,6 @@ public class SlotMachine : MonoBehaviour
 
         if (rolled) return;
 
-        Debug.Log("test");
         rolled = true;
         Roll();
     }
