@@ -889,7 +889,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4430640474824362383, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: runSpeed
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4430640474824362383, guid: 8a6001e97e697b042b7ab17490369464, type: 3}
       propertyPath: sceneCamera
@@ -4372,7 +4372,7 @@ MonoBehaviour:
   PlayerController: {fileID: 873385963}
   criticalSpeed: 6
   perkSpeed: 5
-  normalSpeed: 3
+  normalSpeed: 4
 --- !u!4 &1204494939
 Transform:
   m_ObjectHideFlags: 0
