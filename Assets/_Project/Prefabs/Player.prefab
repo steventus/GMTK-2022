@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 1843499621836002513}
   - component: {fileID: 9188689436653734582}
   - component: {fileID: 5465699294769666080}
+  - component: {fileID: 506544604418071787}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -314,6 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneCamera: {fileID: 0}
   rb: {fileID: 0}
+  InputReader: {fileID: 506544604418071787}
   runSpeed: 5
   desiredAimDir: {x: 0, y: 0}
   forceAmount: 0
@@ -326,7 +328,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4430640474824362387}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cb316e9958857d47b119ef0a4de6bb6, type: 3}
   m_Name: 
@@ -628,7 +630,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &4430640474824362381
 BoxCollider2D:
@@ -643,7 +645,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.117221236, y: -0.6468872}
+  m_Offset: {x: -0.073194265, y: -0.021075845}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -654,7 +656,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.84370506, y: 0.24457431}
+  m_Size: {x: 0.7556511, y: 1.2320354}
   m_EdgeRadius: 0
 --- !u!114 &1325310620638773487
 MonoBehaviour:
@@ -779,7 +781,19 @@ MonoBehaviour:
       m_Calls: []
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5763624804621651058}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 396df4dde11109b419f1ac73b50e7e5a, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onRegainHealth:
     m_PersistentCalls:
       m_Calls: []
@@ -816,6 +830,7 @@ MonoBehaviour:
   sceneCamera: {fileID: 0}
   aimCursor: {fileID: 2777702512436239870}
   gun: {fileID: 2934635704977511199}
+  InputReader: {fileID: 0}
   gunSprite: {fileID: 6698357750694874648}
 --- !u!95 &5465699294769666080
 Animator:
@@ -837,6 +852,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &506544604418071787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4430640474824362387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b73b2bc8ed4bfba4bb156e53ec19699a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movetest: {x: 0, y: 0}
+  move: {x: 0, y: 0}
+  mouseScreenPos: {x: 0, y: 0}
 --- !u!1 &6165160813485028465
 GameObject:
   m_ObjectHideFlags: 0

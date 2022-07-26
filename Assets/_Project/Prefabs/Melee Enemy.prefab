@@ -341,18 +341,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7570b07d82fd535488bcb3eab0054328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMovingRight: 1
   playerRb: {fileID: 0}
   currentEnemyType: 0
   currentUpgradeEnemy: 0
   correctUpgradesToShowCrown: 0100000002000000
   canCharge: 0
-  dashed: 0
-  IsAvailable: 1
-  isTouchingPlayer: 0
   isFlanking: 0
-  hasTakenDamage: 0
-  canTeleport: 1
   TeleportTime: -5
   TimeElapsed: 0
   isFlipped: 0
@@ -361,10 +355,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   rb: {fileID: 0}
-  CooldownDuration: 1
   speed: 0
-  RotateSpeed: 3
-  Radius: 2
   anim: {fileID: 0}
   transparency: -0.1
   targetTransparency: -0.1
@@ -399,9 +390,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  AudioSource: {fileID: 0}
-  ChargeAudioClip: {fileID: 0}
-  DashAudioClip: {fileID: 0}
   saveCurrentPlayerPosition: {fileID: 0}
 --- !u!50 &8701104280922528471
 Rigidbody2D:
@@ -416,13 +404,13 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &8701104280922528470
 BoxCollider2D:
@@ -437,7 +425,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.005140424, y: -0.13924462}
+  m_Offset: {x: 0.011358976, y: -0.03420335}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -448,7 +436,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8143232, y: 1.5817586}
+  m_Size: {x: 1.5032163, y: 1.3716761}
   m_EdgeRadius: 0
 --- !u!61 &8701104280922528473
 BoxCollider2D:
@@ -488,18 +476,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2013b9fc14c2400468097cfebff2e4c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iniEnemyHealth: 100
+  iniEnemyHealth: 500
   curEnemyHealth: 0
   onTakeDamage:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1947421387731580848}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: PlayOneShot
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgument: {fileID: 8300000, guid: f1bd95a8b04ca2f41aed995e1fc14ebd, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

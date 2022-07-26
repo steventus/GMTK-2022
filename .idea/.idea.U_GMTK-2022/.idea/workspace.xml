@@ -1,16 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="36d1653d-233b-4467-8bab-8bd88ddd6377" name="Changes" comment="" />
+    <list default="true" id="36d1653d-233b-4467-8bab-8bd88ddd6377" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.U_GMTK-2022/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.U_GMTK-2022/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AimMouse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AimMouse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art Assets/Characters/Idle 1.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art Assets/Characters/Idle 1.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art Assets/Characters/Idle 2.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art Assets/Characters/Idle 2.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art Assets/Characters/Running 2.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art Assets/Characters/Running 2.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art Assets/UI/RapidFire.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art Assets/UI/RapidFire.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BaseBullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BaseBullet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BulletManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BulletManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CameraFollow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CameraFollow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DamgerBullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DamgerBullet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EnemyBullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EnemyBullet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EnemyRifle.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EnemyRifle.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EnemyRifleBullet.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EnemyRifleBullet.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Kiran - EnemyAI Script/EnemyAIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Kiran - EnemyAI Script/EnemyAIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayerHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayerHealth.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayerSprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayerSprite.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ShotgunBullet.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ShotgunBullet.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UiSlotMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UiSlotMachine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Animations/slotMachine_flyIn.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Animations/slotMachine_flyIn.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Animations/slotMachine_flyOut.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Animations/slotMachine_flyOut.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/New 2D Renderer Data.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/New 2D Renderer Data.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/New Universal Render Pipeline Asset_Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/New Universal Render Pipeline Asset_Renderer.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Player.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Player.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Melee Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/Melee Enemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Ranged Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/Ranged Enemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/KarimGame.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/KarimGame.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/KarimGame_Profiles/Main Camera Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/KarimGame_Profiles/Main Camera Profile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/CameraShaker.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/CameraShaker.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Perks/DoubleTime.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Perks/DoubleTime.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Perks/SugarRush.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Perks/SugarRush.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Reference.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Reference.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/SlotMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/SlotMachine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/WaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/WaveManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/debugScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/debugScene.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/../BWJ8/Assets/UIScaler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/AimMouse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BaseBullet.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/CameraScaler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DamgerBullet.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/RoundHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/RoundManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -18,6 +64,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/GameEvent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/GameOverr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/ISlotMachine.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Input/Controls.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Input/InputReader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Messenger.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Perks/DoubleTime.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Perks/NoChange.cs" root0="FORCE_HIGHLIGHTING" />
@@ -102,6 +150,9 @@
       <workItem from="1657923258023" duration="8397000" />
       <workItem from="1657961420655" duration="30873000" />
       <workItem from="1658004252477" duration="38130000" />
+      <workItem from="1658499315856" duration="2283000" />
+      <workItem from="1658656365994" duration="19106000" />
+      <workItem from="1658847182234" duration="10491000" />
     </task>
     <servers />
   </component>
@@ -111,6 +162,17 @@
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

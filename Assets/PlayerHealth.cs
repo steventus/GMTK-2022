@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using CameraShake;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -23,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
     private float invulTimer;
     private bool ifInvul = false;
 
-    private int requredKill = 2;
+    public int requredKill = 2;
     private void OnEnable()
     {
         Messenger.AddListener(GameEvent.PlayerReGainHealth, RegainHealth);
@@ -49,18 +50,18 @@ public class PlayerHealth : MonoBehaviour
 
         curHealth -= 1;
         Messenger<int>.Broadcast(UiEvent.player_takeDamage, curHealth);
+        CameraShaker.Presets.ShortShake2D();
+
 
         Debug.Log("Take Damage");
         if (curHealth <= 0)
         {
-            Reference.cam.ShakeCamera(0.25f,0.25f);
             Messenger.Broadcast(GameEvent.PlayerDeathEvent);
             Death();
             
         }
         else
         {
-            Reference.cam.ShakeCamera(0.15f,0.15f);
 
             onTakeDamage.Invoke();
         }
@@ -105,11 +106,10 @@ public class PlayerHealth : MonoBehaviour
         if (requredKill == enemiesKilled)
         {
             curHealth += 1;
+            requredKill = enemiesKilled + 3;
             Messenger<int>.Broadcast(UiEvent.player_takeDamage, curHealth);
         }
 
-        requredKill = enemiesKilled * 2;
-       
     }
     
 }

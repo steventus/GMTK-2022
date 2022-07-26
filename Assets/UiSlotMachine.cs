@@ -19,6 +19,7 @@ public class UiSlotMachine : MonoBehaviour
     private bool readyToExit = false;
 
     public UnityEvent onSlotEnter, onSlotBegin, onSlotStop, onSlotExit;
+    public UnityEvent onRoundBegin;
 
     private void Awake()
     {
@@ -104,14 +105,21 @@ public class UiSlotMachine : MonoBehaviour
     public void SlotExit()
     {
         StartCoroutine(Coro_Exit());
-
-        onSlotExit.Invoke();
+        
     }
     private IEnumerator Coro_Exit()
     {
-        yield return new WaitForSeconds(1);
-
         //Update relevant ui with new images
+        yield return new WaitForSeconds(1);
+        
+        // Exit SlotUI
+        onSlotExit.Invoke();
+
+        // wait for UI to hide
+        yield return new WaitForSeconds(2f);
+        
+        onRoundBegin?.Invoke();
+
     }
     private void Update()
     {

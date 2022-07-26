@@ -9,6 +9,7 @@ public class SugarRush : Perk
     public PlayerController PlayerController;
     public float criticalSpeed = 12;
     public float perkSpeed = 8;
+    public float normalSpeed = 5f;
 
     public override void RunPerk()
     {
@@ -19,6 +20,6 @@ public class SugarRush : Perk
     public override void ResetPerks()
     {
         usedPerk = false;
-        PlayerController.runSpeed = 5;
+        PlayerController.runSpeed = normalSpeed;
     }
 }

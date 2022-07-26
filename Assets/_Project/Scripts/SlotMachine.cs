@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using CameraShake;
 using TMPro;
 using Unity.VisualScripting.InputSystem;
 using UnityEngine;
@@ -8,6 +10,7 @@ using Random = UnityEngine.Random;
 public class SlotMachine : MonoBehaviour
 {
     public bool rolled = false;
+    
 
     private IEnumerator Spin()
     {
@@ -163,19 +166,21 @@ public class SlotMachine : MonoBehaviour
     }
     private void RollArena(int _choice)
     {
-        WaveManager _waveManager = FindObjectOfType<WaveManager>();
-
-        _waveManager.ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
+        WaveManager _waveManager = FindObjectOfType<WaveManager>(); 
+        
+        ResetArenaPerks(_waveManager);
         _waveManager.ArenaPerk.Perks[_choice].RunPerk();
 
         Messenger<Sprite>.Broadcast(UiEvent.arena_perkChange, FindObjectOfType<UiSlotMachine>().arenaPerks[_choice]);
     }
 
+
+
     private void RollArenaCrit(int _choice)
     {
         WaveManager _waveManager = FindObjectOfType<WaveManager>();
 
-        _waveManager.ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
+        ResetArenaPerks(_waveManager);
         _waveManager.ArenaPerk.Perks[_choice].isCritical = true;
         _waveManager.ArenaPerk.Perks[_choice].RunPerk();
 
@@ -185,7 +190,21 @@ public class SlotMachine : MonoBehaviour
 
     public void StartNextRound()
     {
-        FindObjectOfType<WaveManager>().StartNextRound();
         GetComponent<Animator>().Play("slotMachine_flyOut");
+        FindObjectOfType<WaveManager>().StartNextRound();
+    }
+    
+    private static void ResetArenaPerks(WaveManager _waveManager)
+    {
+        foreach (var perk in _waveManager.ArenaPerk.Perks.Where(perk => perk.usedPerk))
+        {
+            perk.ResetPerks();
+        }
+    }
+
+
+    public void ShakeCamera()
+    {
+        CameraShaker.Presets.Explosion2D();
     }
 }

@@ -11,6 +11,7 @@ public class AimMouse : MonoBehaviour
     public Camera sceneCamera;
     public Transform aimCursor;
     public Transform gun;
+    public InputReader InputReader;
 
     public SpriteRenderer gunSprite;
     private Vector2 moveDir;
@@ -20,8 +21,7 @@ public class AimMouse : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+     
     }
     private void OnEnable()
     {

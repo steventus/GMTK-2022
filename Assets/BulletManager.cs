@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 public class BulletManager : MonoBehaviour
@@ -129,18 +130,20 @@ public class BulletManager : MonoBehaviour
                 return;
 
             //Debug.Log("Fire");
-
+            Camera.main.DOOrthoSize(4.8f, .5f);
             InterruptRegen();
             CallFire();
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse0) && !isReloading)
         {
+            Camera.main.DOOrthoSize(5f, .5f);
             InterruptRegen();
 
             coro_bulletRegen = StartCoroutine(BeginRegen());
         }
     }
+    
     public virtual void CallFire()
     {
         //FIRE
@@ -204,6 +207,7 @@ public class BulletManager : MonoBehaviour
         _bullet.GetComponentInChildren<SpriteRenderer>().sprite = curWeapon.bulletData.bulletSprite;
         _bullet.GetComponent<BaseBulletBehaviour>().Initialise(curWeapon.bulletData.bulletLifeTime, curWeapon.bulletData.velocityOverLifetime, curWeapon.bulletData.sizeOverLifetime, _bullet.transform.up * bulletSpeed);
         _bullet.GetComponent<DamgerBullet>().BulletData = curWeapon.bulletData;
+        _bullet.GetComponent<DamgerBullet>().directionForce = targetdirection;
 
         #endregion
 

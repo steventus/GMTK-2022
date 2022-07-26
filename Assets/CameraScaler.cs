@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
-public class Reference : MonoBehaviour
+public class CameraScaler : MonoBehaviour
 {
+
 }

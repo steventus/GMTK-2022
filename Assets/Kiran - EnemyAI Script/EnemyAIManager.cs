@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CameraShake;
 using UnityEngine;
 using UnityEngine.Events;
 public class EnemyAIManager : MonoBehaviour
@@ -7,10 +8,14 @@ public class EnemyAIManager : MonoBehaviour
     public float iniEnemyHealth;
     public float curEnemyHealth;
 
+    private Rigidbody2D rb;
+    
+    
     [Space]
     public UnityEvent onTakeDamage, onDeath, onSpawn;
     private void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
         curEnemyHealth = iniEnemyHealth;
     }
     private void OnEnable()
@@ -22,19 +27,21 @@ public class EnemyAIManager : MonoBehaviour
         if(collision.tag == "bullet")
         {
             collision.gameObject.SetActive(false);
-            var damage = collision.GetComponent<DamgerBullet>().BulletData.damage;
-            TakeDamage(damage);
+            var bullet = collision.GetComponent<DamgerBullet>();
+            
+            
+            TakeDamage(bullet.BulletData.damage);
+            Knockback(bullet.directionForce, bullet.forceAmount);
         }
     }
 
     private void TakeDamage(float _delta)
     {
         curEnemyHealth -= _delta;
+        CameraShaker.Presets.ShortShake2D();
 
         if (curEnemyHealth <= 0)
         {
-            Reference.cam.ShakeCamera(0.25f,0.25f);
-
             
             Messenger.Broadcast(GameEvent.EnemyDeathEvent);
             Messenger.Broadcast(GameEvent.PlayerReGainHealth);
@@ -48,8 +55,11 @@ public class EnemyAIManager : MonoBehaviour
         {
             Messenger.Broadcast(GameEvent.PlayerTakeDamage);
             onTakeDamage.Invoke();
-            Reference.cam.ShakeCamera(0.15f,0.15f);
         }
     }
     
+    public void Knockback(Vector2 direction, float amount)
+    {
+        rb.AddForce(direction * amount, ForceMode2D.Force);
+    }
 }

@@ -173,3 +173,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletData: {fileID: 0}
+  directionForce: {x: 0, y: 0}
+  forceAmount: 100

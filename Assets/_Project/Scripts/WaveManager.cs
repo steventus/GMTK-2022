@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -100,7 +101,10 @@ public class WaveManager : MonoBehaviour
         CriticalRoll = GetComponent<EnemyUpgradeManager>().SlotMachineIfCritical();
       
         //Select new perk - Karim
-        ArenaPerk.Perks.ForEach((perk => perk.ResetPerks()));
+        foreach (var perk in ArenaPerk.Perks.Where(perk => perk.usedPerk))
+        {
+            perk.ResetPerks();
+        }
         ArenaPerk.Randomize();
     }
     public void StartNextRound()

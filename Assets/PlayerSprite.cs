@@ -30,21 +30,21 @@ public class PlayerSprite : MonoBehaviour
     private bool isInvul = false;
     private Coroutine coroInvul;
 
-    public void SwitchState(string newState)
+    private void SwitchState(string newState)
     {
         if (currentState == newState) return;
-
+        
         currentState = newState;
-        Animator.Play(currentState);
+        
+        Animator.CrossFadeInFixedTime(currentState, 0.1f);
     }
-
     
-    public enum Direction
+    private enum Direction
     {
-        down = (int)0,
-        right = (int)1,
-        diagonaldown = (int)2,
-        diagonalup = (int)3,
+        Down = 0,
+        Right = 1,
+        Diagonaldown = 2,
+        Diagonalup = 3,
     }
     private void Awake()
     {
@@ -55,6 +55,7 @@ public class PlayerSprite : MonoBehaviour
         Animator = GetComponent<Animator>();
 
         DOTween.Init(false, false);
+
     }
 
 
@@ -63,55 +64,41 @@ public class PlayerSprite : MonoBehaviour
         SetSprite();
         SetDirection();
     }
-    public void SetSprite()
+
+    private void SetSprite()
     {
         //Player Facing
-        Vector3 _playerAim = GetComponent<PlayerController>().desiredAimDir;
+        Vector3 playerAim = PlayerController.desiredAimDir;
 
         //Get Direction to South
-        float _value = Vector3.Dot(Vector3.Normalize(Vector3.down), Vector3.Normalize(_playerAim));
-
-        //Debug.Log(_value);
-        
-
-
-        Direction _choice;
+        float value = Vector3.Dot(Vector3.zero, Vector3.Normalize(playerAim));
 
         #region Math
-        switch (_value)
+        switch (value)
         {
             case <= 1 and > 0.7f:
-                _choice = Direction.down;
                 SwitchState(PlayerController.isMoving ? "Running-1" : "Idle-1");
                 break;
             case <= 0.7f and > 0.2f:
-                _choice = Direction.diagonaldown;
                 SwitchState(PlayerController.isMoving? "Running-1" : "Idle-1");
                 break;
             case <= 0.2f and > -0.2f:
-                _choice = Direction.right;
                 SwitchState(PlayerController.isMoving? "Running-1" : "Idle-1");
                 break;
             default:
-                _choice = Direction.diagonalup;
                 SwitchState(PlayerController.isMoving ? "Running-2" : "Idle-2");
                 break;
         }
         #endregion
-
-        //Debug.Log(_choice);
-
-        //GetComponent<SpriteRenderer>().sprite = sprites[((int)_choice)].sprite;
-
     }
 
-    public void SetDirection()
+    private void SetDirection()
     {
         //Player Facing
-        Vector3 _playerAim = GetComponent<PlayerController>().desiredAimDir;
+        Vector3 playerAim = GetComponent<PlayerController>().desiredAimDir;
 
 
-        if (_playerAim.x > 0)
+        if (playerAim.x > 0)
         {
             ifFacingRight = true;
             thisSprite.flipX = false;

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public Camera sceneCamera;
     public Rigidbody2D rb;
+    public InputReader InputReader;
 
     float moveX;
     float moveY;
@@ -21,6 +22,9 @@ public class PlayerController : MonoBehaviour
     private float curRunSpeed;
 
     [HideInInspector] public Vector2 desiredAimDir;
+    
+    
+    
     void Start ()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -56,37 +60,24 @@ public class PlayerController : MonoBehaviour
     public bool isMoving;
     private void HandleInput()
     {
-        moveX = Input.GetAxisRaw("Horizontal");
-        moveY = Input.GetAxisRaw("Vertical");
-
-        moveDir = new Vector2(moveX, moveY);
-        input = new Vector2(moveX, moveY);
-        input.Normalize();
 
         mousePos = sceneCamera.ScreenToWorldPoint(Input.mousePosition);
-        
-      
-        if (Input.GetMouseButtonDown(0))
-        {
-            Knockback(forceAmount);
-        }
+        desiredAimDir = mousePos - rb.position;
+
+        input = InputReader.move;
+        input.Normalize();
+
+
+        Debug.DrawRay(transform.position, desiredAimDir);
+
     }
 
     public Vector2 input;
-    public void Knockback(float amount)
-    {
-        var direction =  mousePos - rb.position;
-        rb.AddForce(-direction * amount, ForceMode2D.Force);
-    }
+
     void Move()
     {
-        rb.velocity = new Vector2(moveX * runSpeed, moveY * runSpeed);
+        rb.velocity = new Vector2(input.x * runSpeed, input.y * runSpeed);
 
-        desiredAimDir = mousePos - rb.position;
-        float aimAngle = Mathf.Atan2(desiredAimDir.y, desiredAimDir.x) * Mathf.Rad2Deg - 90f;
-
-        Debug.DrawRay(transform.position, desiredAimDir);
-       
     }
 
     public void Reset()

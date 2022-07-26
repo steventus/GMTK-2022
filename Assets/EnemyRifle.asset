@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62076d9a91baa9841857f662d79a4ab8, type: 3}
   m_Name: EnemyRifle
   m_EditorClassIdentifier: 
-  fireRate: 1.2
+  fireRate: 1
   costPerShot: 0
   numOfBulletsInBurst: 3
-  angleBetweenBullet: 10
+  angleBetweenBullet: 20
   bulletData: {fileID: 11400000, guid: 2fc928600a7c7ea4e8c44a89a5ee2da3, type: 2}
+  gunSprite: {fileID: 0}
   soundOnFire: {fileID: 0}
   soundOnReload: {fileID: 0}
   soundOnFinishReload: {fileID: 0}

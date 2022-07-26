@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-
 public class CameraFollow : MonoBehaviour
 {
     public float followOffset;
@@ -16,7 +13,6 @@ public class CameraFollow : MonoBehaviour
     {
         oriPos = transform.position;
         player = FindObjectOfType<PlayerController>();
-
         DOTween.Init(false, false);
     }
 
