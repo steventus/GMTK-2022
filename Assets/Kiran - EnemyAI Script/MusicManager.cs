@@ -12,18 +12,16 @@ public class MusicTrack
 public class MusicManager : MonoBehaviour
 {
 	public List<MusicTrack> listsOfMusic;
-	[Range(0,2)] public float timeToSwap;
+	[Range(0,10)] public float timeToSwap;
 
-	private AudioSource musicSource;
-	private AudioClip currentBattle, currentIdle;
+	public AudioSource battleSource, idleSource;
 	private bool fading = false;
-	private int selector = 0;
+	public int selector = 0;
 
 	// Use this for initialization
 	void Start()
 	{
 		DOTween.Init(false, false);
-		musicSource = GetComponent<AudioSource>();
 
 		Initialise();
 	}
@@ -39,42 +37,52 @@ public class MusicManager : MonoBehaviour
 	}
 	private void Initialise()
     {
-		currentBattle = listsOfMusic[selector].battle;
-		currentIdle = listsOfMusic[selector].idle;
+		battleSource.clip = listsOfMusic[selector].battle;
+		idleSource.clip = listsOfMusic[selector].idle;
+
+		battleSource.volume = 1;
+		idleSource.volume = 0;
+
+		battleSource.Play();
+		idleSource.Play();
     }
     public void ChangeList()
     {
 		selector++;
-		if (selector > listsOfMusic.Count)
+		if (selector > listsOfMusic.Count-1)
 			selector = 0;
 
-		currentBattle = listsOfMusic[selector].battle;
-		currentIdle = listsOfMusic[selector].idle;
-
-		ChangeTrack(currentBattle);
+		Initialise();
     }
 
-	public void ChangeTrack(AudioClip _desiredClip)
+	public void ChangeTrack(AudioSource _desiredSource)
     {
-		StartCoroutine(FadeTrack(_desiredClip));
+		StartCoroutine(FadeTrack(_desiredSource));
     }
 
 	public void ChangeToIdle()
     {
-		StartCoroutine(FadeTrack(currentIdle));
+		StartCoroutine(FadeTrack(idleSource));
 	}
 
-	private IEnumerator FadeTrack(AudioClip _clip)
+	private IEnumerator FadeTrack(AudioSource _desiredSource)
     {
 		if (!fading)
         {
 			fading = true;
-			musicSource.DOFade(0, timeToSwap / 2);
-			yield return new WaitForSeconds(timeToSwap / 2);
-			musicSource.clip = _clip;
-			musicSource.Play();
-			musicSource.DOFade(1, timeToSwap / 2);
-			yield return new WaitForSeconds(timeToSwap / 2);
+
+			Sequence _seq = DOTween.Sequence();
+
+
+			foreach (AudioSource _source in GetComponents<AudioSource>())
+            {
+				if (_source != _desiredSource)
+					_seq.Append(_source.DOFade(0, timeToSwap));
+            }
+
+			_seq.Join(_desiredSource.DOFade(1, timeToSwap));
+			
+			yield return new WaitForSeconds(timeToSwap);
 			fading = false;
 		}
 	}
