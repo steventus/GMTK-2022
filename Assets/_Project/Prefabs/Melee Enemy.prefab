@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2013b9fc14c2400468097cfebff2e4c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iniEnemyHealth: 500
+  iniEnemyHealth: 350
   curEnemyHealth: 0
   onTakeDamage:
     m_PersistentCalls:
