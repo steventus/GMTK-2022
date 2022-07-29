@@ -16,24 +16,24 @@ public class SwitchMusicTrigger : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-        {           
-            if (oldTrack == track1)
-            {
-                musicManager.ChangeBackgroundMusic(track2);
-                oldTrack = track2;
-
-            }
-
-            else
-            {
-                musicManager.ChangeBackgroundMusic(track1);
-                oldTrack = track1;
-            }
-        }
-    }
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.G))
+    //    {           
+    //        if (oldTrack == track1)
+    //        {
+    //            musicManager.ChangeBackgroundMusic(track2);
+    //            oldTrack = track2;
+    //
+    //        }
+    //
+    //        else
+    //        {
+    //            musicManager.ChangeBackgroundMusic(track1);
+    //            oldTrack = track1;
+    //        }
+    //    }
+    //}
 
   
 }

@@ -53,7 +53,6 @@ public class PlayerHealth : MonoBehaviour
         CameraShaker.Presets.ShortShake2D();
 
 
-        Debug.Log("Take Damage");
         if (curHealth <= 0)
         {
             Messenger.Broadcast(GameEvent.PlayerDeathEvent);

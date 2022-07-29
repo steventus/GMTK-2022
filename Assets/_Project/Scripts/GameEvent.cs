@@ -10,6 +10,5 @@ public static class GameEvent
    public static readonly string PlayerReGainHealth = "OnRegainHealth";
    public static readonly string PlayerTakeDamage = "OnPlayerTakeDamage";
    public static readonly string SpawnNewRound = "OnSpawnNewRound";
-
-
+    public static readonly string OnRoundEnd = "OnRoundEnd";
 }
